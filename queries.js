@@ -1,6 +1,10 @@
 
 var knex = require('./db/knex');
 
+function Schedules() {
+    return knex('schedules');
+}
+
 function Employees() {
     return knex('employees');
 }
@@ -14,6 +18,23 @@ function Employees() {
 // }
 
 module.exports = {
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+// log in to specific clinic/company 
+// and check email address/password at the same time
+
+    CheckEmail: function(email) {
+        return Employees().where('email', email);
+    },
+    NewEmployee: function(data) {
+        return Employees().insert(data)
+        .returning('*');
+    },
+    getEmployee: function(id){
+        // Get Employee by ID
+        return Employees().where('id',id);
+    }
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+};
 
 //     Users: function() {
 //         return Users();
@@ -67,23 +88,5 @@ module.exports = {
 
 //     deleteCards: function(deck_id){
 //         return Cards().where('deck_id', deck_id).del();
-//     },
-
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
-// log in to specific clinic/company 
-// and check email address/password at the same time
-
-    CheckEmail: function(email) {
-        return Employees().where('email', email);
-    },
-    NewEmployee: function(data) {
-        return Employees().insert(data)
-        .returning('*');
-    },
-    getEmployee: function(id){
-        // Get Employee by ID
-        return Employees().where('id',id);
-    }
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +    
-};
+//     }
 

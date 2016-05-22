@@ -11,11 +11,11 @@ angular
         restricted: false,
         preventLoggedIn: true
       })
-      // .when('/register', {
-      //   template: '<register></register>',
-      //   restricted: false,
-      //   preventLoggedIn: true
-      // })
+      .when('/signup', {
+        template: '<signup></signup>',
+        restricted: false,
+        preventLoggedIn: true
+      })
       // .when('/profile', {
       //   template: '<profile></profile>',
       //   restricted: true,
@@ -41,17 +41,17 @@ angular
       //   restricted: true,
       //   preventLoggedIn: false
       // })
-      // .when('/logout', {
-      //   restricted: false,
-      //   preventLoggedIn: false,
-      //   resolve: {
-      //     test: function(authService, $rootScope, $location) {
-      //       authService.logout();
-      //       $rootScope.currentUser = authService.getUserInfo();
-      //       $location.path('/login');
-      //     }
-      //   }
-      // })
+      .when('/logout', {
+        restricted: false,
+        preventLoggedIn: false,
+        resolve: {
+          test: function(authService, $rootScope, $location) {
+            authService.logout();
+            $rootScope.currentUser = authService.getUserInfo();
+            $location.path('/login');
+          }
+        }
+      })
       .otherwise({redirectTo: '/login'});
       $httpProvider.interceptors.push('authInterceptor');
 }]);
