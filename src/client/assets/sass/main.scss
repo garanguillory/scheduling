@@ -1,0 +1,63 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	1). universal
+	2). navbar
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* ------ universal ------- */
+
+	html{
+		font-size:16px;
+	}
+
+	ul {
+		padding-left: 0;
+	}
+
+	li {
+		list-style: none;
+	}
+
+	a {
+		color: inherit;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	.ng-cloak {
+		display: none;
+	}
+	
+	.green {
+		color: green;
+	}
+
+	.red {
+		color: red;
+	}
+
+	.centered {
+		text-align: center;
+	}
+
+	.wrapper {
+		margin: 0 1rem;
+	}
+
+/* ------ navbar ------- */
+
+	.navbar {
+		border-radius: 0;
+	}
+
+
+
+
+
+
+
+
+
