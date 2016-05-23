@@ -5,18 +5,18 @@ angular
 		return {
 			restrict: 'AE',
 			templateUrl: "app/components/signup/signup.view.html",
-			controller: function($scope, $location, $window){
+			controller: function($rootScope, $scope, $location){
 
 				$scope.user = {};
 				$scope.signUp = function(){
 
 					// do something before the auth service
 
-					authService.register($scope.user)
+					authService.signup($scope.user)
 					  .then(function(user) {
 					  	console.log("$scope.user: ", $scope.user);
 					    authService.setUserInfo(user);
-					    $location.path('/profile');
+					    $location.path('/');
 					    $rootScope.currentUser = authService.getUserInfo();
 					  })
 					  .catch(function(err) {

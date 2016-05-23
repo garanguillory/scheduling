@@ -5,7 +5,7 @@ function Schedules() {
     return knex('schedules');
 }
 
-function Employees() {
+function Users() {
     return knex('employees');
 }
 
@@ -23,15 +23,20 @@ module.exports = {
 // and check email address/password at the same time
 
     CheckEmail: function(email) {
-        return Employees().where('email', email);
+        return Users().where('email', email);
     },
-    NewEmployee: function(data) {
-        return Employees().insert(data)
+
+    NewCompany: function(company){
+        return knex.insert({'company': company}).into('schedules').returning('id');
+    },
+
+    NewUser: function(data) {
+        return Users().insert(data)
         .returning('*');
     },
-    getEmployee: function(id){
+    getUser: function(id){
         // Get Employee by ID
-        return Employees().where('id',id);
+        return Users().where('id',id);
     }
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 };
