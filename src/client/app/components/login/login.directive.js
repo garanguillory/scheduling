@@ -12,7 +12,9 @@ angular
 				  authService.login($scope.user)
 				    .then(function(user) {
 				      authService.setUserInfo(user);
-				      $location.path('/'); // need to change redirect path
+				      // if/else to determine if user is an admin backend???
+				      console.log("user: ", user);
+				      $location.path('/company'); // need to change redirect path
 				      $rootScope.currentUser = authService.getUserInfo();
 				    })
 				    .catch(function(err) {

@@ -9,14 +9,6 @@ function Users() {
     return knex('employees');
 }
 
-// function Decks() {
-//     return knex('decks');
-// }
-
-// function Cards() {
-//     return knex('cards');
-// }
-
 module.exports = {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // log in to specific clinic/company 
@@ -37,6 +29,11 @@ module.exports = {
         return Users().insert(data)
         .returning('*');
     },
+
+    getEmployeesByCompany: function(company_id){
+        return Users().where('company_id', company_id);
+    },
+
     getUser: function(id){
         // Get Employee by ID
         return Users().where('id',id);
@@ -44,9 +41,6 @@ module.exports = {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 };
 
-//     Users: function() {
-//         return Users();
-//     },
 
 //     getDecksByUser: function(user_id) {
 //         return knex.select('users.id', 'decks.id', 'decks.name', 'decks.description', 'decks.image_url')

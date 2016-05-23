@@ -72,7 +72,8 @@ router.post('/login', function (req, res, next) {
                 data: {
                     token: token,
                     id: user.id,
-                    email: user.email
+                    email: user.email,
+                    company_id: user.company_id
                 }
             });
         } else {

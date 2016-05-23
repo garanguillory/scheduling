@@ -33,6 +33,7 @@
         console.log("userData: ", userData);
         $window.localStorage.setItem('id', userData.data.data.id);
         $window.localStorage.setItem('email', userData.data.data.email);
+        $window.localStorage.setItem('company_id', userData.data.data.company_id);
         $window.localStorage.setItem('token', userData.data.data.token);
       },
       getUserInfo: function(userData) {

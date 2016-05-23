@@ -16,13 +16,13 @@ angular
         restricted: false,
         preventLoggedIn: true
       })
+      .when('/company', {
+        template: '<company></company>',
+        restricted: true,
+        preventLoggedIn: false
+      })
       // .when('/profile', {
       //   template: '<profile></profile>',
-      //   restricted: true,
-      //   preventLoggedIn: false
-      // })
-      // .when('/newdeck', {
-      //   template: '<newdeck></newdeck>',
       //   restricted: true,
       //   preventLoggedIn: false
       // })
