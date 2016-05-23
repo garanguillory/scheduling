@@ -16,7 +16,7 @@ angular
 					  .then(function(user) {
 					  	console.log("$scope.user: ", $scope.user);
 					    authService.setUserInfo(user);
-					    $location.path('/');
+					    $location.path('/'); // need to change redirect path
 					    $rootScope.currentUser = authService.getUserInfo();
 					  })
 					  .catch(function(err) {

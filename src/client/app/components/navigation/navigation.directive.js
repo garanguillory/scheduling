@@ -16,7 +16,7 @@ angular
 					$scope.logout = function(){
 						console.log("logging out...");
 						authService.logout();
-						$location.path('/login');
+						$location.path('/login'); // need to edit redirect path
 					};
 				
 			}

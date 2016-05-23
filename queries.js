@@ -21,6 +21,9 @@ module.exports = {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // log in to specific clinic/company 
 // and check email address/password at the same time
+    Users: function() {
+        return Users();
+    },
 
     CheckEmail: function(email) {
         return Users().where('email', email);

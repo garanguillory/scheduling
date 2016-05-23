@@ -47,7 +47,7 @@ router.post('/signup', function(req, res, next) {
   		        }
   		    });
   		})
-  		.catch((err) => {
+  		.catch(function(err) {
   		    console.log(err);
   		    res.send(err);
   		});
@@ -58,10 +58,7 @@ router.post('/login', function (req, res, next) {
     // ensure that user exists
     queries.Users().where('email', req.body.email)
     .then(function (user) {
-    	// console.log("user: ", user);
         user = user[0];
-        console.log("user: ", user);
-        console.log("user.password: ", user.password);
         if (!user) {
             return res.status(401).json({
                 status: 'fail',
