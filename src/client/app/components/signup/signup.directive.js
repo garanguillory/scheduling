@@ -14,10 +14,11 @@ angular
 
 					authService.signup($scope.user)
 					  .then(function(user) {
-					  	console.log("$scope.user: ", $scope.user);
+					  	// console.log('user: ', user);
+					  	// console.log("$scope.user: ", $scope.user);
 					    authService.setUserInfo(user);
-					    $location.path('/'); // need to change redirect path
 					    $rootScope.currentUser = authService.getUserInfo();
+					    $location.path('/company'); // need to change redirect path
 					  })
 					  .catch(function(err) {
 					    console.log("err: ",err);

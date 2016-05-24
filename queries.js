@@ -17,6 +17,10 @@ module.exports = {
         return Users();
     },
 
+    Schedules: function() {
+        return Schedules();
+    },
+
     CheckEmail: function(email) {
         return Users().where('email', email);
     },
@@ -28,6 +32,10 @@ module.exports = {
     NewUser: function(data) {
         return Users().insert(data)
         .returning('*');
+    },
+
+    getCompany: function(company_id){
+        return Schedules().where('id', company_id).returning('id');
     },
 
     getEmployeesByCompany: function(company_id){

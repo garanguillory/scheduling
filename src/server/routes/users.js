@@ -5,16 +5,34 @@ var jwt = require('jwt-simple');
 var knex = require('../../../db/knex.js');
 var queries = require("../../../queries");
 
-// get ALL employees
-router.get('/:id/employees', function(req, res, next){
-	var id = req.params.id;
+// get ALL employees by company
+router.get('/:company_id/employees', function(req, res, next){
+	var company_id = req.params.company_id;
 
-	queries.getEmployeesByCompany(id)
+	queries.getEmployeesByCompany(company_id)
 		.then(function(employees) {
 			console.log('employees: ', employees);
 		  res.status(200).json({
 		    status: 'success',
 		    data: employees
+		  });
+		})
+		.catch(function (err) {
+		  return next(err);
+		});
+
+});
+
+// get company by id
+router.get('/:company_id/company', function(req, res, next){
+	var company_id = req.params.company_id;
+
+	queries.getCompany(company_id)
+		.then(function(company) {
+			console.log('company: ', company);
+		  res.status(200).json({
+		    status: 'success',
+		    data: company
 		  });
 		})
 		.catch(function (err) {

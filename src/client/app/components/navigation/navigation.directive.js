@@ -7,8 +7,18 @@ angular
 			templateUrl: "app/components/navigation/navigation.view.html",
 			controller: function($scope, $location, $window){
 
+				var company_id = $window.localStorage.company_id;
+
 					if($window.localStorage.token){
-						$scope.token = true;
+							
+							$scope.token = true;
+
+							navigationService.getCompany(company_id)
+								.then(function(data){
+									console.log('company info: ', data.data.data[0]);
+									$scope.company = data.data.data[0].company;
+								});
+
 					} else {
 						$scope.token = false;
 					}

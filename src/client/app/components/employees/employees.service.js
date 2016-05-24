@@ -1,10 +1,10 @@
 angular
 	.module('Scheduling')
-	.service('navigationService',[ '$http', function($http){
+	.service('employeesService',[ '$http', function($http){
 
 		return {
-			getCompany: function(company_id){
-				return $http.get('/api/users/' + company_id +'/company')
+			getEmployees: function(id){
+				return $http.get('/api/users/' + id +'/employees')
 										.then(function(res){
 										  return res;
 										})

@@ -21,6 +21,11 @@ angular
         restricted: true,
         preventLoggedIn: false
       })
+      .when('/employees', {
+        template: '<employees></employees>',
+        restricted: true,
+        preventLoggedIn: false
+      })
       // .when('/profile', {
       //   template: '<profile></profile>',
       //   restricted: true,
@@ -66,7 +71,7 @@ angular
       }
       // if token and prevent logging in is true
       if(next.preventLoggedIn && $window.localStorage.getItem('token')) {
-          console.log(next.restricted)
+          console.log(next.restricted);
         $location.path('/');
       }
     });

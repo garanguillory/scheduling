@@ -23,7 +23,7 @@ router.post('/signup', function(req, res, next) {
     })
 		// create new company
   	.then(function(company_id){
-  		console.log("company_id: ", company_id);
+  		// console.log("company_id: ", company_id);
   		// create new user
   		var userData = {
   			first_name: req.body.first_name,
@@ -43,7 +43,8 @@ router.post('/signup', function(req, res, next) {
   		        data: {
   		            token: token,
   		            id: newUser.id,
-  		            email: newUser.email
+  		            email: newUser.email,
+                  company_id: Number(company_id)
   		        }
   		    });
   		})

@@ -2,6 +2,7 @@
 
 	1). universal
 	2). navbar
+	3). employees
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -53,10 +54,32 @@
 		border-radius: 0;
 	}
 
+/* ------ employees ------- */
 
+.edit-employee {
+	img {
+		max-width: 100%;
+	}
+}
 
+.employee-list {
+	border: 1px solid black;
+	height: 90vh;
+	overflow: scroll;
+}
 
+.employee-individual {
+	&:hover {
+		background: lightgrey;
+	}
+	border-bottom: 1px solid black;
+	// need to edit height and width
+	img {
+		height: 100px;
+		width: 100px;
+	}
 
+}
 
 
 
