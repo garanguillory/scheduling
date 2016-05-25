@@ -41,6 +41,41 @@ router.get('/:company_id/company', function(req, res, next){
 
 });
 
+// add new user (with company id)
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
+router.post('/employees', function(req, res, next) {
+	
+	// var userData = {
+	// 	first_name: req.body.first_name,
+	// 	last_name: req.body.last_name,
+	// 	email: req.body.email,
+	// 	password: hashing(req.body.password),
+	// 	phone: '555-555-5555',
+	// 	admin: true,
+	// 	company_id: Number(company_id)
+	// };
+
+		queries.NewUser(req.body)
+		.then(function(newUser) {
+		    // newUser = newUser[0];
+		    res.status(200).json({
+		        status: 'success',
+		        data: {
+		            new_employee: newUser
+		        }
+		    });
+		})
+		.catch(function(err) {
+		    console.log(err);
+		    res.send(err);
+		});
+
+});
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
+
 // needs work
 
 // router.get('/employee/:id', function(req, res, next){
