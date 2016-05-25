@@ -50,7 +50,7 @@ module.exports = {
         return Users().update(employee).where('id', employee.id);
     },
 
-    getUser: function(id){
+    getEmployee: function(id){
         // Get Employee by ID
         return Users().where('id',id);
     }

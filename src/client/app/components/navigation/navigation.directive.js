@@ -9,6 +9,8 @@ angular
 
 				var company_id = $window.localStorage.company_id;
 
+				var employee_id = $window.localStorage.id;
+
 					if($window.localStorage.token){
 							
 							$scope.token = true;
@@ -17,6 +19,12 @@ angular
 								.then(function(data){
 									console.log('company info: ', data.data.data[0]);
 									$scope.company = data.data.data[0].company;
+								});
+
+							navigationService.getEmployee(employee_id)
+								.then(function(data){
+									console.log('employee info: ', data.data.data[0]);
+									$scope.employee = data.data.data[0];
 								});
 
 					} else {

@@ -66,7 +66,7 @@ angular
 					$window.location.reload();
 				};
 
-			// need to add functionality for adding conflicts
+			// need to add functionality for simultaneously adding conflicts
 				$scope.add = function(){
 					console.log("add function");
 					$scope.new_employee.company_id = company_id;
@@ -79,6 +79,8 @@ angular
 					$window.location.reload();
 				};
 
+			// need to add functionality for deleting the specified
+			// employee's conflicts BEFORE deleting the employee
 				$scope.delete = function(){
 					console.log(this.employee);
 					employeesService.deleteEmployee(this.employee.id)

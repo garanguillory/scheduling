@@ -4,7 +4,7 @@ angular
 		
 		return {
 			getEmployees: function(id){
-				return $http.get('/api/users/' + id +'/employees')
+				return $http.get('/api/users/employees/'+id)
 										.then(function(res){
 										  return res;
 										})

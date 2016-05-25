@@ -14,7 +14,11 @@ angular
 				      authService.setUserInfo(user);
 				      // if/else to determine if user is an admin backend???
 				      console.log("user: ", user);
-				      $location.path('/company'); // need to change redirect path
+				      if(user.data.data.admin){
+				      	$location.path('/company');
+				      } else {
+				      	$location.path('/profile');
+				      }
 				      $rootScope.currentUser = authService.getUserInfo();
 				    })
 				    .catch(function(err) {

@@ -74,6 +74,7 @@ router.post('/login', function (req, res, next) {
                     token: token,
                     id: user.id,
                     email: user.email,
+                    admin: user.admin,
                     company_id: user.company_id
                 }
             });

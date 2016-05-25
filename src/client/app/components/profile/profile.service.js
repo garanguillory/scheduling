@@ -1,7 +1,7 @@
 angular
 	.module('Scheduling')
-	.service('navigationService',[ '$http', function($http){
-
+	.service('profileService',[ '$http', function($http){
+		
 		return {
 			getCompany: function(company_id){
 				return $http.get('/api/users/company/' + company_id)
@@ -13,7 +13,16 @@ angular
 										});
 			},
 			getEmployee: function(employee_id){
-				return $http.get('/api/users/employee/' + employee_id) // '/employee/ <-- needs to be singular'
+				return $http.get('/api/users/employee/' + employee_id)
+										.then(function(res){
+										  return res;
+										})
+										.catch(function(err){
+										  return err;
+										});
+			},
+			editEmployee: function(employee){
+				return $http.put('/api/users/employees/edit', employee)
 										.then(function(res){
 										  return res;
 										})
@@ -24,3 +33,4 @@ angular
 		};
 
 }]);
+

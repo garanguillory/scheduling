@@ -1,0 +1,105 @@
+<navigation></navigation>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-8">
+			<p class="centered">- Individual Employee Profile View -</p>
+			<p class="centered">- Add instructions here -</p>
+			
+				<nav class="employee-nav navbar navbar-default">
+				  <div class="container-fluid">
+					  <div class="navbar-header">
+					    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					      <span class="sr-only">Toggle navigation</span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					    </button>
+					  </div>
+
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				    	<ul class="nav navbar-nav">
+				    		<li ng-click="editing()"><a>Edit Your Information</a></li>
+				    		<li ng-click="adding()"><a>Add Scheduling Conflicts</a></li>
+				    		<li>
+					    		<form class="navbar-form navbar-right" role="search">
+						        <div class="form-group">
+						          <input ng-model="search" type="text" class="form-control" placeholder="Search By Name">
+						        </div>
+					      	</form>
+				      	</li>
+				    	</ul>
+				    </div><!-- /.navbar-collapse -->
+
+				  </div><!-- /.container-fluid -->
+				</nav>
+
+			<p ng-show="add_employee == false && edit_employee == false" class="centered">To get started, choose one of the above options.</p>
+
+				<form ng-show="edit_employee" ng-submit="edit()" class="edit-employee form-horizontal">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="row">
+								<div class="col-xs-4">
+									<p ng-show="selection == false">
+										To edit an employee, select one from the list on the right.
+									</p>
+									<img ng-src="{{employee.picture}}">
+								</div>
+								<div class="col-xs-8">
+									<div class="row form-group">
+										<div class="col-xs-6">
+											<input ng-model="employee.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
+										</div>
+										<div class="col-xs-6">
+											<input ng-model="employee.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-6">
+											<input ng-model="employee.email" type="text" class="form-control" id="email" placeholder="Email">
+										</div>
+										<div class="col-xs-6">
+											<input ng-model="employee.phone" type="text" class="form-control" id="phone" placeholder="Phone">
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<input  ng-model="employee.picture" type="text" class="form-control" id="picture" placeholder="Picture (url or file)">
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<textarea class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
+										</div>
+									</div>
+								</div> <!-- end col-xs-8 -->
+							</div> <!-- end row -->
+						</div> <!-- end col-xs-12 -->
+					</div> <!-- end row -->
+				<br><br>
+					<div class="row form-group">
+						<div class="col-xs-12">
+							<button ng-click="edit_employee = false" type="button" class="btn btn-default pull-right">Cancel</button>
+						  <button type="submit" class="btn btn-default pull-right">Edit Information</button>
+						</div>
+					</div>
+				</form>
+
+		<!-- <br><br> -->
+
+		</div>
+
+		<!-- move employee-list to 'col-sm-4' div and add the style="border-left: 1px solid black" -->
+		<div class="col-sm-4" style="border-left: 1px solid black">
+			<div class="employee-list">
+				<ul> <!-- need to hide admin from employee list -->
+					<li ng-click="selected()" class="employee-individual" ng-repeat="employee in employees | filter:search">
+						<img ng-src="{{employee.picture}}">{{employee.first_name}} {{employee.last_name}}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

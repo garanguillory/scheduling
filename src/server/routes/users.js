@@ -5,64 +5,78 @@ var jwt = require('jwt-simple');
 var knex = require('../../../db/knex.js');
 var queries = require("../../../queries");
 
+
 // get ALL employees by company
-router.get('/:company_id/employees', function(req, res, next){
+router.get('/employees/:company_id', function(req, res, next){
 	var company_id = req.params.company_id;
-
-	queries.getEmployeesByCompany(company_id)
-		.then(function(employees) {
-			console.log('employees: ', employees);
-		  res.status(200).json({
-		    status: 'success',
-		    data: employees
-		  });
-		})
-		.catch(function (err) {
-		  return next(err);
-		});
-
+		queries.getEmployeesByCompany(company_id)
+			.then(function(employees) {
+				console.log('employees: ', employees);
+			  res.status(200).json({
+			    status: 'success',
+			    data: employees
+			  });
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
 });
+
 
 // get company by id
-router.get('/:company_id/company', function(req, res, next){
+router.get('/company/:company_id', function(req, res, next){
 	var company_id = req.params.company_id;
-
-	queries.getCompany(company_id)
-		.then(function(company) {
-			console.log('company: ', company);
-		  res.status(200).json({
-		    status: 'success',
-		    data: company
-		  });
-		})
-		.catch(function (err) {
-		  return next(err);
-		});
-
+		queries.getCompany(company_id)
+			.then(function(company) {
+				console.log('company: ', company);
+			  res.status(200).json({
+			    status: 'success',
+			    data: company
+			  });
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
 });
+
+
+// get employee by id '/employee/ <-- needs to be singular'
+router.get('/employee/:employee_id', function(req, res, next){
+	var employee_id = req.params.employee_id;
+		queries.getEmployee(employee_id)
+			.then(function(employee) {
+				console.log('employee: ', employee);
+			  res.status(200).json({
+			    status: 'success',
+			    data: employee
+			  });
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
+});
+
 
 // add new employee (with company id)
 router.post('/employees', function(req, res, next) {
-
-		queries.NewUser(req.body)
-			.then(function(newUser) {
-			    res.status(200).json({
-			        status: 'success',
-			        data: {
-			            new_employee: newUser
-			        }
-			    });
-			})
-			.catch(function(err) {
-			    console.log(err);
-			    res.send(err);
-			});
-
+	queries.NewUser(req.body)
+		.then(function(newUser) {
+		    res.status(200).json({
+		        status: 'success',
+		        data: {
+		            new_employee: newUser
+		        }
+		    });
+		})
+		.catch(function(err) {
+		    console.log(err);
+		    res.send(err);
+		});
 });
+
 
 // delete employee (by employee_id)
 router.delete('/employees/delete/:employee_id', function(req, res, next){
-	// var employee_id = Number(req.body);
 	var employee_id = req.params.employee_id;
 		queries.deleteEmployee(employee_id)
 			.then(function() {
@@ -80,7 +94,6 @@ router.delete('/employees/delete/:employee_id', function(req, res, next){
 // edit employee (by employee_id)
 router.put('/employees/edit', function(req, res, next){
 	var employee = req.body;
-
 		queries.editEmployee(employee)
 			.then(function(edited_employee) {
 			    res.status(200).json({

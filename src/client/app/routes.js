@@ -26,23 +26,13 @@ angular
         restricted: true,
         preventLoggedIn: false
       })
-      // .when('/profile', {
-      //   template: '<profile></profile>',
-      //   restricted: true,
-      //   preventLoggedIn: false
-      // })
-      // .when('/deck/:id', {
-      //   template: '<deck></deck>',
-      //   restricted: true,
-      //   preventLoggedIn: false
-      // })
-      // .when('/study/:id', {
-      //   template: '<study></study>',
-      //   restricted: true,
-      //   preventLoggedIn: false
-      // })
-      // .when('/editdeck/:id', {
-      //   template: '<editdeck></editdeck>',
+      .when('/profile', {
+        template: '<profile></profile>',
+        restricted: true,
+        preventLoggedIn: false
+      })
+      // .when('/schedule', {
+      //   template: '<schedule></schedule>',
       //   restricted: true,
       //   preventLoggedIn: false
       // })
