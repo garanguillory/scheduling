@@ -41,7 +41,7 @@ router.get('/:company_id/company', function(req, res, next){
 
 });
 
-// add new user (with company id)
+// add new employee (with company id)
 router.post('/employees', function(req, res, next) {
 
 		queries.NewUser(req.body)
@@ -60,8 +60,7 @@ router.post('/employees', function(req, res, next) {
 
 });
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
-
+// delete employee (by employee_id)
 router.delete('/employees/delete/:employee_id', function(req, res, next){
 	// var employee_id = Number(req.body);
 	var employee_id = req.params.employee_id;
@@ -78,7 +77,26 @@ router.delete('/employees/delete/:employee_id', function(req, res, next){
 });
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+// edit employee (by employee_id)
+router.put('/employees/edit', function(req, res, next){
+	var employee = req.body;
 
+		queries.editEmployee(employee)
+			.then(function(edited_employee) {
+			    res.status(200).json({
+			        status: 'success',
+			        data: {
+			            edited_employee: edited_employee
+			        }
+			    });
+			})
+			.catch(function(err) {
+			    console.log(err);
+			    res.send(err);
+			});
+});
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 
 // needs work
 

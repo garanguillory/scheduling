@@ -25,6 +25,7 @@ angular
 					$scope.selection = true;
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
+					$scope.search = '';
 				};
 
 				$scope.editing = function(){
@@ -47,7 +48,6 @@ angular
 				// 	$scope.add_employee = false;
 				// 	return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
 				// };
-
 				// $scope.addingBulk = function(){
 				// 	$scope.edit_employee = false;
 				// 	return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
@@ -56,21 +56,23 @@ angular
 
 			// add functionality for edit, delete, and update employee + conflicts
 				$scope.edit = function(){
-					$scope.employee.company_id = company_id;
 					console.log("edit function");
-
+					employeesService.editEmployee($scope.employee)
+						.then(function(data) {
+						console.log('employee edited: ', data);
+					});
 					$scope.employee = {};
 					$scope.employee.company_id = company_id;
+					$window.location.reload();
 				};
-			// add functionality for adding an employee + conflicts
+
+			// need to add functionality for adding conflicts
 				$scope.add = function(){
 					console.log("add function");
 					$scope.new_employee.company_id = company_id;
 					employeesService.addEmployee($scope.new_employee)
-						.then(function (data) {
+						.then(function(data) {
 						console.log('new_employee', data);
-						// $scope.employees = data.data.data;
-						// reload page
 					});
 					$scope.new_employee = {};
 					$scope.new_employee.company_id = company_id;
@@ -89,3 +91,19 @@ angular
 			}
 		};
 }]);
+
+
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// better edit function ???
+		// $scope.edit = function(){
+		// 	console.log("edit function");
+		// 	employeesService.editEmployee($scope.employee.id, $scope.employee)
+		// 		.then(function(data) {
+		// 		console.log('employee edited: ', data);
+		// 	});
+		// 	$scope.employee = {};
+		// 	$scope.employee.company_id = company_id;
+		// };
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

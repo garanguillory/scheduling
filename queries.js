@@ -46,6 +46,10 @@ module.exports = {
         return Users().where('id', employee_id).delete();
     },
 
+    editEmployee: function(employee){
+        return Users().update(employee).where('id', employee.id);
+    },
+
     getUser: function(id){
         // Get Employee by ID
         return Users().where('id',id);
