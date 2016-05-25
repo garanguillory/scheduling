@@ -42,6 +42,10 @@ module.exports = {
         return Users().where('company_id', company_id);
     },
 
+    deleteEmployee: function(employee_id){
+        return Users().where('id', employee_id).delete();
+    },
+
     getUser: function(id){
         // Get Employee by ID
         return Users().where('id',id);

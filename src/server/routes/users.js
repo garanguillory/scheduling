@@ -42,35 +42,39 @@ router.get('/:company_id/company', function(req, res, next){
 });
 
 // add new user (with company id)
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
-
 router.post('/employees', function(req, res, next) {
-	
-	// var userData = {
-	// 	first_name: req.body.first_name,
-	// 	last_name: req.body.last_name,
-	// 	email: req.body.email,
-	// 	password: hashing(req.body.password),
-	// 	phone: '555-555-5555',
-	// 	admin: true,
-	// 	company_id: Number(company_id)
-	// };
 
 		queries.NewUser(req.body)
-		.then(function(newUser) {
-		    // newUser = newUser[0];
-		    res.status(200).json({
-		        status: 'success',
-		        data: {
-		            new_employee: newUser
-		        }
-		    });
-		})
-		.catch(function(err) {
-		    console.log(err);
-		    res.send(err);
-		});
+			.then(function(newUser) {
+			    res.status(200).json({
+			        status: 'success',
+			        data: {
+			            new_employee: newUser
+			        }
+			    });
+			})
+			.catch(function(err) {
+			    console.log(err);
+			    res.send(err);
+			});
 
+});
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
+router.delete('/employees/delete/:employee_id', function(req, res, next){
+	// var employee_id = Number(req.body);
+	var employee_id = req.params.employee_id;
+		queries.deleteEmployee(employee_id)
+			.then(function() {
+			    res.status(200).json({
+			        status: 'deleted employee'
+			    });
+			})
+			.catch(function(err) {
+			    console.log(err);
+			    res.send(err);
+			});
 });
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 

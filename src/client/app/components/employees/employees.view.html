@@ -36,6 +36,8 @@
 				  </div><!-- /.container-fluid -->
 				</nav>
 
+			<p ng-show="add_employee == false && edit_employee == false" class="centered">To get started, choose one of the above options.</p>
+
 				<form ng-show="edit_employee" ng-submit="edit()" class="edit-employee form-horizontal">
 					<div class="row">
 						<div class="col-xs-12">
@@ -85,9 +87,11 @@
 						</div>
 					</div>
 				<br><br>
-					<div class="row">
+					<div class="row form-group">
 						<div class="col-xs-12">
-							<p class="centered">- need to add 'delete employee' button and 'submit edits' button -</p>
+							<button ng-click="delete()" type="button" class="btn btn-danger pull-left">Delete Employee</button>
+							<button ng-click="edit_employee = false" type="button" class="btn btn-default pull-right">Cancel</button>
+						  <button type="submit" class="btn btn-default pull-right">Edit Employee</button>
 						</div>
 					</div>
 				</form>
@@ -130,7 +134,8 @@
 							</div> <!-- end row -->
 							<div class="row form-group">
 								<div class="col-xs-12">
-								  <button type="submit" class="btn btn-default">Add New Employee</button>
+								  <button ng-click="add_employee = false" type="button" class="btn btn-default  pull-right">Cancel</button>
+								  <button type="submit" class="btn btn-default pull-right">Add New Employee</button>
 								</div>
 							</div>
 						</div> <!-- end col-xs-12 -->

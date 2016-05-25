@@ -1,11 +1,11 @@
 
 angular
 	.module('Scheduling')
-	.directive("employees",['employeesService', 'authService', function(employeesService, authService){
+	.directive("employees",['employeesService', function(employeesService){
 		return {
 			restrict: 'AE',
 			templateUrl: "app/components/employees/employees.view.html",
-			controller: function($scope, $window, authService){
+			controller: function($scope, $window){
 
 				var company_id = $window.localStorage.company_id;
 				
@@ -17,16 +17,18 @@ angular
 
 				$scope.employee = {};
 				$scope.new_employee = {};
+				$scope.add_employee = false;
+				$scope.edit_employee = false;
 				$scope.selection = false;
 
 				$scope.selected = function(){
 					$scope.selection = true;
 					$scope.employee = this.employee;
+					$scope.edit_employee = true;
 				};
 
-				console.log('this.employee: ', this.employee);
-
 				$scope.editing = function(){
+					$scope.selection = false;
 					$scope.employee = {};
 					$scope.add_employee = false;
 					return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
@@ -72,6 +74,16 @@ angular
 					});
 					$scope.new_employee = {};
 					$scope.new_employee.company_id = company_id;
+					$window.location.reload();
+				};
+
+				$scope.delete = function(){
+					console.log(this.employee);
+					employeesService.deleteEmployee(this.employee.id)
+						.then(function () {
+						console.log('employee deleted');
+					});
+					$window.location.reload();
 				};
 
 			}

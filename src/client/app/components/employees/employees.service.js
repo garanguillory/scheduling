@@ -20,6 +20,15 @@ angular
 										.catch(function(err){
 										  return err;
 										});
+			},
+			deleteEmployee: function(employee_id){
+				return $http.delete('/api/users/employees/delete/'+ employee_id)
+										.then(function(res){
+										  return res;
+										})
+										.catch(function(err){
+										  return err;
+										});
 			}
 		};
 
