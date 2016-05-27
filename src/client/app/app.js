@@ -1,5 +1,6 @@
 
 angular
 	.module('Scheduling', [
-		'ngRoute'
+		'ngRoute',
+		'datetimepicker' // ???
 	]);

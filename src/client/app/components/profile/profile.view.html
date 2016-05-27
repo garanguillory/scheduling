@@ -1,43 +1,37 @@
 <navigation></navigation>
 
 <div class="container-fluid">
+
+	<div class="row">
+		<div class="col-sm-12">
+			<nav class="employee-nav navbar navbar-default">
+			  <div class="container-fluid">
+				  <div class="navbar-header">
+				    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				      <span class="sr-only">Toggle navigation</span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				      <span class="icon-bar"></span>
+				    </button>
+				  </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    	<ul class="nav navbar-nav">
+			    		<li ng-click="editing()"><a>Edit Your Information</a></li>
+			    		<li ng-click="adding()"><a>Add Scheduling Conflicts</a></li>
+			    		<li ng-click="adding()"><a>Add Scheduling Conflicts Bulk</a></li>
+			    	</ul>
+			    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</div>
+	</div>
+
 	<div class="row">
 		<div class="col-sm-8">
-			<p class="centered">- Individual Employee Profile View -</p>
-			<p class="centered">- Add instructions here -</p>
-			
-				<nav class="employee-nav navbar navbar-default">
-				  <div class="container-fluid">
-					  <div class="navbar-header">
-					    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					      <span class="sr-only">Toggle navigation</span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					    </button>
-					  </div>
 
-				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				    	<ul class="nav navbar-nav">
-				    		<li ng-click="editing()"><a>Edit Your Information</a></li>
-				    		<li ng-click="adding()"><a>Add Scheduling Conflicts</a></li>
-				    		<li>
-					    		<form class="navbar-form navbar-right" role="search">
-						        <div class="form-group">
-						          <input ng-model="search" type="text" class="form-control" placeholder="Search By Name">
-						        </div>
-					      	</form>
-				      	</li>
-				    	</ul>
-				    </div><!-- /.navbar-collapse -->
-
-				  </div><!-- /.container-fluid -->
-				</nav>
-
-			<p ng-show="add_employee == false && edit_employee == false" class="centered">To get started, choose one of the above options.</p>
-
-				<form ng-show="edit_employee" ng-submit="edit()" class="edit-employee form-horizontal">
+				<form ng-submit="edit()" class="edit-employee form-horizontal">
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="row">
@@ -81,25 +75,81 @@
 				<br><br>
 					<div class="row form-group">
 						<div class="col-xs-12">
-							<button ng-click="edit_employee = false" type="button" class="btn btn-default pull-right">Cancel</button>
+							<button type="button" class="btn btn-default pull-right">Cancel</button>
 						  <button type="submit" class="btn btn-default pull-right">Edit Information</button>
 						</div>
 					</div>
 				</form>
 
-		<!-- <br><br> -->
+				<div class="schedule-conflicts form-horizontal">
+					<div class="form-group">
+					    <label for="inputEmail3" class="col-sm-3 control-label" style="text-align: right">Schedule Conflicts</label>
+					    <div class="col-sm-9">
+					      <input type="text" class="form-control" id="inputEmail3" placeholder="dd/mm/yyyy, dd/mm/yyyy, dd/mm/yyyy">
+					    </div>
+				  </div>
+				  <div class="form-group">
+				  	<label for="" class="col-sm-3 control-label" style="text-align: right">On Call</label>
+				  	<div class="col-sm-9">
+				  	  <input type="text" class="form-control" id="" placeholder="dd/mm/yyyy, dd/mm/yyyy, dd/mm/yyyy">
+				  	</div>
+				  </div>
+				</div>
 
 		</div>
 
 		<!-- move employee-list to 'col-sm-4' div and add the style="border-left: 1px solid black" -->
-		<div class="col-sm-4" style="border-left: 1px solid black">
-			<div class="employee-list">
-				<ul> <!-- need to hide admin from employee list -->
-					<li ng-click="selected()" class="employee-individual" ng-repeat="employee in employees | filter:search">
-						<img ng-src="{{employee.picture}}">{{employee.first_name}} {{employee.last_name}}
-					</li>
-				</ul>
-			</div>
-		</div>
+<!-- 		<div class="col-sm-4" style="border-left: 1px solid black;">
+
+				<div style="overflow:hidden">
+				    <div class="form-group">
+				        <div class="row">
+				            <div class="col-xs-12">
+				                <div id="datetimepicker12" style="border: 1px solid black; border-radius: 4px;"></div>
+				            </div>
+				        </div>
+				    </div>
+				    <script type="text/javascript">
+				        $(document).ready(function() {
+				            $('#datetimepicker12').datetimepicker({
+				            		toolbarPlacement: 'bottom',
+				                inline: true
+				            });
+				            $(document).on('click', 'td', function(){
+				            	console.log(this);
+				            });
+				        });
+				    </script>
+				</div>
+
+		</div> -->
+
+								<div class='col-sm-4' style="border-left: 1px solid black;">
+									<form class="form form-horizontal" novalidate>
+										<div class="form-group">
+											<div class="col-xs-12">
+											<div
+												 dpicker
+									       datetimepicker-options="{inline:true, debug:true}"
+									       >
+									       <input type="text" class="form-control">
+									       </div>
+											</div>
+										</div>
+									</form>
+									<div class="legend">
+										<ul>
+											<li><div id="red"></div> = schedule conflict</li>
+											<li><div id="blue"></div> = current date</li>
+											<li><div id="orange"></div> = you are scheduled to be on call on this date</li>
+										</ul>
+									</div>
+								</div>
+						
+				
+				</div> <!-- end row -->
+				
+		
+
 	</div>
 </div>

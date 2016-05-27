@@ -10,9 +10,10 @@ angular
 				var company_id = $window.localStorage.company_id;
 				var employee_id = $window.localStorage.id;
 
+				$scope.dates = {};
+
 				profileService.getEmployee(employee_id)
 					.then(function(data){
-						console.log("employee: ", data.data.data[0]);
 						$scope.employee = data.data.data[0];
 					})
 					.catch(function(error){
@@ -21,15 +22,8 @@ angular
 
 				$scope.edit_employee = false;
 
-				$scope.editing = function(){
-					return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
-				};
-
-
 				// add functionality for edit, delete, and update employee + conflicts
 					$scope.edit = function(){
-						// $scope.employee.company_id = company_id;
-						// $scope.employee.id = id;
 						profileService.editEmployee($scope.employee)
 							.then(function(data) {
 							console.log('employee edited: ', data);
@@ -52,17 +46,6 @@ angular
 					// 	$window.location.reload();
 					// };
 
-				// need to add functionality for deleting the specified
-				// employee's conflicts BEFORE deleting the employee
-					$scope.delete = function(){
-						// delete $scope.employee ???
-						console.log(this.employee);
-						employeesService.deleteEmployee(this.employee.id)
-							.then(function () {
-							console.log('employee deleted');
-						});
-						$window.location.reload();
-					};
 				
 			}
 		};

@@ -3,6 +3,7 @@
 	1). universal
 	2). navbar
 	3). employees
+	4). profile
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -56,31 +57,58 @@
 
 /* ------ employees ------- */
 
-.edit-employee {
-	img {
-		max-width: 100%;
-	}
-}
-
-.employee-list {
-	border: 1px solid black;
-	height: 90vh;
-	overflow: scroll;
-}
-
-.employee-individual {
-	&:hover {
-		background: lightgrey;
-	}
-	border-bottom: 1px solid black;
-	// need to edit height and width
-	img {
-		height: 100px;
-		width: 100px;
+	.edit-employee {
+		img {
+			max-width: 100%;
+		}
 	}
 
-}
+	.employee-list {
+		border: 1px solid black;
+		height: 90vh;
+		overflow: scroll;
+	}
+
+	.employee-individual {
+		&:hover {
+			background: lightgrey;
+		}
+		border-bottom: 1px solid black;
+		// need to edit height and width
+		img {
+			height: 100px;
+			width: 100px;
+		}
+
+	}
 
 
 
 
+/* -------- legend --------- */
+
+	.legend {
+		ul li {
+			#red {
+				background: red;
+				border-radius: 4px;
+				display: inline-block;
+				height: 30px;
+				width: 40px;
+			}
+			#blue {
+				background: blue;
+				border-radius: 4px;
+				display: inline-block;
+				height: 30px;
+				width: 40px;
+			}
+			#orange {
+				background: orange;
+				border-radius: 4px;
+				display: inline-block;
+				height: 30px;
+				width: 40px;
+			}
+		}
+	}

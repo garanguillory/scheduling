@@ -3,6 +3,7 @@
 	1). universal
 	2). navbar
 	3). employees
+	4). profile
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 /* ------ universal ------- */
@@ -56,3 +57,25 @@ a:hover {
   .employee-individual img {
     height: 100px;
     width: 100px; }
+
+/* -------- legend --------- */
+.legend ul li #red {
+  background: red;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  width: 40px; }
+
+.legend ul li #blue {
+  background: blue;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  width: 40px; }
+
+.legend ul li #orange {
+  background: orange;
+  border-radius: 4px;
+  display: inline-block;
+  height: 30px;
+  width: 40px; }

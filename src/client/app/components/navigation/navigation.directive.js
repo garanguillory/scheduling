@@ -17,13 +17,13 @@ angular
 
 							navigationService.getCompany(company_id)
 								.then(function(data){
-									console.log('company info: ', data.data.data[0]);
+									// console.log('company info: ', data.data.data[0]);
 									$scope.company = data.data.data[0].company;
 								});
 
 							navigationService.getEmployee(employee_id)
 								.then(function(data){
-									console.log('employee info: ', data.data.data[0]);
+									// console.log('employee info: ', data.data.data[0]);
 									$scope.employee = data.data.data[0];
 								});
 

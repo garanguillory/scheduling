@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('employee_id').unsigned();
     table.foreign('employee_id').references('id').inTable('employees');
     table.date('date').notNullable();
+    table.unique(['employee_id', 'date']);
     // table.string('shift').defaultTo('All');
   });
 };
