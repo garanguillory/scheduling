@@ -49,7 +49,7 @@ module.exports = {
     getEmployeesAndConflicts: function(company_id){
         return knex.select('employees.id', 'employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.admin', 'employees.company_id', 'employees.picture', 'conflicts.id as conflict_id', 'conflicts.employee_id', 'conflicts.date')
                    .from('employees')
-                   .rightJoin('conflicts', 'employees.id', 'conflicts.employee_id')
+                   .leftJoin('conflicts', 'employees.id', 'conflicts.employee_id')
                    .where('employees.company_id', company_id)
                    .returning('*');
     },
@@ -72,6 +72,10 @@ module.exports = {
 
     deleteConflict: function(conflict_id){
         return Conflicts().where('id', conflict_id).delete();
+    },
+
+    deleteConflicts: function(employee_id){
+        return Conflicts().where('employee_id', employee_id).delete();
     },
 
     updateConflict: function(employee_id, conflict){

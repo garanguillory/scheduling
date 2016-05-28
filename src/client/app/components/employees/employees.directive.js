@@ -13,6 +13,13 @@ angular
 						.then(function (data) {
 						console.log('employees', data);
 						$scope.employees = data.data.data;
+
+						for(var i=0; i<$scope.employees.length; i++){
+							$scope.employees[i].conflicts.forEach(function(conflict){
+								conflict.remove = false;
+							});
+						}
+
 					});
 
 				$scope.employee = {};
@@ -21,12 +28,23 @@ angular
 				$scope.edit_employee = false;
 				$scope.selection = false;
 
+				$scope.remove = function(){
+					this.conflict.remove = true;
+					console.log(this.conflict);
+				};
+
+				$scope.keep = function(){
+					this.conflict.remove = false;
+					console.log(this.conflict);
+				};
+
 				$scope.selected = function(){
 					$scope.new_employee = {};
 					$scope.selection = true;
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
 					$scope.search = '';
+					// console.log("$scope.employee: ", $scope.employee);
 				};
 
 				$scope.editing = function(){
@@ -69,8 +87,7 @@ angular
 					$window.location.reload();
 				};
 
-			// need to add functionality for deleting the specified
-			// employee's conflicts BEFORE deleting the employee
+
 				$scope.delete = function(){
 					console.log(this.employee);
 					employeesService.deleteEmployee(this.employee.id)

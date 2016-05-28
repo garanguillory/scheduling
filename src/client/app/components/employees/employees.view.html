@@ -1,5 +1,4 @@
 <navigation></navigation>
-	{{employees}}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-8">
@@ -85,6 +84,20 @@
 							<p class="centered">- Add calendar widget here -</p>
 							<p class="centered">Enable multi-day selection that automatically adds all selected dates to the conflicts table linked to the proper employee.</p>
 						</div>
+					</div>
+					<div class="schedule-conflicts form-horizontal">
+						<!-- <div class="form-group"> -->
+							<ul>
+								<li ng-repeat="conflict in employee.conflicts">
+									<!-- <span>delete</span> -->
+									<!-- <input type="checkbox"> -->
+									<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+									<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+									<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+									<!-- <button type="button" class="btn btn-danger btn-xs">Cancel</button> -->
+								</li>
+							</ul>
+						<!-- </div> -->
 					</div>
 				<br><br>
 					<div class="row form-group">

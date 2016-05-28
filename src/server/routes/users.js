@@ -5,27 +5,13 @@ var jwt = require('jwt-simple');
 var knex = require('../../../db/knex.js');
 var queries = require("../../../queries");
 
-// previous attempt
-// var employeeArray = employeeInfo.map(function(employee){
-// 		var employeeObject = {
-// 			id: employee.id,
-// 			first_name: employee.first_name,
-// 			last_name: employee.last_name,
-// 			email: employee.email,
-// 			phone: employee.phone,
-// 			admin: employee.admin,
-// 			company_id: employee.company_id,
-// 			picture: employee.picture,
-// 			conflicts: []
-// 		};
-// });
 
 // get ALL employees and their conflicts (by company)
 router.get('/employees/:company_id', function(req, res, next){
 	var company_id = req.params.company_id;
 		queries.getEmployeesAndConflicts(company_id)
 			.then(function(data) {
-				console.log('Array of Employees: ', data);
+				// console.log('Array of Employees: ', data);
 
 				var uniqBy = function(a, key) {
 				    var seen = {};
@@ -66,7 +52,7 @@ router.get('/employees/:company_id', function(req, res, next){
 						}
 					}
 					return employees;
-				}
+				};
 
 			  res.status(200).json({
 			    status: 'success',
@@ -150,36 +136,99 @@ router.post('/employees', function(req, res, next) {
 // delete employee (by employee_id)
 router.delete('/employees/delete/:employee_id', function(req, res, next){
 	var employee_id = req.params.employee_id;
-		queries.deleteEmployee(employee_id)
-			.then(function() {
-			    res.status(200).json({
-			        status: 'deleted employee'
-			    });
-			})
-			.catch(function(err) {
-			    console.log(err);
-			    res.send(err);
-			});
+
+		queries.deleteConflicts(employee_id)
+					 .then(function(){
+					 		queries.deleteEmployee(employee_id)
+					 			.then(function() {
+					 			    res.status(200).json({
+					 			        status: 'deleted employee'
+					 			    });
+					 			})
+					 })
+					 .catch(function(error){
+					 		console.log(error);
+					 		res.send(error);
+					 });
 });
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // edit employee (by employee_id)
 router.put('/employees/edit', function(req, res, next){
 	var employee = req.body;
-	// console.log('employee(req.body): ', employee);
-		queries.editEmployee(employee)
-			.then(function(edited_employee) {
-			    res.status(200).json({
-			        status: 'success',
-			        data: {
-			            edited_employee: edited_employee
-			        }
-			    });
-			})
-			.catch(function(err) {
-			    console.log(err);
-			    res.send(err);
-			});
+		// queries.deleteConflict()
+		// 			 .then(function(){})
+		// 			 .catch(function(err) {
+		// 			     console.log(err);
+		// 			     res.send(err);
+		// 			 });
+
+		// queries.editEmployee(employee)
+		// 	.then(function() {
+		// 	  	if(employee.conflicts.length > 0){
+		// 	  			var promises = employee.conflicts.map(function(conflict){
+		// 	  						var conflictData = {
+		// 	  							id: conflict.conflict_id,
+		// 	  							employee_id: conflict.employee_id,
+		// 	  							date: conflict.date
+		// 	  						};
+		// 	  					if(conflict.remove){
+		// 	  						return queries.deleteConflict(conflictData.id);
+		// 	  					} else {
+		// 	  						return queries.updateConflict(employee.id, conflictData);
+		// 	  					}
+		// 	  			});
+		// 	  				return Promise.all(promises);
+		// 	  		}
+
+		// 	})
+		// 	.catch(function(err) {
+		// 	    console.log(err);
+		// 	    res.send(err);
+		// 	});
+
+
+		if(employee.conflicts.length > 0){
+
+				var promises = employee.conflicts.map(function(conflict){
+							var conflictData = {
+								id: conflict.conflict_id,
+								employee_id: conflict.employee_id,
+								date: conflict.date
+							};
+						if(conflict.remove){
+							return queries.deleteConflict(conflictData.id);
+						}
+				});
+
+		}
+
+	Promise.all(promises)
+				 .then(function(){
+					 	var employeeData = {
+					 		id: employee.id,
+					 		first_name: employee.first_name,
+					 		last_name: employee.last_name,
+					 		email: employee.email,
+					 		phone: employee.phone,
+					 		notes: employee.notes
+					 	};
+
+					 	queries.editEmployee(employeeData)
+					 		.then(function(edited_employee) {
+					 		    res.status(200).json({
+					 		        status: 'success',
+					 		        data: {
+					 		            edited_employee: edited_employee
+					 		        }
+					 		    });
+					 		});
+				 })
+				 .catch(function(err) {
+				     console.log(err);
+				     res.send(err);
+				 });
+			
 });
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
