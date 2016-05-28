@@ -4,12 +4,15 @@ angular
 	.directive("navigation",['navigationService', 'authService', function(navigationService, authService){
 		return {
 			restrict: 'AE',
+			scope: true,
 			templateUrl: "app/components/navigation/navigation.view.html",
 			controller: function($scope, $location, $window){
 
 				var company_id = $window.localStorage.company_id;
 
 				var employee_id = $window.localStorage.id;
+
+				// $scope.selected = {};
 
 					if($window.localStorage.token){
 							

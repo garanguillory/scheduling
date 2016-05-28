@@ -9,7 +9,7 @@ angular
 
 				var company_id = $window.localStorage.company_id;
 				
-				employeesService.getEmployees(company_id)
+				employeesService.getEmployeeInfo(company_id)
 						.then(function (data) {
 						console.log('employees', data);
 						$scope.employees = data.data.data;
@@ -22,6 +22,7 @@ angular
 				$scope.selection = false;
 
 				$scope.selected = function(){
+					$scope.new_employee = {};
 					$scope.selection = true;
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
@@ -42,17 +43,6 @@ angular
 					$scope.edit_employee = false;
 					return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
 				};
-
-			// edit bulk functions
-				// $scope.editingBulk = function(){
-				// 	$scope.add_employee = false;
-				// 	return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
-				// };
-				// $scope.addingBulk = function(){
-				// 	$scope.edit_employee = false;
-				// 	return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
-				// };
-				
 
 			// add functionality for edit, delete, and update employee + conflicts
 				$scope.edit = function(){
@@ -89,6 +79,18 @@ angular
 					});
 					$window.location.reload();
 				};
+
+
+			// edit bulk functions
+				// $scope.editingBulk = function(){
+				// 	$scope.add_employee = false;
+				// 	return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
+				// };
+				// $scope.addingBulk = function(){
+				// 	$scope.edit_employee = false;
+				// 	return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
+				// };
+
 
 			}
 		};

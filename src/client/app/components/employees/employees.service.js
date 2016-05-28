@@ -3,8 +3,17 @@ angular
 	.service('employeesService',[ '$http', function($http){
 		
 		return {
-			getEmployees: function(id){
-				return $http.get('/api/users/employees/'+id)
+			// getEmployees: function(company_id){
+			// 	return $http.get('/api/users/employees/' + company_id)
+			// 							.then(function(res){
+			// 							  return res;
+			// 							})
+			// 							.catch(function(err){
+			// 							  return err;
+			// 							});
+			// },
+			getEmployeeInfo: function(company_id){
+				return $http.get('/api/users/employees/' + company_id)
 										.then(function(res){
 										  return res;
 										})

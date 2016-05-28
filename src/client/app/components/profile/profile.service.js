@@ -29,6 +29,24 @@ angular
 										.catch(function(err){
 										  return err;
 										});
+			},
+			getConflicts: function(employee_id){
+				return $http.get('/api/users/conflicts/' + employee_id)
+										.then(function(res){
+										  return res;
+										})
+										.catch(function(err){
+										  return err;
+										});
+			},
+			updateConflict: function(employee_id, conflicts){
+				return $http.put('/api/users/conflicts/update/' + employee_id, conflicts)
+										.then(function(res){
+										  return res;
+										})
+										.catch(function(err){
+										  return err;
+										});
 			}
 		};
 

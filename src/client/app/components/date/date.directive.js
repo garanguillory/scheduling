@@ -37,23 +37,23 @@ angular
           var passed_in_options = scope.$eval(attrs.datetimepickerOptions);
           var options = jQuery.extend({}, default_options, passed_in_options);
 
-          console.log('controller: ', controller);
+          console.log('scope: ', scope);
 
           // console.log('element: ', element);
           // console.log('attrs: ', attrs);
 
-          attrs.$observe('id', function(e) {
-             console.log(e.date);
-          });
+          // attrs.$observe('id', function(e) {
+          //    console.log(e.date);
+          // });
 
           console.log(element.datetimepicker);
 
           element
             .on('dp.change', function (e) {
               // console.log('newly selected', e.date, 'last selected', e.oldDate);
-                scope.selected = e.date._d;
-                console.log('scope.selected: ', scope.selected);
-                return scope.selected;
+                scope.$root.datePicked = e.date._d;
+                console.log(scope.$root.datePicked);
+                // scope.$root.$digest();
                 // console.log('changing...', $scope);
               // console.log('$scope.selected: ', $scope.selected);
               // if (ngModelCtrl) {

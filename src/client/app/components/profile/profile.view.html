@@ -1,5 +1,5 @@
 <navigation></navigation>
-
+	<!-- {{conflicts}} -->
 <div class="container-fluid">
 
 	<div class="row">
@@ -21,6 +21,7 @@
 			    		<li ng-click="editing()"><a>Edit Your Information</a></li>
 			    		<li ng-click="adding()"><a>Add Scheduling Conflicts</a></li>
 			    		<li ng-click="adding()"><a>Add Scheduling Conflicts Bulk</a></li>
+			    		<!-- <li>{{dateChosen}}</li> -->
 			    	</ul>
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->
@@ -40,6 +41,7 @@
 										To edit an employee, select one from the list on the right.
 									</p>
 									<img ng-src="{{employee.picture}}">
+									<!-- <p>{{datePicked1}}</p> -->
 								</div>
 								<div class="col-xs-8">
 									<div class="row form-group">
@@ -81,11 +83,12 @@
 					</div>
 				</form>
 
+				<!-- 				
 				<div class="schedule-conflicts form-horizontal">
 					<div class="form-group">
-					    <label for="inputEmail3" class="col-sm-3 control-label" style="text-align: right">Schedule Conflicts</label>
+					    <label for="" class="col-sm-3 control-label" style="text-align: right">Schedule Conflicts</label>
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="inputEmail3" placeholder="dd/mm/yyyy, dd/mm/yyyy, dd/mm/yyyy">
+					      <input type="text" class="form-control" id="" placeholder="dd/mm/yyyy, dd/mm/yyyy, dd/mm/yyyy">
 					    </div>
 				  </div>
 				  <div class="form-group">
@@ -94,6 +97,22 @@
 				  	  <input type="text" class="form-control" id="" placeholder="dd/mm/yyyy, dd/mm/yyyy, dd/mm/yyyy">
 				  	</div>
 				  </div>
+				</div>
+				-->
+
+				<div class="schedule-conflicts form-horizontal">
+					<!-- <div class="form-group"> -->
+						<ul>
+							<li ng-repeat="conflict in conflicts">
+								<!-- <span>delete</span> -->
+								<!-- <input type="checkbox"> -->
+								<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+								<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+								<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+								<!-- <button type="button" class="btn btn-danger btn-xs">Cancel</button> -->
+							</li>
+						</ul>
+					<!-- </div> -->
 				</div>
 
 		</div>

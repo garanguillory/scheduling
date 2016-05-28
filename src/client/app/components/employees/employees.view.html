@@ -1,5 +1,5 @@
 <navigation></navigation>
-
+	{{employees}}
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-8">
@@ -19,8 +19,8 @@
 				    <!-- Collect the nav links, forms, and other content for toggling -->
 				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    	<ul class="nav navbar-nav">
-				    		<li ng-click="editing()"><a>Edit Employee</a></li>
-				    		<li ng-click="adding()"><a>Add Employee</a></li>
+				    		<li ng-click="editing()" ng-class="{active: edit_employee}"><a>Edit Employee</a></li>
+				    		<li ng-click="adding()" ng-class="{active: add_employee}"><a>Add Employee</a></li>
 				    		<li ng-click="editingBulk()"><a>Edit Bulk</a></li>
 				    		<li ng-click="addingBulk()"><a>Add Bulk</a></li>
 				    		<li>

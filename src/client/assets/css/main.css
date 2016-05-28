@@ -34,6 +34,9 @@ a:hover {
 .centered {
   text-align: center; }
 
+.strikethrough {
+  text-decoration: line-through; }
+
 .wrapper {
   margin: 0 1rem; }
 
@@ -58,6 +61,7 @@ a:hover {
     height: 100px;
     width: 100px; }
 
+/*----------- schedule ---------------*/
 /* -------- legend --------- */
 .legend ul li #red {
   background: red;

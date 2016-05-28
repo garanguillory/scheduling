@@ -5,22 +5,94 @@ var jwt = require('jwt-simple');
 var knex = require('../../../db/knex.js');
 var queries = require("../../../queries");
 
+// previous attempt
+// var employeeArray = employeeInfo.map(function(employee){
+// 		var employeeObject = {
+// 			id: employee.id,
+// 			first_name: employee.first_name,
+// 			last_name: employee.last_name,
+// 			email: employee.email,
+// 			phone: employee.phone,
+// 			admin: employee.admin,
+// 			company_id: employee.company_id,
+// 			picture: employee.picture,
+// 			conflicts: []
+// 		};
+// });
 
-// get ALL employees by company
+// get ALL employees and their conflicts (by company)
 router.get('/employees/:company_id', function(req, res, next){
 	var company_id = req.params.company_id;
-		queries.getEmployeesByCompany(company_id)
-			.then(function(employees) {
-				console.log('employees: ', employees);
+		queries.getEmployeesAndConflicts(company_id)
+			.then(function(data) {
+				console.log('Array of Employees: ', data);
+
+				var uniqBy = function(a, key) {
+				    var seen = {};
+				    return a.filter(function(item) {
+				        var k = key(item);
+				        return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+				    });
+				};
+
+				var employeesArray = uniqBy(data, function(item){return item.id;});
+
+				var employees = employeesArray.map(function(employee){
+					return {
+						id: employee.id,
+				    first_name: employee.first_name,
+				    last_name: employee.last_name,
+				    email: employee.email,
+				    phone: employee.phone,
+				    admin: employee.admin,
+				    company_id: employee.company_id,
+				    picture: employee.picture,
+				    conflicts: []
+					};
+				});
+
+				var employeesWithConflicts = function(){
+					for(var i=0; i<employees.length; i++){
+						for(var j=0; j<data.length; j++){
+							if(data[j].employee_id == employees[i].id){
+								employees[i].conflicts.push(
+									{
+										conflict_id: data[j].conflict_id,
+										employee_id: data[j].employee_id,
+										date: data[j].date
+									}
+									);
+							}
+						}
+					}
+					return employees;
+				}
+
 			  res.status(200).json({
 			    status: 'success',
-			    data: employees
+			    data: employeesWithConflicts()
 			  });
 			})
 			.catch(function (err) {
 			  return next(err);
 			});
 });
+
+// get ALL employees by company
+// router.get('/employees/:company_id', function(req, res, next){
+// 	var company_id = req.params.company_id;
+// 		queries.getEmployeesByCompany(company_id)
+// 			.then(function(employees) {
+// 				console.log('employees: ', employees);
+// 			  res.status(200).json({
+// 			    status: 'success',
+// 			    data: employees
+// 			  });
+// 			})
+// 			.catch(function (err) {
+// 			  return next(err);
+// 			});
+// });
 
 
 // get company by id
@@ -94,6 +166,7 @@ router.delete('/employees/delete/:employee_id', function(req, res, next){
 // edit employee (by employee_id)
 router.put('/employees/edit', function(req, res, next){
 	var employee = req.body;
+	// console.log('employee(req.body): ', employee);
 		queries.editEmployee(employee)
 			.then(function(edited_employee) {
 			    res.status(200).json({
@@ -111,27 +184,63 @@ router.put('/employees/edit', function(req, res, next){
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 
-// needs work
 
-// router.get('/employee/:id', function(req, res, next){
-// 	var id = req.params.id;
+// get conflicts by employee_id
+router.get('/conflicts/:employee_id', function(req, res, next){
+	var employee_id = req.params.employee_id;
+		queries.getConflicts(employee_id)
+			.then(function(conflicts) {
+				console.log('conflicts: ', conflicts);
+			  res.status(200).json({
+			    status: 'success',
+			    data: conflicts
+			  });
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
+});
 
-// 	queries.getDeckInfo(id)
-// 		.then(function(deck){
-// 			queries.getCards(deck[0].id)
-// 				.then(function(cards){
-// 					deck[0].cards = cards;
-// 					res.status(200).json({
-// 					  status: 'success',
-// 					  data: deck[0]
-// 					});
-// 				});
-// 		})
-// 		.catch(function (err) {
-// 		  return next(err);
-// 		});
-// });
 
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+// update conflicts by employee_id
+router.put('/conflicts/update/:employee_id', function(req, res, next){
+	var employee_id = req.params.employee_id;
+	var conflicts = req.body;
+
+	// need to delete conflicts with remove == true
+	// need to update conflicts with remove == false
+
+	var promises = conflicts.map(function(conflict){
+		var conflictData = {
+			id: conflict.id,
+			employee_id: conflict.employee,
+			date: conflict.date
+		};
+
+			if(conflict.remove){
+				return queries.deleteConflict(conflictData.id);
+			} else {
+				return queries.updateConflict(employee_id, conflictData);
+			}
+
+	});
+
+	Promise.all(promises)
+				 .then(function(conflicts){
+			 			console.log('conflicts: ', conflicts);
+			 		  res.status(200).json({
+			 		    status: 'success',
+			 		    data: conflicts
+			 		  });
+				 })
+				 .catch(function(err){
+				 		return next(err);
+				 });
+});
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 // router.put('/editdeck/:id', function(req, res, next){
 // 	var id = req.params.id;
@@ -227,23 +336,6 @@ router.put('/employees/edit', function(req, res, next){
 // 		});
 // });
 
-
-// router.delete('/deck/:deck_id/delete', function(req, res, next){
-// 	var deck_id = req.params.deck_id;
-
-// 	queries.deleteCards(deck_id)
-// 		.then(function() {
-// 			return queries.deleteDeck(deck_id);
-// 		})
-// 		.then(function(){
-// 			res.status(200).json({
-// 			  status: 'success',
-// 			});
-// 		})
-// 		.catch(function (err) {
-// 		  return next(err);
-// 		});
-// });
 
 
 module.exports = router;

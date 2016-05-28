@@ -9,6 +9,10 @@ function Users() {
     return knex('employees');
 }
 
+function Conflicts() {
+    return knex('conflicts');
+}
+
 module.exports = {
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // log in to specific clinic/company 
@@ -42,6 +46,14 @@ module.exports = {
         return Users().where('company_id', company_id);
     },
 
+    getEmployeesAndConflicts: function(company_id){
+        return knex.select('employees.id', 'employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.admin', 'employees.company_id', 'employees.picture', 'conflicts.id as conflict_id', 'conflicts.employee_id', 'conflicts.date')
+                   .from('employees')
+                   .rightJoin('conflicts', 'employees.id', 'conflicts.employee_id')
+                   .where('employees.company_id', company_id)
+                   .returning('*');
+    },
+
     deleteEmployee: function(employee_id){
         return Users().where('id', employee_id).delete();
     },
@@ -51,19 +63,31 @@ module.exports = {
     },
 
     getEmployee: function(id){
-        // Get Employee by ID
         return Users().where('id',id);
-    }
+    },
+
+    getConflicts: function(employee_id){
+        return Conflicts().where('employee_id',employee_id);
+    },
+
+    deleteConflict: function(conflict_id){
+        return Conflicts().where('id', conflict_id).delete();
+    },
+
+    updateConflict: function(employee_id, conflict){
+        return Conflicts().update(conflict).where('employee_id', employee_id);
+    },
+
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 };
 
 
-//     getDecksByUser: function(user_id) {
-//         return knex.select('users.id', 'decks.id', 'decks.name', 'decks.description', 'decks.image_url')
-//         					 .from('decks')
-//         					 .rightJoin('users', 'decks.user_id', 'users.id')
-//         					 .where('users.id', user_id);
-//     },
+    // getDecksByUser: function(user_id) {
+    //     return knex.select('users.id', 'decks.id', 'decks.name', 'decks.description', 'decks.image_url')
+    //     					 .from('decks')
+    //     					 .rightJoin('users', 'decks.user_id', 'users.id')
+    //     					 .where('users.id', user_id);
+    // },
 
 //     getDeckInfo: function(deck_id){
 //         return Decks().where('id', deck_id);
