@@ -155,41 +155,19 @@ router.delete('/employees/delete/:employee_id', function(req, res, next){
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 // edit employee (by employee_id)
 router.put('/employees/edit', function(req, res, next){
+	
 	var employee = req.body;
-		// queries.deleteConflict()
-		// 			 .then(function(){})
-		// 			 .catch(function(err) {
-		// 			     console.log(err);
-		// 			     res.send(err);
-		// 			 });
 
-		// queries.editEmployee(employee)
-		// 	.then(function() {
-		// 	  	if(employee.conflicts.length > 0){
-		// 	  			var promises = employee.conflicts.map(function(conflict){
-		// 	  						var conflictData = {
-		// 	  							id: conflict.conflict_id,
-		// 	  							employee_id: conflict.employee_id,
-		// 	  							date: conflict.date
-		// 	  						};
-		// 	  					if(conflict.remove){
-		// 	  						return queries.deleteConflict(conflictData.id);
-		// 	  					} else {
-		// 	  						return queries.updateConflict(employee.id, conflictData);
-		// 	  					}
-		// 	  			});
-		// 	  				return Promise.all(promises);
-		// 	  		}
-
-		// 	})
-		// 	.catch(function(err) {
-		// 	    console.log(err);
-		// 	    res.send(err);
-		// 	});
-
-
+	var employeeData = {
+		id: employee.id,
+		first_name: employee.first_name,
+		last_name: employee.last_name,
+		email: employee.email,
+		phone: employee.phone,
+		notes: employee.notes
+	};
+	
 		if(employee.conflicts.length > 0){
-
 				var promises = employee.conflicts.map(function(conflict){
 							var conflictData = {
 								id: conflict.conflict_id,
@@ -200,34 +178,33 @@ router.put('/employees/edit', function(req, res, next){
 							return queries.deleteConflict(conflictData.id);
 						}
 				});
-
+			Promise.all(promises)
+						 .then(function(){
+							 	queries.editEmployee(employeeData)
+							 		.then(function(edited_employee) {
+							 		    res.status(200).json({
+							 		        status: 'success',
+							 		        data: {
+							 		            edited_employee: edited_employee
+							 		        }
+							 		    });
+							 		});
+						 })
+						 .catch(function(err) {
+						     console.log(err);
+						     res.send(err);
+						 });
+		} else {
+			queries.editEmployee(employeeData)
+				.then(function(edited_employee) {
+				    res.status(200).json({
+				        status: 'success',
+				        data: {
+				            edited_employee: edited_employee
+				        }
+				    });
+				});
 		}
-
-	Promise.all(promises)
-				 .then(function(){
-					 	var employeeData = {
-					 		id: employee.id,
-					 		first_name: employee.first_name,
-					 		last_name: employee.last_name,
-					 		email: employee.email,
-					 		phone: employee.phone,
-					 		notes: employee.notes
-					 	};
-
-					 	queries.editEmployee(employeeData)
-					 		.then(function(edited_employee) {
-					 		    res.status(200).json({
-					 		        status: 'success',
-					 		        data: {
-					 		            edited_employee: edited_employee
-					 		        }
-					 		    });
-					 		});
-				 })
-				 .catch(function(err) {
-				     console.log(err);
-				     res.send(err);
-				 });
 			
 });
 
