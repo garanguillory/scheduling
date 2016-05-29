@@ -163,7 +163,7 @@
 			<div class="employee-list">
 				<ul> <!-- need to hide admin from employee list -->
 					<li ng-click="selected()" class="employee-individual" ng-repeat="employee in employees | filter:search">
-						<img ng-src="{{employee.picture}}">{{employee.first_name}} {{employee.last_name}}
+						<img ng-src="{{employee.picture}}">{{employee.first_name}} {{employee.last_name}} <span ng-show="employee.admin"> -- ADMIN</span>
 					</li>
 				</ul>
 			</div>

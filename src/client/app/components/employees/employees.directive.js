@@ -40,6 +40,7 @@ angular
 
 				$scope.selected = function(){
 					$scope.new_employee = {};
+					$scope.add_employee = false;
 					$scope.selection = true;
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
