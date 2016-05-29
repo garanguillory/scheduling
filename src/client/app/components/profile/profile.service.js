@@ -12,6 +12,15 @@ angular
 										  return err;
 										});
 			},
+			getEmployeeInfo: function(employee_id){
+				return $http.get('/api/users/employee/profile/' + employee_id)
+										.then(function(res){
+										  return res;
+										})
+										.catch(function(err){
+										  return err;
+										});
+			},
 			getEmployee: function(employee_id){
 				return $http.get('/api/users/employee/' + employee_id)
 										.then(function(res){

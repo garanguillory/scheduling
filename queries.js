@@ -53,6 +53,14 @@ module.exports = {
                    .where('employees.company_id', company_id)
                    .returning('*');
     },
+        // single 'Employee'
+    getEmployeeAndConflicts: function(employee_id){
+        return knex.select('employees.id', 'employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.admin', 'employees.company_id', 'employees.picture', 'conflicts.id as conflict_id', 'conflicts.employee_id', 'conflicts.date')
+                   .from('employees')
+                   .leftJoin('conflicts', 'employees.id', 'conflicts.employee_id')
+                   .where('employees.id', employee_id)
+                   .returning('*');
+    },
 
     deleteEmployee: function(employee_id){
         return Users().where('id', employee_id).delete();

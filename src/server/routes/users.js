@@ -64,22 +64,6 @@ router.get('/employees/:company_id', function(req, res, next){
 			});
 });
 
-// get ALL employees by company
-// router.get('/employees/:company_id', function(req, res, next){
-// 	var company_id = req.params.company_id;
-// 		queries.getEmployeesByCompany(company_id)
-// 			.then(function(employees) {
-// 				console.log('employees: ', employees);
-// 			  res.status(200).json({
-// 			    status: 'success',
-// 			    data: employees
-// 			  });
-// 			})
-// 			.catch(function (err) {
-// 			  return next(err);
-// 			});
-// });
-
 
 // get company by id
 router.get('/company/:company_id', function(req, res, next){
@@ -112,6 +96,52 @@ router.get('/employee/:employee_id', function(req, res, next){
 			.catch(function (err) {
 			  return next(err);
 			});
+});
+
+// get employee by id '/employee/ <-- needs to be singular'
+router.get('/employee/profile/:employee_id', function(req, res, next){
+
+	var employee_id = req.params.employee_id;
+		
+		queries.getEmployeeAndConflicts(employee_id)
+			.then(function(employee) {
+				console.log('employee--: ', employee);
+
+				var employeeData = {
+					id: employee[0].id,
+					first_name: employee[0].first_name,
+					last_name: employee[0].last_name,
+					email: employee[0].email,
+					phone: employee[0].phone,
+					admin: employee[0].admin,
+					company_id: employee[0].company_id,
+					picture: employee[0].picture,
+					conflicts: []
+				};
+
+				console.log('employeeData 1: ', employeeData);
+
+				var employeeObject = function(){
+					for(var i=0; i<employee.length; i++){
+						employeeData.conflicts.push({
+							conflict_id: employee[i].conflict_id,
+							employee_id: employee[i].employee_id,
+							date: employee[i].date
+						});
+					}
+					console.log('employeeData 2: ', employeeData);
+					return employeeData;
+				};
+
+				res.status(200).json({
+				  status: 'success',
+				  data: employeeObject()
+				});
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
+
 });
 
 

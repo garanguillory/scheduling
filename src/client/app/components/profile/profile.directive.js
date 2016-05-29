@@ -10,17 +10,25 @@ angular
 				var company_id = $window.localStorage.company_id;
 				var employee_id = $window.localStorage.id;
 
-				profileService.getEmployee(employee_id)
-					.then(function(data){
-						$scope.employee = data.data.data[0];
-					})
-					.catch(function(error){
-						console.log("error: ", error);
-					});
+				// profileService.getEmployee(employee_id)
+				// 	.then(function(data){
+				// 		$scope.employee = data.data.data[0];
+				// 	})
+				// 	.catch(function(error){
+				// 		console.log("error: ", error);
+				// 	});
 
-				profileService.getConflicts(employee_id)
+				// profileService.getConflicts(employee_id)
+				// 	.then(function(data){
+				// 		$scope.conflicts = data.data.data;
+				// 	})
+				// 	.catch(function(error){
+				// 		console.log("error: ", error);
+				// 	});
+
+				profileService.getEmployeeInfo(employee_id)
 					.then(function(data){
-						$scope.conflicts = data.data.data;
+						$scope.employee = data.data.data;
 					})
 					.catch(function(error){
 						console.log("error: ", error);
