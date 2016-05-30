@@ -31,7 +31,8 @@ angular
         // require : '?ngModel',
         restrict: 'AE',
         scope   : {
-          datetimepickerOptions: '@'
+          datetimepickerOptions: '@',
+          day: '='
         },
         link: function (scope, element, attrs, controller) {
           var passed_in_options = scope.$eval(attrs.datetimepickerOptions);
@@ -39,23 +40,13 @@ angular
 
           console.log('scope: ', scope);
 
-          // console.log('element: ', element);
-          // console.log('attrs: ', attrs);
-
-          // attrs.$observe('id', function(e) {
-          //    console.log(e.date);
-          // });
-
-          console.log(element.datetimepicker);
-
           element
             .on('dp.change', function (e) {
               // console.log('newly selected', e.date, 'last selected', e.oldDate);
-                scope.$root.datePicked = e.date._d;
-                console.log(scope.$root.datePicked);
-                // scope.$root.$digest();
-                // console.log('changing...', $scope);
-              // console.log('$scope.selected: ', $scope.selected);
+                scope.day = e.date._d;
+                console.log('scope.day (e.date._d): ', scope.day);
+              element.find('td.day.weekend').css('background-color', 'red');
+
               // if (ngModelCtrl) {
               //   $timeout(function () {
               //     ngModelCtrl.$setViewValue(e.target.value);
@@ -89,3 +80,18 @@ angular
       };
     }
   ]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

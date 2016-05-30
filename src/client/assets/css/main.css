@@ -26,9 +26,11 @@ a:hover {
   display: none; }
 
 .green {
+  background: green;
   color: green; }
 
 .red {
+  background: red;
   color: red; }
 
 .centered {

@@ -10,6 +10,8 @@ angular
 				var company_id = $window.localStorage.company_id;
 				var employee_id = $window.localStorage.id;
 
+				$scope.day;
+
 				// profileService.getEmployee(employee_id)
 				// 	.then(function(data){
 				// 		$scope.employee = data.data.data[0];
