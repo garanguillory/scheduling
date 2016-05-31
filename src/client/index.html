@@ -19,27 +19,24 @@
 		<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 
-<!-- + + + + + + + + + + + + + + + + + + + + + + + -->
-
-		
-		<script type="text/javascript" src="scripts/bootstrap/js/transition.js"></script>
-		<script type="text/javascript" src="scripts/bootstrap/js/collapse.js"></script>
-
 		<script src="scripts/jquery/dist/jquery.min.js"></script>
 		<script src="scripts/moment/min/moment.min.js"></script>
-		<script src="scripts/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-
-		<link rel="stylesheet" href="styles/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"/>
-<!-- + + + + + + + + + + + + + + + + + + + + + + + -->
+		
+		<link rel="stylesheet" href="bc_scripts/fullcalendar/dist/fullcalendar.css">
 
 
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular.min.js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular-route.min.js"></script>
 		 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.10/angular-sanitize.js"></script>
-		
-		<!-- <script src="scripts/angular-eonasdan-datetimepicker/dist/angular-eonasdan-datetimepicker.js"></script> -->
-		<!-- angular-bootstrap-datetimepicker-directive.js -->
-		<script src="bc_scripts/angular-bootstrap-datetimepicker-directive/angular-bootstrap-datetimepicker-directive.js"></script>
+		 
+		 <!-- jquery, moment, and angular have to get included before fullcalendar -->
+			<!-- ui-full-calendar -->
+		<script src="bc_scripts/fullcalendar/dist/fullcalendar.js"></script>
+		<script type="text/javascript" src="bc_scripts/angular-ui-calendar/src/calendar.js"></script>
+		<script type="text/javascript" src="bc_scripts/fullcalendar/dist/fullcalendar.min.js"></script>
+		<!-- <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script> -->
+
+
 
 
 		<script type="text/javascript" src="app/app.js"></script>
@@ -63,7 +60,8 @@
 		<script type="text/javascript" src="app/components/profile/profile.directive.js"></script>
 		<script type="text/javascript" src="app/components/profile/profile.service.js"></script> 
 
-		<script type="text/javascript" src="app/components/date/date.directive.js"></script>
+		
+		<!-- <script type="text/javascript" src="app/components/date/date.directive.js"></script> -->
 
 	</body>
 </html>

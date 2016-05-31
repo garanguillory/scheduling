@@ -1,3 +1,4 @@
+
 var calendar_2016 = new Map();
 
 var January_2016 = 
@@ -414,6 +415,7 @@ var December_2016 =
 	  { day: 31, name: 'Saturday', date: '2016-10-30', weekend: true, holiday: false }
 	];
 
+
 calendar_2016.set('January', January_2016);
 calendar_2016.set('February', February_2016);
 calendar_2016.set('March', March_2016);
@@ -427,126 +429,74 @@ calendar_2016.set('October', October_2016);
 calendar_2016.set('November', November_2016);
 calendar_2016.set('December', December_2016);
 
-// var calendar = 
+
+
+
+
+// var calendar_2016 = new Map();
+
+// var December_2016 = 
 // 	[
-// 		January_2016,
-// 		February_2016,
-// 		March_2016,
-// 		April_2016,
-// 		May_2016,
-// 		June_2016,
-// 		July_2016,
-// 		August_2016,
-// 		September_2016,
-// 		October_2016,
-// 		November_2016,
-// 		December_2016
+// 		{ day: 1, name: 'Thursday', date: '2016-10-01', weekend: true, holiday: false },
+// 	  { day: 2, name: 'Friday', date: '2016-10-02', weekend: true, holiday: false },
+// 	  { day: 3, name: 'Saturday', date: '2016-10-03', weekend: false, holiday: false },
+// 	  { day: 4, name: 'Sunday', date: '2016-10-04', weekend: false, holiday: false },
+// 	  { day: 5, name: 'Monday', date: '2016-10-05', weekend: false, holiday: false },
+// 	  { day: 6, name: 'Tuesday', date: '2016-10-06', weekend: false, holiday: false },
+// 	  { day: 7, name: 'Wednesday', date: '2016-10-07', weekend: true, holiday: false },
+// 	  { day: 8, name: 'Thursday', date: '2016-10-08', weekend: true, holiday: false },
+// 	  { day: 9, name: 'Friday', date: '2016-10-09', weekend: true, holiday: false },
+// 	  { day: 10, name: 'Saturday', date: '2016-10-10', weekend: false, holiday: false },
+// 	  { day: 11, name: 'Sunday', date: '2016-10-11', weekend: false, holiday: false },
+// 	  { day: 12, name: 'Monday', date: '2016-10-12', weekend: false, holiday: false },
+// 	  { day: 13, name: 'Tuesday', date: '2016-10-13', weekend: false, holiday: false },
+// 	  { day: 14, name: 'Wednesday', date: '2016-10-14', weekend: true, holiday: false },
+// 	  { day: 15, name: 'Thursday', date: '2016-10-15', weekend: true, holiday: false },
+// 	  { day: 16, name: 'Friday', date: '2016-10-16', weekend: true, holiday: false },
+// 	  { day: 17, name: 'Saturday', date: '2016-10-17', weekend: false, holiday: true },
+// 	  { day: 18, name: 'Sunday', date: '2016-10-18', weekend: false, holiday: false },
+// 	  { day: 19, name: 'Monday', date: '2016-10-19', weekend: false, holiday: false },
+// 	  { day: 20, name: 'Tuesday', date: '2016-10-20', weekend: false, holiday: false },
+// 	  { day: 21, name: 'Wednesday', date: '2016-10-21', weekend: true, holiday: false },
+// 	  { day: 22, name: 'Thursday', date: '2016-10-22', weekend: true, holiday: false },
+// 	  { day: 23, name: 'Friday', date: '2016-10-23', weekend: true, holiday: false },
+// 	  { day: 24, name: 'Saturday', date: '2016-10-24', weekend: false, holiday: false },
+// 	  { day: 25, name: 'Sunday', date: '2016-10-25', weekend: false, holiday: false },
+// 	  { day: 26, name: 'Monday', date: '2016-10-26', weekend: false, holiday: false },
+// 	  { day: 27, name: 'Tuesday', date: '2016-10-27', weekend: false, holiday: false },
+// 	  { day: 28, name: 'Wednesday', date: '2016-10-28', weekend: true, holiday: false },
+// 	  { day: 29, name: 'Thursday', date: '2016-10-29', weekend: true, holiday: false },
+// 	  { day: 30, name: 'Friday', date: '2016-10-30', weekend: true, holiday: false },
+// 	  { day: 31, name: 'Saturday', date: '2016-10-30', weekend: false, holiday: false }
 // 	];
 
-angular
-	.module('Scheduling')
-	.directive("profile",['profileService', 'authService', function(profileService, authService){
-		return {
-			restrict: 'AE',
-			templateUrl: "app/components/profile/profile.view.html",
-			controller: function($scope, $rootScope, $location, $window){
-
-				var company_id = $window.localStorage.company_id;
-				var employee_id = $window.localStorage.id;
-
-				// $scope.eventSources = [];
-
-				// $scope.uiConfig = {
-				//      calendar:{
-				//        height: 450,
-				//        editable: true,
-				//        header:{
-				//          left: 'month basicWeek basicDay agendaWeek agendaDay',
-				//          center: 'title',
-				//          right: 'today prev,next'
-				//        },
-				//        dayClick: $scope.alertEventOnClick,
-				//        eventDrop: $scope.alertOnDrop,
-				//        eventResize: $scope.alertOnResize
-				//      }
-				//    };
-
-				$scope.calendar = calendar_2016;
-
-				$scope.moment = moment();
-
-				// var month = moment().format('MMMM');
-
-				$scope.current = moment().format('MMMM');
-				$scope.counter = 0;
-				
-
-				$scope.previousMonth = function(){
-					console.log("previous month");
-					--$scope.counter;
-					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
-					console.log($scope.current +": ",calendar_2016.get($scope.current));
-				};
-
-				$scope.nextMonth = function(){
-					++$scope.counter;
-					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
-					console.log($scope.current +": ",calendar_2016.get($scope.current));
-				};
+// calendar_2016.set('December', December_2016);
 
 
 
-				profileService.getEmployeeInfo(employee_id)
-					.then(function(data){
-						$scope.employee = data.data.data;
-					})
-					.catch(function(error){
-						console.log("error: ", error);
-					});
+// for(var i=0; i<calendar_2016.get('December').length; i++){	
+// 	if(calendar_2016.get('December')[i].name == "Friday"){
+// 			calendar_2016.get('December')[i].weekend = true;
+// 	} else if(calendar_2016.get('December')[i].name == "Saturday"){
+// 			calendar_2016.get('December')[i].weekend = true;
+// 	}	else if(calendar_2016.get('December')[i].name == "Sunday"){
+// 			calendar_2016.get('December')[i].weekend = true;
+// 	}	else {
+// 			calendar_2016.get('December')[i].weekend = false;
+// 	}
+	
+// }
 
-				$scope.edit_employee = false;
-
-				// add functionality for edit, delete, and update employee + conflicts
-					$scope.edit = function(){
-						profileService.editEmployee($scope.employee)
-							.then(function(data) {
-							console.log('employee edited: ', data);
-						});
-						profileService.updateConflict(employee_id, $scope.conflicts)
-							.then(function(data){
-								console.log('conflicts updated: ', data);
-							});
-						$window.location.reload();
-					};
-
-				$scope.remove = function(){
-					this.conflict.remove = true;
-					console.log(this.conflict);
-				};
-
-				$scope.keep = function(){
-					this.conflict.remove = false;
-					console.log(this.conflict);
-				};
+// calendar_2016.get('December');
 
 
-				// need to add functionality for adding conflicts
 
-				// addConflicts function
-					// $scope.add = function(){
-					// 	console.log("add function");
-					// 	$scope.new_employee.company_id = company_id;
-					// 	employeesService.addEmployee($scope.new_employee)
-					// 		.then(function(data) {
-					// 		console.log('new_employee', data);
-					// 	});
-					// 	$scope.new_employee = {};
-					// 	$scope.new_employee.company_id = company_id;
-					// 	$window.location.reload();
-					// };
 
-				
-			}
-		};
-}]);
+
+
+
+
+
+
+
 

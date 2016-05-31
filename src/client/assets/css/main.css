@@ -85,3 +85,8 @@ a:hover {
   display: inline-block;
   height: 30px;
   width: 40px; }
+
+/* ------- calendar -------- */
+.calendar-header li {
+  display: inline-block;
+  margin: 0 1rem; }
