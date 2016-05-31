@@ -175,10 +175,79 @@
 											</div> -->
 											<ul class="calendar-header centered">
 												<li><i ng-click="previousMonth(counter)" class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
-												<li><h4 ng-model="current" ng-click="currentMonth()" class="centered">{{ current | date:'MMMM'}}</h4></li>
+												<li><h4 ng-click="currentMonth()" class="centered">{{ current | date:'MMMM'}}</h4></li>
 												<li><i ng-click="nextMonth(counter)" class="fa fa-angle-right fa-2x" aria-hidden="true"></i></li>
 											</ul>
-											<table class="table table-bordered">
+											<table ng-show="current === 'May'" class="table table-bordered">
+											  <thead>
+											    <tr>
+											    	<th class="centered">Sun</th>
+											    	<th class="centered">Mon</th>
+											    	<th class="centered">Tue</th>
+											    	<th class="centered">Wed</th>
+											    	<th class="centered">Thu</th>
+											    	<th class="centered">Fri</th>
+											    	<th class="centered">Sat</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <tr>
+											      <td class="May current 2016-05-1 centered">1</td>
+											    	<td class="May current 2016-05-2 centered">2</td>
+											    	<td class="May current 2016-05-3 centered">3</td>
+											    	<td class="June curent 2016-06-4 centered">4</td>
+											    	<td class="June curent 2016-06-5 centered">5</td>
+											    	<td class="June curent 2016-06-6 centered">6</td>
+											    	<td class="June curent 2016-06-7 centered">7</td>
+											    </tr>
+											   <tr>
+											    <td class="centered">8</td>
+											   	<td class="centered">9</td>
+											   	<td class="centered">10</td>
+											   	<td class="centered">11</td>
+											   	<td class="centered">12</td>
+											   	<td class="centered">13</td>
+											   	<td class="centered">14</td>
+											   </tr>
+											    <tr>
+											    <td class="centered">15</td>
+											   	<td class="centered">16</td>
+											   	<td class="centered">17</td>
+											   	<td class="centered">18</td>
+											   	<td class="centered">19</td>
+											   	<td class="centered">20</td>
+											   	<td class="centered">21</td>
+											   </tr>
+											   <tr>
+											    <td class="centered">22</td>
+											   	<td class="centered">23</td>
+											   	<td class="centered">24</td>
+											   	<td class="centered">25</td>
+											   	<td class="centered">26</td>
+											   	<td class="centered">27</td>
+											   	<td class="centered">28</td>
+											   </tr>
+											   <tr>
+											    <td class="centered">29</td>
+											   	<td class="centered">30</td>
+											   	<td class="centered">31</td>
+											   	<td class="centered">1</td>
+											   	<td class="centered">2</td>
+											   	<td class="centered">3</td>
+											   	<td class="centered">4</td>
+											   </tr>
+											   <tr>
+											    <td class="centered">3</td>
+											   	<td class="centered">4</td>
+											   	<td class="centered">5</td>
+											   	<td class="centered">6</td>
+											   	<td class="centered">7</td>
+											   	<td class="centered">7</td>
+											   	<td class="centered">9</td>
+											   </tr>
+											  </tbody>
+											</table>
+											<table ng-show="current === 'June'" class="table table-bordered">
 											  <thead>
 											    <tr>
 											    	<th>Sun</th>
@@ -192,71 +261,199 @@
 											  </thead>
 											  <tbody>
 											    <tr>
-											      <td>Sun</td>
-											    	<td>Mon</td>
-											    	<td>Tue</td>
-											    	<td>Wed</td>
-											    	<td>Thu</td>
-											    	<td>Fri</td>
-											    	<td>Sat</td>
+											      <td class="May previous 2016-05-29">29</td>
+											    	<td class="May previous 2016-05-30">30</td>
+											    	<td class="May previous 2016-05-31">31</td>
+											    	<td class="June curent 2016-06-1">1</td>
+											    	<td class="June curent 2016-06-2">2</td>
+											    	<td class="June curent 2016-06-3">3</td>
+											    	<td class="June curent 2016-06-4">4</td>
 											    </tr>
 											   <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
+											    <td>5</td>
+											   	<td>6</td>
+											   	<td>7</td>
+											   	<td>8</td>
+											   	<td>9</td>
+											   	<td>10</td>
+											   	<td>11</td>
 											   </tr>
 											    <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
+											    <td>12</td>
+											   	<td>13</td>
+											   	<td>14</td>
+											   	<td>15</td>
+											   	<td>16</td>
+											   	<td>17</td>
+											   	<td>18</td>
 											   </tr>
 											   <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
+											    <td>19</td>
+											   	<td>20</td>
+											   	<td>21</td>
+											   	<td>22</td>
+											   	<td>23</td>
+											   	<td>24</td>
+											   	<td>25</td>
 											   </tr>
 											   <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
+											    <td>26</td>
+											   	<td>27</td>
+											   	<td>28</td>
+											   	<td>29</td>
+											   	<td>30</td>
+											   	<td>1</td>
+											   	<td>1</td>
 											   </tr>
 											   <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
-											   </tr>
-											   <tr>
-											    <td>Sun</td>
-											   	<td>Mon</td>
-											   	<td>Tue</td>
-											   	<td>Wed</td>
-											   	<td>Thu</td>
-											   	<td>Fri</td>
-											   	<td>Sat</td>
+											    <td>3</td>
+											   	<td>4</td>
+											   	<td>5</td>
+											   	<td>6</td>
+											   	<td>7</td>
+											   	<td>7</td>
+											   	<td>9</td>
 											   </tr>
 											  </tbody>
 											</table>
-
+											<table ng-show="current === 'July'" class="table table-bordered">
+											  <thead>
+											    <tr>
+											    	<th>Sun</th>
+											    	<th>Mon</th>
+											    	<th>Tue</th>
+											    	<th>Wed</th>
+											    	<th>Thu</th>
+											    	<th>Fri</th>
+											    	<th>Sat</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <tr>
+											      <td>26</td>
+											    	<td>27</td>
+											    	<td>28</td>
+											    	<td>29</td>
+											    	<td>30</td>
+											    	<td>1</td>
+											    	<td>2</td>
+											    </tr>
+											   <tr>
+											    <td>3</td>
+											   	<td>4</td>
+											   	<td>5</td>
+											   	<td>6</td>
+											   	<td>7</td>
+											   	<td>8</td>
+											   	<td>9</td>
+											   </tr>
+											    <tr>
+											    <td>10</td>
+											   	<td>11</td>
+											   	<td>12</td>
+											   	<td>13</td>
+											   	<td>14</td>
+											   	<td>15</td>
+											   	<td>16</td>
+											   </tr>
+											   <tr>
+											    <td>17</td>
+											   	<td>18</td>
+											   	<td>19</td>
+											   	<td>20</td>
+											   	<td>21</td>
+											   	<td>22</td>
+											   	<td>23</td>
+											   </tr>
+											   <tr>
+											    <td>24</td>
+											   	<td>25</td>
+											   	<td>26</td>
+											   	<td>27</td>
+											   	<td>28</td>
+											   	<td>29</td>
+											   	<td>30</td>
+											   </tr>
+											   <tr>
+											    <td>31</td>
+											   	<td>1</td>
+											   	<td>2</td>
+											   	<td>3</td>
+											   	<td>4</td>
+											   	<td>5</td>
+											   	<td>6</td>
+											   </tr>
+											  </tbody>
+											</table>
+											<table ng-show="current === 'August'" class="table table-bordered">
+											  <thead>
+											    <tr>
+											    	<th>Sun</th>
+											    	<th>Mon</th>
+											    	<th>Tue</th>
+											    	<th>Wed</th>
+											    	<th>Thu</th>
+											    	<th>Fri</th>
+											    	<th>Sat</th>
+											    </tr>
+											  </thead>
+											  <tbody>
+											    <tr>
+											      <td>31</td>
+											    	<td>1</td>
+											    	<td>2</td>
+											    	<td>3</td>
+											    	<td>4</td>
+											    	<td>5</td>
+											    	<td>6</td>
+											    </tr>
+											   <tr>
+											    <td>7</td>
+											   	<td>8</td>
+											   	<td>9</td>
+											   	<td>10</td>
+											   	<td>11</td>
+											   	<td>12</td>
+											   	<td>13</td>
+											   </tr>
+											    <tr>
+											    <td>14</td>
+											   	<td>15</td>
+											   	<td>16</td>
+											   	<td>17</td>
+											   	<td>18</td>
+											   	<td>19</td>
+											   	<td>20</td>
+											   </tr>
+											   <tr>
+											    <td>21</td>
+											   	<td>22</td>
+											   	<td>23</td>
+											   	<td>24</td>
+											   	<td>25</td>
+											   	<td>26</td>
+											   	<td>27</td>
+											   </tr>
+											   <tr>
+											    <td>28</td>
+											   	<td>29</td>
+											   	<td>30</td>
+											   	<td>31</td>
+											   	<td>1</td>
+											   	<td>2</td>
+											   	<td>3</td>
+											   </tr>
+											   <tr>
+											    <td>4</td>
+											   	<td>5</td>
+											   	<td>6</td>
+											   	<td>7</td>
+											   	<td>8</td>
+											   	<td>9</td>
+											   	<td>10</td>
+											   </tr>
+											  </tbody>
+											</table>
 
 
 

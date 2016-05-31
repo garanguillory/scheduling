@@ -449,6 +449,14 @@ angular
 		return {
 			restrict: 'AE',
 			templateUrl: "app/components/profile/profile.view.html",
+			link: function(scope, element, attr, controller){
+				angular.element('tr').on('click', 'td',
+					function(){
+						console.log();
+					});
+
+				angular.element('td.previous').find().css("background; red");
+			},
 			controller: function($scope, $rootScope, $location, $window){
 
 				var company_id = $window.localStorage.company_id;
@@ -471,6 +479,8 @@ angular
 				//      }
 				//    };
 
+				// $scope.generated = 
+
 				$scope.calendar = calendar_2016;
 
 				$scope.moment = moment();
@@ -492,6 +502,7 @@ angular
 					++$scope.counter;
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
 					console.log($scope.current +": ",calendar_2016.get($scope.current));
+					console.log("$scope.current: ", $scope.current);
 				};
 
 
