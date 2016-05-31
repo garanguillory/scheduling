@@ -493,7 +493,21 @@ calendar_2016.set('December', December_2016);
 
 
 
-
+// var calendar = 
+// 	[
+// 		January_2016,
+// 		February_2016,
+// 		March_2016,
+// 		April_2016,
+// 		May_2016,
+// 		June_2016,
+// 		July_2016,
+// 		August_2016,
+// 		September_2016,
+// 		October_2016,
+// 		November_2016,
+// 		December_2016
+// 	];
 
 
 
