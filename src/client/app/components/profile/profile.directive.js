@@ -5,40 +5,54 @@ angular
 		return {
 			restrict: 'AE',
 			templateUrl: "app/components/profile/profile.view.html",
-			link: function(scope, element, attr, controller){
+			require: ['profile'],
+			link: function(scope, element, attrs, controllers){
+				var months = moment.months();
+
+					// for(var i=0; i<scope.employee.conflicts.length; i++){
+					// 	console.log(i);
+					// }
+
+				// if(angular.element('td').data('date') == )
+
 				angular.element('tr').on('click', 'td', function(){
-					scope.selected = this;
-					console.log('scope.selected: ', scope.selected);
+
+					angular.element(this).toggleClass('red');
+					console.log('scope.year: ', scope.year);
+					
+					var date = angular.element(this).data('date');
+
+						if(angular.element(this).hasClass('red')){
+							scope.employee.newConflicts.push(date);
+						} else {
+							scope.employee.newConflicts.splice(scope.employee.newConflicts.indexOf(date),1);
+						}
+					console.log('scope.employee.newConflicts: ', scope.employee.newConflicts);
+					scope.$apply();
 				});
 
-				angular.element('td.previous').find().css("background; red");
 			},
 			controller: function($scope, $rootScope, $location, $window){
 
 				var company_id = $window.localStorage.company_id;
 				var employee_id = $window.localStorage.id;
 
-				// $scope.eventSources = [];
 
-				// $scope.uiConfig = {
-				//      calendar:{
-				//        height: 450,
-				//        editable: true,
-				//        header:{
-				//          left: 'month basicWeek basicDay agendaWeek agendaDay',
-				//          center: 'title',
-				//          right: 'today prev,next'
-				//        },
-				//        dayClick: $scope.alertEventOnClick,
-				//        eventDrop: $scope.alertOnDrop,
-				//        eventResize: $scope.alertOnResize
-				//      }
-				//    };
-
+				profileService.getEmployeeInfo(employee_id)
+					.then(function(data){
+						$scope.employee = data.data.data;
+						$scope.employee.conflictDates = $scope.employee.conflicts.map(function (c) {
+							return moment(c.date).format('YYYY-MM-DD');
+						});
+						$scope.employee.newConflicts = []; 
+					})
+					.catch(function(error){
+						console.log("error: ", error);
+					});
+				
+				
 				$scope.moment = moment();
-
-				// var month = moment().format('MMMM');
-
+				$scope.year = moment().format('YYYY');
 				$scope.current = moment().format('MMMM');
 				$scope.counter = 0;
 				
@@ -47,25 +61,19 @@ angular
 					console.log("previous month");
 					--$scope.counter;
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
+					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
+					console.log('$scope.year: ', $scope.year);
 					// console.log($scope.current +": ",calendar_2016.get($scope.current));
 				};
 
 				$scope.nextMonth = function(){
 					++$scope.counter;
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
+					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
+					console.log('$scope.year: ', $scope.year);
 					// console.log($scope.current +": ",calendar_2016.get($scope.current));
 					console.log("$scope.current: ", $scope.current);
 				};
-
-
-
-				profileService.getEmployeeInfo(employee_id)
-					.then(function(data){
-						$scope.employee = data.data.data;
-					})
-					.catch(function(error){
-						console.log("error: ", error);
-					});
 
 				$scope.edit_employee = false;
 
@@ -75,10 +83,10 @@ angular
 							.then(function(data) {
 							console.log('employee edited: ', data);
 						});
-						profileService.updateConflict(employee_id, $scope.conflicts)
-							.then(function(data){
-								console.log('conflicts updated: ', data);
-							});
+						// profileService.updateConflict(employee_id, $scope.conflicts)
+						// 	.then(function(data){
+						// 		console.log('conflicts updated: ', data);
+						// 	});
 						$window.location.reload();
 					};
 

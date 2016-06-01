@@ -35,12 +35,10 @@
 	
 	.green {
 		background: green;
-		color: green;
 	}
 
 	.red {
 		background: red;
-		color: red;
 	}
 
 	.centered {
@@ -127,12 +125,22 @@
 /* ------- calendar -------- */
 
 	.calendar-header {
+		text-align: center;
+
 		li {
 			display: inline-block;
 			margin: 0 1rem;
 		}
 	}
 
+	.calendar {
+		th {
+			text-align: center;
+		}
+		td {
+			text-align: center;
+		}
+	}
 
 
 

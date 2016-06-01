@@ -105,7 +105,7 @@ router.get('/employee/profile/:employee_id', function(req, res, next){
 		
 		queries.getEmployeeAndConflicts(employee_id)
 			.then(function(employee) {
-				console.log('employee--: ', employee);
+				// console.log('employee--: ', employee);
 
 				var employeeData = {
 					id: employee[0].id,
@@ -119,7 +119,7 @@ router.get('/employee/profile/:employee_id', function(req, res, next){
 					conflicts: []
 				};
 
-				console.log('employeeData 1: ', employeeData);
+				// console.log('employeeData 1: ', employeeData);
 
 				var employeeObject = function(){
 					for(var i=0; i<employee.length; i++){
@@ -129,7 +129,7 @@ router.get('/employee/profile/:employee_id', function(req, res, next){
 							date: employee[i].date
 						});
 					}
-					console.log('employeeData 2: ', employeeData);
+					// console.log('employeeData 2: ', employeeData);
 					return employeeData;
 				};
 
@@ -141,7 +141,6 @@ router.get('/employee/profile/:employee_id', function(req, res, next){
 			.catch(function (err) {
 			  return next(err);
 			});
-
 });
 
 
@@ -196,19 +195,64 @@ router.put('/employees/edit', function(req, res, next){
 		phone: employee.phone,
 		notes: employee.notes
 	};
-	
-		if(employee.conflicts.length > 0){
-				var promises = employee.conflicts.map(function(conflict){
-							var conflictData = {
-								id: conflict.conflict_id,
-								employee_id: conflict.employee_id,
-								date: conflict.date
-							};
+
+	// var promises = employee.newConflicts.map();
+	// promises.concat(employee.conflicts.filter(...).map(...))
+
+		if(employee.newConflicts.length){
+			var promises = employee.newConflicts.map(function(conflict){
+					var dateData = {
+							employee_id: employee.id,
+							date: conflict,
+					};
+				return queries.addConflict(employee.id, dateData);
+			});
+
+			var promises2 = employee.conflicts.map(function(conflict){
+					if(conflict.remove){
+						return queries.deleteConflict(conflict.conflict_id);
+					}
+			});
+
+
+			promises = promises.concat(promises2);
+			console.log("length: ", promises.length);
+			// promises.map(function(conflict){
+			// 		if(conflict.remove){
+			// 			return queries.deleteConflict(conflict.conflict_id);
+			// 		}
+			// });
+
+			Promise.all(promises)
+						 .then(function(){
+							 	queries.editEmployee(employeeData)
+							 		.then(function(edited_employee) {
+							 		    res.status(200).json({
+							 		        status: 'success',
+							 		        data: {
+							 		            edited_employee: edited_employee
+							 		        }
+							 		    });
+							 		});
+						 })
+						 .catch(function(err) {
+						     console.log(err);
+						     res.send(err);
+						 });
+
+		} else if(employee.conflicts.length){
+
+				var proms = employee.conflicts.map(function(conflict){
+							// var conflictData = {
+							// 	id: conflict.conflict_id,
+							// 	employee_id: conflict.employee_id,
+							// 	date: conflict.date
+							// };
 						if(conflict.remove){
-							return queries.deleteConflict(conflictData.id);
+							return queries.deleteConflict(conflict.conflict_id);
 						}
 				});
-			Promise.all(promises)
+			Promise.all(proms)
 						 .then(function(){
 							 	queries.editEmployee(employeeData)
 							 		.then(function(edited_employee) {

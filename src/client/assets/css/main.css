@@ -26,12 +26,10 @@ a:hover {
   display: none; }
 
 .green {
-  background: green;
-  color: green; }
+  background: green; }
 
 .red {
-  background: red;
-  color: red; }
+  background: red; }
 
 .centered {
   text-align: center; }
@@ -87,6 +85,14 @@ a:hover {
   width: 40px; }
 
 /* ------- calendar -------- */
-.calendar-header li {
-  display: inline-block;
-  margin: 0 1rem; }
+.calendar-header {
+  text-align: center; }
+  .calendar-header li {
+    display: inline-block;
+    margin: 0 1rem; }
+
+.calendar th {
+  text-align: center; }
+
+.calendar td {
+  text-align: center; }

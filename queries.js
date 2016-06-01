@@ -86,6 +86,10 @@ module.exports = {
         return Conflicts().where('employee_id', employee_id).delete();
     },
 
+    addConflict: function(employee_id, data){
+        return Conflicts().insert(data).where('id', employee_id);//.returning('*');
+    },
+
     updateConflict: function(employee_id, conflict){
         return Conflicts().update(conflict).where('employee_id', employee_id);
     },
