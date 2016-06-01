@@ -80,25 +80,29 @@
 					</div> <!-- end row -->
 				<br><br>
 					<div class="row">
-						<div class="col-xs-12">
-							<p class="centered">- Add calendar widget here -</p>
-							<p class="centered">Enable multi-day selection that automatically adds all selected dates to the conflicts table linked to the proper employee.</p>
+						<div class="col-xs-6">
+							<calendar></calendar>
 						</div>
-					</div>
-					<div class="schedule-conflicts form-horizontal">
-						<!-- <div class="form-group"> -->
+						<br><br><br>
+						<div class="schedule-conflicts form-horizontal col-xs-6">
 							<ul>
 								<li ng-repeat="conflict in employee.conflicts">
-									<!-- <span>delete</span> -->
-									<!-- <input type="checkbox"> -->
 									<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
 									<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
 									<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
-									<!-- <button type="button" class="btn btn-danger btn-xs">Cancel</button> -->
 								</li>
 							</ul>
-						<!-- </div> -->
-					</div>
+						</div>
+					</div> 
+					<!-- <div class="schedule-conflicts form-horizontal">
+						<ul>
+							<li ng-repeat="conflict in employee.conflicts">
+								<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+								<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+								<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+							</li>
+						</ul>
+					</div> -->
 				<br><br>
 					<div class="row form-group">
 						<div class="col-xs-12">

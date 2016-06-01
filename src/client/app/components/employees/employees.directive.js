@@ -15,8 +15,12 @@ angular
 						$scope.employees = data.data.data;
 
 						for(var i=0; i<$scope.employees.length; i++){
+							$scope.employees[i].newConflicts = [];
 							$scope.employees[i].conflicts.forEach(function(conflict){
 								conflict.remove = false;
+							});
+							$scope.employees[i].conflictDates = $scope.employees[i].conflicts.map(function(c){
+								return moment(c.date).format('YYYY-MM-DD');
 							});
 						}
 
