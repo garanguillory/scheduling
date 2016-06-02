@@ -8,12 +8,6 @@ angular
 			link: function(scope, element, attrs, controllers){
 				var months = moment.months();
 
-					// for(var i=0; i<scope.employee.conflicts.length; i++){
-					// 	console.log(i);
-					// }
-
-				// if(angular.element('td').data('date') == )
-
 				angular.element('tr').on('click', 'td', function(){
 
 					angular.element(this).toggleClass('red');
@@ -45,7 +39,6 @@ angular
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
 					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
 					console.log('$scope.year: ', $scope.year);
-					// console.log($scope.current +": ",calendar_2016.get($scope.current));
 				};
 
 				$scope.nextMonth = function(){
@@ -53,7 +46,6 @@ angular
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
 					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
 					console.log('$scope.year: ', $scope.year);
-					// console.log($scope.current +": ",calendar_2016.get($scope.current));
 					console.log("$scope.current: ", $scope.current);
 				};
 

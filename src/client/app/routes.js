@@ -31,11 +31,11 @@ angular
         restricted: true,
         preventLoggedIn: false
       })
-      // .when('/schedule', {
-      //   template: '<schedule></schedule>',
-      //   restricted: true,
-      //   preventLoggedIn: false
-      // })
+      .when('/schedule', {
+        template: '<schedule></schedule>',
+        restricted: true,
+        preventLoggedIn: false
+      })
       .when('/logout', {
         restricted: false,
         preventLoggedIn: false,

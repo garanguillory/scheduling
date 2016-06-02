@@ -23,7 +23,6 @@ angular
 								return moment(c.date).format('YYYY-MM-DD');
 							});
 						}
-
 					});
 
 				$scope.employee = {};

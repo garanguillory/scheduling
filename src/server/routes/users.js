@@ -196,8 +196,63 @@ router.put('/employees/edit', function(req, res, next){
 		notes: employee.notes
 	};
 
+// + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
 	// var promises = employee.newConflicts.map();
 	// promises.concat(employee.conflicts.filter(...).map(...))
+
+	// 	if(employee.conflictDates){
+	// 		var dates = employee.conflicts.map(function(conflict){
+	// 			return moment(conflict.date).format('YYYY-MM-DD');
+	// 		});
+	// 			// dates example : ['2016-06-17', '2016-06-10', '2016-06-03']
+	// // conflictDates example : ['2016-06-17', '', '2016-06-03', '2016-07-07', '2016-07-12' ]
+	// 		var promises = employee.dates.map(function(date){
+	// 			if(employee.conflictDates.indexOf(date) > -1){
+	// 				// do nothing to database
+	// 				// remove from conflictDates array
+	// 				employee.conflictDates.splice(employee.conflictDates.indexOf(date),1);
+
+	// 			} else if(employee.conflictDates.indexOf(date) < 0){
+	// 				// remove from database
+	// 				var removal = employee.conflictDates.indexOf(date);
+	// 				return queries.deleteConflict(employee.conflictDates[removal].conflict_id);
+	// 			}
+	// 		});
+
+	// 		var promises2 = employee.conflictDates.map(function(date){
+	// 					var dateData = {
+	// 							employee_id: employee.id,
+	// 							date: date,
+	// 					};
+	// 				return queries.addConflict(employee.id, dateData);
+	// 		});
+
+	// 		promises = promises.concat(promises2);
+
+			// then the Promise.all(promises) ... 
+
+
+		// 	var promises = employee.conflictDates.map(function(conflict){
+		// 		// compare employee.conflict array of conflict-objects
+		// 		// to see if an individual conflict is already in employee.conflictDates array
+		// 		// need to format dates
+
+		// 		// $scope.employees[i].conflictDates = $scope.employees[i].conflicts.map(function(c){
+		// 		// 	return moment(c.date).format('YYYY-MM-DD');
+		// 		// });
+				
+		// 			if(dates.indexOf(conflict) > -1){
+		// 				// do nothing
+		// 			} else if (){
+
+		// 			}
+
+		// 	});
+		// }
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + 
+
 
 		if(employee.newConflicts.length){
 			var promises = employee.newConflicts.map(function(conflict){
