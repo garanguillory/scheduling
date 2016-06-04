@@ -13,7 +13,7 @@ angular
 
 				scheduleService.getEmployeeInfo(company_id)
 						.then(function (data) {
-						console.log('employees', data);
+						// console.log('employees', data);
 						$scope.employees = data.data.data;
 
 						for(var i=0; i<$scope.employees.length; i++){
@@ -40,72 +40,99 @@ angular
 											});
 									}
 							}
-						console.log('$scope.people: ', $scope.people);
+						// console.log('$scope.people: ', $scope.people);
 					});
 				
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +				
-				$scope.makeSchedule = function(){
-					console.log('$scope.people: ', $scope.people);
-					// exclude admin from rotation
-					// $scope.employeeConflicts = {}; // 
-					// $scope.employees[i].onCall = [];
-					// $scope.employeeConflicts[i] = [];
-					// array of weekdays for three months
-					var weekdaysJS = ["2016-07-05", "2016-07-06", "2016-07-07", "2016-07-11", "2016-07-12", "2016-07-13", "2016-07-14", "2016-07-18", "2016-07-19", "2016-07-20", "2016-07-21", "2016-07-25", "2016-07-26", "2016-07-27", "2016-07-28", "2016-08-01", "2016-08-02", "2016-08-03", "2016-08-04", "2016-08-08", "2016-08-09", "2016-08-10", "2016-08-11", "2016-08-15", "2016-08-16", "2016-08-17", "2016-08-18", "2016-08-22", "2016-08-23", "2016-08-24", "2016-08-25", "2016-08-29", "2016-08-30", "2016-08-31", "2016-09-01", "2016-09-06", "2016-09-07", "2016-09-08", "2016-09-12", "2016-09-13", "2016-09-14", "2016-09-15", "2016-09-19", "2016-09-20", "2016-09-21", "2016-09-22", "2016-09-26", "2016-09-27", "2016-09-28", "2016-09-29"]; 
-					// need 'on-hold' array
-					// need to create separate array of employees 
-					// call recursive function to check employee availabilty 
-					var sliceWeekdaysJS = weekdaysJS.slice(0);
-					var employeesArray = $scope.employees.slice(0);
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +	
+				var currentMonth = moment().format("MMMM");
+				var currentYear = +moment().format("YYYY");
+				var nextYear = +moment().add(1,'year').format('YYYY');
 
-						// day = sliceweekdaysJS[0];
-					var checkAvailability = function(day){
+				var getWeekdays = function(currentMonth, year){
+					var monthsArray = moment.months();
+					var array = [];
 
-						for(var i=0; i<employeesArray; i++){
-							if($scope.employees[i].conflictDates.indexOf(day) === -1){
-								$scope.employees[i].onCall.push(day);
-								sliceWeekdaysJs.splice(sliceWeekdaysJs.indexOf(day),1);
-								employeesArray.splice(employeesArray[i],1);
-								checkAvailability(sliceweekdaysJS[0]);
-							} else {
-								checkAvailability(day+1);
+					var month = monthsArray.indexOf(currentMonth)+1;
+					year = year || moment().year();
+					var day = moment().day() + 1;
+					
+					var lengthOfMonth = moment(month).daysInMonth();
+
+					for(var d=1; d<lengthOfMonth+1; d++){
+						var date = moment(year+"-"+month+"-"+d);
+							if(date.format("dddd") == "Monday"){
+									array.push(date.format("YYYY-MM-DD"));
 							}
-						}
-					};
+							if(date.format("dddd") == "Tuesday"){
+									array.push(date.format("YYYY-MM-DD"));
+							}
+							if(date.format("dddd") == "Wednesday"){
+									array.push(date.format("YYYY-MM-DD"));
+							}
+							if(date.format("dddd") == "Thursday"){
+									array.push(date.format("YYYY-MM-DD"));
+							}
+					}
 
-					checkAvailability(sliceweekdaysJS[0]);
-
-					// var weekdays = []; // 53 total days July - September
-
-					// for(var d=0; d<sliceweekdaysJS.length; d++){
-					// 	// checkAvailabiltiy function goes here
-					// }
-
-
+					return array;
 				};
 
+
+				// var currentMonthNumber = +moment().format("M");
+				// if($scope.end){
+				// 	var endMonthNumber = +moment().month($scope.end).format("M");
+				// }
+
+				$scope.makeSchedule = function(){
+						console.log("making schedule");
+
+						var weekdays = [];
+						var counter = 0;
+
+						while(month != $scope.end){
+							var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
+							var month = moment().month($scope.start).add(counter, 'months').format('MMMM');
+
+							weekdays.push(getWeekdays(month, year));
+							counter++;
+						}
+						weekdays = weekdays.reduce(function(start, current){
+							return start.concat(current);
+						})
+						console.log("weekdays: ", weekdays);
+				};
+
+				// if the start month is less than the current month, then the start month's
+				// year is the currentYear + 1
+				// Example:
+				// 		start-month: August 		end-month: December			current-month: June
+				// 		August > June => start-month's year = 2016 (currentYear)
+				// 		December > June => end-month's year = 2016 (currentYear)
+				// 		start-month: November 		end-month: March			current-month: June
+				// 		November > June => start-month's year = 2016 (currentYear)
+				// 		March < June => end-month's year = 2017 (currentYear + 1)
+				// 		start-month: January 		end-month: April			current-month: June
+				// 		January < June => start-month's year = 2017 (currentYear + 1)
+				// 		April < June => end-month's year = 2017 (currentYear + 1)
+				// if the end month is less than the current month, then the end month's
+				// year is the currentYear + 1
+
+
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
-				
 				$scope.moment = moment();
 				$scope.year = moment().format('YYYY');
 				$scope.current = moment().format('MMMM');
 				$scope.counter = 0;
 
 				$scope.previousMonth = function(){
-					console.log("previous month");
 					--$scope.counter;
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
 					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
-					console.log('$scope.year: ', $scope.year);
-					// console.log($scope.current +": ",calendar_2016.get($scope.current));
 				};
 				$scope.nextMonth = function(){
 					++$scope.counter;
 					$scope.current = moment().add($scope.counter, 'months').format('MMMM');
 					$scope.year = moment().add($scope.counter, 'months').format('YYYY');
-					console.log('$scope.year: ', $scope.year);
-					// console.log($scope.current +": ",calendar_2016.get($scope.current));
-					console.log("$scope.current: ", $scope.current);
 				};
 				
 			}

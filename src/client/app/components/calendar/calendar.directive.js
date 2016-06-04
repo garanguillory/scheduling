@@ -23,7 +23,6 @@ angular
 								console.log('scope.employee.newConflicts: ', scope.employee.newConflicts);
 								scope.$apply();
 							});
-
 						},
 			controller: function($scope, $window){
 
