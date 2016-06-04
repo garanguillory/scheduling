@@ -135,9 +135,15 @@
 
 	.calendar {
 		th {
+			max-width: 2rem;
+			min-width: 2rem;
 			text-align: center;
+			width: 2rem;
 		}
 		td {
+		 	height: 2rem;
+		 	max-height: 2rem;
+			min-height: 2rem;
 			text-align: center;
 		}
 	}

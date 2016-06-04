@@ -48,7 +48,6 @@ angular
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
 					$scope.search = '';
-					// console.log("$scope.employee: ", $scope.employee);
 				};
 
 				$scope.editing = function(){

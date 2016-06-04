@@ -161,6 +161,43 @@ router.post('/employees', function(req, res, next) {
 		});
 });
 
+	// router.post('/employees', function(req, res, next) {
+	// 		var newEmployee = {
+	// 			first_name: req.body.first_name,
+	// 			last_name: req.body.last_name,
+	// 			email: req.body.email,
+	// 			phone: req.body.phone,
+	// 			picture: req.body.picture
+	// 		};
+	// 		queries.NewUser(newEmployee)
+	// 			.then(function(newGuy) {
+	// 				console.log("newGuy[0].id: ", newGuy[0].id);
+	// 				console.log("req.body.conflicts: ", req.body.conflicts);
+	// 					var promises = req.body.conflicts.map(function(date){
+	// 						var dateData = {
+	// 							employee_id: newGuy[0].id,
+	// 							date: date
+	// 						};
+	// 						return queries.addConflict(newGuy[0].id, dateData);
+	// 					});
+	// 					Promise.all(promises)
+	// 								 .then(function(data){
+	// 								 	res.status(200).json({
+	// 								 	    status: 'success',
+	// 								 	    data: data
+	// 								 	});
+	// 								 })
+	// 								 .catch(function(err) {
+	// 								     console.log(err);
+	// 								     res.send(err);
+	// 								 });
+	// 			})
+	// 			.catch(function(err) {
+	// 			    console.log(err);
+	// 			    res.send(err);
+	// 			});
+	// });
+
 
 // delete employee (by employee_id)
 router.delete('/employees/delete/:employee_id', function(req, res, next){
@@ -193,6 +230,7 @@ router.put('/employees/edit', function(req, res, next){
 		last_name: employee.last_name,
 		email: employee.email,
 		phone: employee.phone,
+		picture: employee.picture,
 		notes: employee.notes
 	};
 
@@ -395,104 +433,4 @@ router.put('/conflicts/update/:employee_id', function(req, res, next){
 				 });
 });
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
-
-// router.put('/editdeck/:id', function(req, res, next){
-// 	var id = req.params.id;
-// 	var data = req.body;
-// 	var deckData = {
-// 		name: data.name,
-// 		description: data.description,
-// 		image_url: data.image_url
-// 	};
-
-// 	queries.updateDeck(deckData, data.id)
-// 		.then(function() {
-// 			console.log('data: ', data);
-// 			var promises = data.cards.map(function(card){
-// 				var cardData = {
-// 					id: card.id,
-// 					question: card.question,
-// 					question_image_url: card.question_image_url,
-// 					answer: card.answer,
-// 					answer_image_url: card.answer_image_url
-// 				};
-
-// 				if ( card.delete ) {
-// 					return queries.deleteCard(cardData.id)
-// 				} else {
-// 					return queries.updateCards(cardData, cardData.id)	
-// 				}
-// 			});
-
-// 			return Promise.all(promises);
-// 		})
-// 		.then(function(){
-// 			console.log('data.id: ', data.id)
-			
-// 			var promises = data.newcards.map(function(card){
-// 				if(card.hasOwnProperty('question')){
-// 					var cardData = {
-// 						deck_id: data.id,
-// 						question: card.question,
-// 						question_image_url: card.question_image_url,
-// 						answer: card.answer,
-// 						answer_image_url: card.answer_image_url
-// 					};
-// 					return queries.addCard(cardData)
-// 				}
-// 			});
-// 			return Promise.all(promises);
-// 		})
-// 		.then(function(cardIdArray){
-// 			res.status(200).json({
-// 			  status: 'success',
-// 			  data: cardIdArray
-// 			});
-// 		})
-// 		.catch(function (err) {
-// 		  return next(err);
-// 		});
-// });
-
-
-// router.post('/newdeck', function(req, res, next){
-// 	var data = req.body;
-// 	var deckData = {
-// 		name: data.name,
-// 		description: data.description,
-// 		image_url: data.image_url,
-// 		user_id: data.user_id
-// 	};
-
-// 	queries.addDeck(deckData)
-// 		.then(function(id) {
-// 			var id = Number(id);
-// 			var promises = data.cards.map(function(card){
-// 				var cardData = {
-// 					deck_id: id,
-// 					question: card.question,
-// 					question_image_url: card.question_image_url,
-// 					answer: card.answer,
-// 					answer_image_url: card.answer_image_url
-// 				};
-// 				return queries.addCard(cardData);
-// 			});
-// 			return Promise.all(promises);
-// 		})
-// 		.then(function(cardIdArray){
-// 			res.status(200).json({
-// 			  status: 'success',
-// 			  data: cardIdArray
-// 			});
-// 		})
-// 		.catch(function (err) {
-// 		  return next(err);
-// 		});
-// });
-
-
-
 module.exports = router;
-
-

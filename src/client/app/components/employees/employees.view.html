@@ -8,6 +8,7 @@
 				employee.conflictDates: {{ employee.conflictDates }}
 						<br>
 				employee.newConflicts: {{ employee.newConflicts }}
+						<br>
 			
 				<nav class="employee-nav navbar navbar-default">
 				  <div class="container-fluid">
@@ -76,7 +77,7 @@
 									</div>
 									<div class="row form-group">
 										<div class="col-xs-12">
-											<textarea class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
+											<textarea ng-model="employee.notes" class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
 										</div>
 									</div>
 								</div> <!-- end col-xs-8 -->
@@ -86,7 +87,8 @@
 				<br><br>
 					<div class="row">
 						<div class="col-xs-6">
-							<calendar></calendar>
+								<!-- calendar directive -->
+							<calendar></calendar> 
 						</div>
 						<br><br><br>
 						<div class="schedule-conflicts form-horizontal col-xs-6">
@@ -99,15 +101,6 @@
 							</ul>
 						</div>
 					</div> 
-					<!-- <div class="schedule-conflicts form-horizontal">
-						<ul>
-							<li ng-repeat="conflict in employee.conflicts">
-								<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
-								<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
-								<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
-							</li>
-						</ul>
-					</div> -->
 				<br><br>
 					<div class="row form-group">
 						<div class="col-xs-12">
@@ -154,6 +147,22 @@
 									</div>
 								</div> <!-- end col-xs-8 -->
 							</div> <!-- end row -->
+							<div class="row">
+								<div class="col-xs-6">
+									<!-- calendar directive not working with both edit employee and add employee-->
+									<!-- <calendar></calendar> -->
+								</div>
+								<br><br><br>
+								<div class="schedule-conflicts form-horizontal col-xs-6">
+									<ul>
+										<li ng-repeat="conflict in employee.conflicts">
+											<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+											<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+											<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+										</li>
+									</ul>
+								</div>
+							</div> 
 							<div class="row form-group">
 								<div class="col-xs-12">
 								  <button ng-click="add_employee = false" type="button" class="btn btn-default  pull-right">Cancel</button>
@@ -180,29 +189,3 @@
 	</div>
 </div>
 
-
-<!-- <form class="edit-employee form-horizontal">
-	<div class="row form-group">
-		<div class="col-xs-4">
-			<img ng-src="{{employees[0].picture}}">
-		</div>
-		<div class="col-xs-8">
-			<div class="row form-group">
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="first_name" placeholder="First Name">
-				</div>
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="first_name" placeholder="First Name">
-				</div>
-			</div>
-			<div class="row form-group">
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="first_name" placeholder="First Name">
-				</div>
-				<div class="col-xs-6">
-					<input type="text" class="form-control" id="first_name" placeholder="First Name">
-				</div>
-			</div>
-		</div>
-	</div>
-</form> -->

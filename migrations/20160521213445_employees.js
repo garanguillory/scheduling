@@ -11,7 +11,6 @@ exports.up = function(knex, Promise) {
     table.boolean('admin').defaultTo(false).notNullable();
     table.integer('company_id').unsigned();
     table.foreign('company_id').references('id').inTable('schedules');
-    table.string('notes');
   });
 };
 
