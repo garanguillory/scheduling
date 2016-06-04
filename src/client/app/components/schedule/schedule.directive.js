@@ -77,16 +77,47 @@ angular
 					return array;
 				};
 
+				// adds Saturday twice && adds Sunday twice
+				var getWeekends = function(currentMonth, year){
+					var monthsArray = moment.months();
+					var array = [];
 
-				// var currentMonthNumber = +moment().format("M");
-				// if($scope.end){
-				// 	var endMonthNumber = +moment().month($scope.end).format("M");
-				// }
+					var month = monthsArray.indexOf(currentMonth)+1;
+					year = year || moment().year();
+					var day = moment().day() + 1;
+
+					var lengthOfMonth = moment(month).daysInMonth();
+
+					for(var d=1; d<lengthOfMonth+1; d++){
+						var date = moment(year+"-"+month+"-"+d);
+							if(date.format("dddd") == "Friday"){
+									array.push(date.format("YYYY-MM-DD"));
+							}
+							if(date.format("dddd") == "Saturday"){
+									array.push(date.format("YYYY-MM-DD"));
+									array.push(date.format("YYYY-MM-DD"));
+							}
+							if(date.format("dddd") == "Sunday"){
+									array.push(date.format("YYYY-MM-DD"));
+									array.push(date.format("YYYY-MM-DD"));
+							}
+					}
+
+					return array;
+				};
+
+				// need to make an array of holidays
+				// var holidays = ["2016-07-04", "2016-09-05", ... ];
+
+				// check to see if holiday falls on a weekend
+				// holiday shifts are split into AM and PM
 
 				$scope.makeSchedule = function(){
 						console.log("making schedule");
 
 						var weekdays = [];
+						var weekends = [];
+						// var holidays = [];
 						var counter = 0;
 
 						while(month != $scope.end){
@@ -94,12 +125,46 @@ angular
 							var month = moment().month($scope.start).add(counter, 'months').format('MMMM');
 
 							weekdays.push(getWeekdays(month, year));
+							weekends.push(getWeekends(month, year));
 							counter++;
 						}
+
 						weekdays = weekdays.reduce(function(start, current){
 							return start.concat(current);
-						})
-						console.log("weekdays: ", weekdays);
+						});
+
+						weekends = weekends.reduce(function(start, current){
+							return start.concat(current);
+						});
+
+						var findEligible = (date) => {
+						  return (person) => person.conflicts.indexOf(date) < 0;
+						};
+
+						var findShortestOnCallList = (type) => {
+						  return (prev, curr) => ( prev.onCall[type].length <= curr.onCall[type].length ) ? prev : curr;
+						};
+
+						weekdays.reduce((acc, date) => {
+						  var type = 'weekdays';
+						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
+
+						  selected.onCall[type].push(date);
+
+						  return acc;
+						}, $scope.people);
+
+						weekends.reduce((acc, date) => {
+						  var type = 'weekends';
+						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
+
+						  selected.onCall[type].push(date);
+
+						  return acc;
+						}, $scope.people);
+
+						console.log($scope.people);
+
 				};
 
 				// if the start month is less than the current month, then the start month's
