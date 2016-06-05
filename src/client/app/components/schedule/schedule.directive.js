@@ -5,11 +5,55 @@ angular
 		return {
 			restrict: 'AE',
 			templateUrl: "app/components/schedule/schedule.view.html",
+			link: function(scope, element, attrs, controller){
+
+				angular.element('tr').on('click', 'td', function(){
+					
+					angular.element(this).append("<p>"+angular.element(this).data('date')+"</p>");
+
+					console.log(angular.element(this).data("date"));
+					console.log(angular.element(this));
+					console.log(angular.element(attrs));
+				});
+
+				// angular.element('button').on('click', function(){
+				// 		angular.element('td').append("<p>"+angular.element('td').data('date')+"</p>");
+				// });
+
+				// angular.element('button').on('click', function(){
+				// 		console.log(scope.people[4].onCall.weekdays)
+				// 	for(var i=0; i<scope.people.length; i++){
+				// 		// console.log(scope.people[i].name);
+				// 		console.log(angular.element('td.'+scope.people[i].onCall.weekdays[0]))
+				// 			// angular.element('td.'+scope.people[i].onCall.weekdays[0]).append("<p>"+scope.people[i].name+"</p>");
+				// 	}
+
+				// 	// if(angular.element('td').hasClass('2016-06-10')){
+				// 	// 	console.log('winner!');
+				// 	// 	angular.element('td.2016-06-10').append("<p>Hello</p>");
+				// 	// }
+				// 	// scope.$apply();
+				// });
+
+			},
 			controller: function($scope, $rootScope, $location, $window){
 
 				var company_id = $window.localStorage.company_id;
 				var employee_id = $window.localStorage.id;
 
+				var currentMonth = moment().format("MMMM");
+				var currentYear = +moment().format("YYYY");
+				var nextYear = +moment().add(1,'year').format('YYYY');
+
+				$scope.monthsRemaining = [];
+				var number = 0;
+				var ending = moment(currentYear + "-12-01", "YYYY-MM-DD").format("MMMM");
+
+				while(months != ending){
+					var months = moment().month(currentMonth).add(number, 'months').format('MMMM');
+					$scope.monthsRemaining.push(months);
+					number++
+				}
 
 				scheduleService.getEmployeeInfo(company_id)
 						.then(function (data) {
@@ -44,9 +88,6 @@ angular
 					});
 				
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +	
-				var currentMonth = moment().format("MMMM");
-				var currentYear = +moment().format("YYYY");
-				var nextYear = +moment().add(1,'year').format('YYYY');
 
 				var getWeekdays = function(currentMonth, year){
 					var monthsArray = moment.months();
@@ -166,22 +207,6 @@ angular
 						console.log($scope.people);
 
 				};
-
-				// if the start month is less than the current month, then the start month's
-				// year is the currentYear + 1
-				// Example:
-				// 		start-month: August 		end-month: December			current-month: June
-				// 		August > June => start-month's year = 2016 (currentYear)
-				// 		December > June => end-month's year = 2016 (currentYear)
-				// 		start-month: November 		end-month: March			current-month: June
-				// 		November > June => start-month's year = 2016 (currentYear)
-				// 		March < June => end-month's year = 2017 (currentYear + 1)
-				// 		start-month: January 		end-month: April			current-month: June
-				// 		January < June => start-month's year = 2017 (currentYear + 1)
-				// 		April < June => end-month's year = 2017 (currentYear + 1)
-				// if the end month is less than the current month, then the end month's
-				// year is the currentYear + 1
-
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 				$scope.moment = moment();

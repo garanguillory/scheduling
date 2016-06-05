@@ -107,7 +107,7 @@
 				   	<td data-date="2016-06-07" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-07') > -1 }">7</td>
 				   	<td data-date="2016-06-08" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-08') > -1 }">8</td>
 				   	<td data-date="2016-06-09" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-09') > -1 }">9</td>
-				   	<td data-date="2016-06-10" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-10') > -1 }">10</td>
+				   	<td data-date="2016-06-10" class="2016-06-10" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-10') > -1 }">10</td>
 				   	<td data-date="2016-06-11" ng-class="{ 'red': employee.conflictDates.indexOf('2016-06-11') > -1 }">11</td>
 				   </tr>
 				    <tr>
@@ -722,18 +722,7 @@
 				  <div class="form-group" style="margin-right: 2rem;">
 				    <label for="start">Start Month</label>
 				    <select ng-model="start" class="form-control" id="start" placeholder="start-month">
-				        <option value="January">January</option>
-				        <option value="February">February</option>
-				        <option value="March">March</option>
-				        <option value="April">April</option>
-				        <option value="May">May</option>
-				        <option value="June">June</option>
-				        <option value="July">July</option>
-				        <option value="August">August</option>
-				        <option value="September">September</option>
-				        <option value="October">October</option>
-				        <option value="November">November</option>
-				        <option value="December">December</option>
+				        <option ng-repeat="month in monthsRemaining" value="{{month}}">{{month}}</option>
 				    </select>
 				  </div>
 				  <div class="form-group">

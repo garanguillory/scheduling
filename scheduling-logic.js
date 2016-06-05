@@ -199,7 +199,45 @@ var resultWeekends = weekendsJS.reduce((acc, date) => {
 console.log(resultWeekends);
 
 
+var holidays = [];
 
+var getHolidays = function(year){
+	holidays.push(`${year}-07-04`, `${year}-07-04`);
+
+	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Friday"){
+		holidays.push(`${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
+	}
+	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Saturday"){
+		holidays.push(`${year}-07-03`, `${year}-07-03`, `${year}-07-05`, `${year}-07-05`);
+	}
+	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Sunday"){
+		holidays.push(`${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+	}
+	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Monday"){
+		holidays.push(`${year}-07-01`, `${year}-07-02`, `${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+	}
+
+	// for labor day
+	var start = moment(`${year}-09`).startOf('month');
+	var counter = 1;
+	// var day = moment(`${year}-09`).startOf('month').add(counter,'days').format('dddd');
+
+		if(start != "Monday"){
+			while(day != "Monday"){
+				var day = moment(`${year}-09`).startOf('month').add(counter,'days').format('dddd');
+				if(day == "Monday"){
+					var laborDay = moment(`${year}-09`).startOf('month').add(counter,'days').format('YYYY-MM-DD');
+					holidays.push(moment(laborDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(laborDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
+					holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+					holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+				}
+				counter++
+			}
+
+		}
+
+	console.log(holidays);
+};
 
 
 
