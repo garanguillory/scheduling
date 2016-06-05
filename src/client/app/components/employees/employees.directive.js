@@ -29,6 +29,8 @@ angular
 				$scope.new_employee = {};
 				$scope.add_employee = false;
 				$scope.edit_employee = false;
+				$scope.add_bulk = false;
+				$scope.edit_bulk = false;
 				$scope.selection = false;
 
 				$scope.remove = function(){
@@ -44,6 +46,8 @@ angular
 				$scope.selected = function(){
 					$scope.new_employee = {};
 					$scope.add_employee = false;
+					$scope.add_bulk = false;
+					$scope.edit_bulk = false;
 					$scope.selection = true;
 					$scope.employee = this.employee;
 					$scope.edit_employee = true;
@@ -54,6 +58,8 @@ angular
 					$scope.selection = false;
 					$scope.employee = {};
 					$scope.add_employee = false;
+					$scope.add_bulk = false;
+					$scope.edit_bulk = false;
 					return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
 				};
 
@@ -62,7 +68,27 @@ angular
 					$scope.employee = {};
 					$scope.new_employee = {};
 					$scope.edit_employee = false;
+					$scope.edit_bulk = false;
+					$scope.add_bulk = false;
 					return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
+				};
+
+				$scope.editingBulk = function(){
+					$scope.add_employee = false;
+					$scope.edit_employee = false;
+					$scope.add_bulk = false;
+					$scope.selection = false;
+					return $scope.edit_bulk ? $scope.edit_bulk = false : $scope.edit_bulk = true;
+				};
+
+				$scope.addingBulk = function(){
+					$scope.employee = {};
+					$scope.new_employee = {};
+					$scope.add_employee = false;
+					$scope.edit_employee = false;
+					$scope.edit_bulk = false;
+					$scope.selection = false
+					return $scope.add_bulk ? $scope.add_bulk = false : $scope.add_bulk = true;
 				};
 
 			// add functionality for edit, delete, and update employee + conflicts
@@ -101,15 +127,16 @@ angular
 				};
 
 
-			// edit bulk functions
-				// $scope.editingBulk = function(){
-				// 	$scope.add_employee = false;
-				// 	return $scope.edit_employee ? $scope.edit_employee = false : $scope.edit_employee = true;
-				// };
-				// $scope.addingBulk = function(){
-				// 	$scope.edit_employee = false;
-				// 	return $scope.add_employee ? $scope.add_employee = false : $scope.add_employee = true;
-				// };
+			// edit/add bulk functions
+				$scope.editBulk = function(){
+					console.log("editing bulk");
+					console.log("$scope.edit_bulk_file: ", $scope.edit_bulk_file);
+				};
+
+				$scope.addBulk = function(){
+					console.log("add bulk");
+					console.log("$scope.add_bulk_file: ", $scope.add_bulk_file);
+				};
 
 
 			}
