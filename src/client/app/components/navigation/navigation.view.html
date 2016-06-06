@@ -9,7 +9,7 @@
 		        <span class="icon-bar"></span>
 		      </button>
 		      <!-- need to change company for profile based on admin privileges -->
-		      <a ng-show="!employee" class="navbar-brand" ng-href="#/home">Scheduling</a>
+		      <a ng-show="!employee" class="navbar-brand" ng-href="#/">Scheduling</a>
 		      <a ng-show="employee.admin == true" class="navbar-brand" ng-href="#/company">Scheduling for <span>{{company}}</span></a>
 		      <a ng-show="!employee.admin && employee" class="navbar-brand" ng-href="#/profile">Welcome back, <span>{{employee.first_name}}!</span></a>
 		    </div>

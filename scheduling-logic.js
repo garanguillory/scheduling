@@ -64,17 +64,6 @@ var getWeekends = function(currentMonth, year){
 	return array;
 };
 
-// getWeekdays('July'); --> ["2016-07-04", "2016-07-05", "2016-07-06", "2016-07-07", "2016-07-11", "2016-07-12", "2016-07-13", "2016-07-14", "2016-07-18", "2016-07-19", "2016-07-20", "2016-07-21", "2016-07-25", "2016-07-26", "2016-07-27", "2016-07-28"]
-// getWeekdays('August'); --> ["2016-08-01", "2016-08-02", "2016-08-03", "2016-08-04", "2016-08-08", "2016-08-09", "2016-08-10", "2016-08-11", "2016-08-15", "2016-08-16", "2016-08-17", "2016-08-18", "2016-08-22", "2016-08-23", "2016-08-24", "2016-08-25", "2016-08-29", "2016-08-30", "2016-08-31"]
-// getWeekdays('September'); --> ["2016-09-01", "2016-09-05", "2016-09-06", "2016-09-07", "2016-09-08", "2016-09-12", "2016-09-13", "2016-09-14", "2016-09-15", "2016-09-19", "2016-09-20", "2016-09-21", "2016-09-22", "2016-09-26", "2016-09-27", "2016-09-28", "2016-09-29"]
-// getWeekdays('October') --> ["2016-10-10", "2016-10-11", "2016-10-12", "2016-10-13", "2016-10-17", "2016-10-18", "2016-10-19", "2016-10-20", "2016-10-24", "2016-10-25", "2016-10-26", "2016-10-27", "2016-10-31"]
-// getWeekdays('November') --> ["2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-01", "2016-11-10", "2016-11-14", "2016-11-15", "2016-11-16", "2016-11-17", "2016-11-21", "2016-11-22", "2016-11-23", "2016-11-24", "2016-11-28", "2016-11-29", "2016-11-30"]
-// getWeekdays('December') --> ["2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-01", "2016-12-12", "2016-12-13", "2016-12-14", "2016-12-15", "2016-12-19", "2016-12-20", "2016-12-21", "2016-12-22", "2016-12-26", "2016-12-27", "2016-12-28", "2016-12-29"]
-// getWeekdays('January', 2017) --> ["2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05", "2017-01-09", "2017-01-10", "2017-01-11", "2017-01-12", "2017-01-16", "2017-01-17", "2017-01-18", "2017-01-19", "2017-01-23", "2017-01-24", "2017-01-25", "2017-01-26", "2017-01-30", "2017-01-31"]
-// getWeekdays('February', 2017) --> ["2017-02-01", "2017-02-02", "2017-02-06", "2017-02-07", "2017-02-08", "2017-02-09", "2017-02-13", "2017-02-14", "2017-02-15", "2017-02-16", "2017-02-20", "2017-02-21", "2017-02-22", "2017-02-23", "2017-02-27", "2017-02-28", "2017-03-01", "2017-03-02"]
-// getWeekdays('March', 2017) --> ["2017-03-01", "2017-03-02", "2017-03-06", "2017-03-07", "2017-03-08", "2017-03-09", "2017-03-13", "2017-03-14", "2017-03-15", "2017-03-16", "2017-03-20", "2017-03-21", "2017-03-22", "2017-03-23", "2017-03-27", "2017-03-28", "2017-03-29", "2017-03-30"]
-
-
 var employeesObject = {};
 
 	for(var i=1; i<=41; i++){
@@ -93,22 +82,6 @@ var weekendsJS = [
 	"2016-08-05", "2016-08-06", "2016-08-06", "2016-08-07", "2016-08-07", "2016-08-12", "2016-08-13", "2016-08-13", "2016-08-14", "2016-08-14", "2016-08-19", "2016-08-20", "2016-08-20", "2016-08-21", "2016-08-21", "2016-08-26", "2016-08-27", "2016-08-27", "2016-08-28", "2016-08-28",
 	"2016-09-09", "2016-09-10", "2016-09-10", "2016-09-11", "2016-09-11", "2016-09-16", "2016-09-17", "2016-09-17", "2016-09-18", "2016-09-18", "2016-09-23", "2016-09-24", "2016-09-24", "2016-09-25", "2016-09-25", "2016-09-30", "2016-10-01", "2016-10-01"
 ];
-
-
-
-// var people = [
-//   { name: 'Garan', onCall: [], conflicts: ['2016-01-02', '2016-01-05', '2016-01-06', '2016-01-08'] },
-//   { name: 'Wes', onCall: [], conflicts: ['2016-01-01'] },
-//   { name: 'Dan', onCall: [], conflicts: ['2016-01-03', '2016-01-05', '2016-01-08'] },
-//   { name: 'Valerie', onCall: [], conflicts: ['2016-01-01', '2016-01-03'] },
-//   { name: 'Aaron', onCall: [], conflicts: ['2016-01-03'] }
-// ];
-
-// var dates = [
-//   '2016-01-01', '2016-01-02', '2016-01-03', '2016-01-04', '2016-01-05', '2016-01-06', '2016-01-07', '2016-01-08', '2016-01-09', '2016-01-10', '2016-01-11', '2016-01-12', '2016-01-13', '2016-01-14', '2016-01-15', '2016-01-16', '2016-01-17', '2016-01-18', '2016-01-19', '2016-01-20', '2016-01-21', '2016-01-22', '2016-01-23', '2016-01-24', '2016-01-25', '2016-01-26', '2016-01-27', '2016-01-28', '2016-01-29', '2016-01-30', '2016-01-31',
-//   '2016-02-01', '2016-02-02', '2016-02-03', '2016-02-04', '2016-02-05', '2016-02-06', '2016-02-07', '2016-02-08', '2016-02-09', '2016-02-10', '2016-02-11', '2016-02-12', '2016-02-13', '2016-02-14', '2016-02-15', '2016-02-16', '2016-02-17', '2016-02-18', '2016-02-19', '2016-02-20', '2016-02-21', '2016-02-22', '2016-02-23', '2016-02-24', '2016-02-25', '2016-02-26', '2016-02-27', '2016-02-28',
-//   '2016-03-01', '2016-03-02', '2016-03-03', '2016-03-04', '2016-03-05', '2016-03-06', '2016-03-07', '2016-03-08', '2016-03-09', '2016-03-10', '2016-03-11', '2016-03-12', '2016-03-13', '2016-03-14', '2016-03-15', '2016-03-16', '2016-03-17', '2016-03-18', '2016-03-19', '2016-03-20', '2016-03-21', '2016-03-22', '2016-03-23', '2016-03-24', '2016-03-25', '2016-03-26', '2016-03-27', '2016-03-28', '2016-03-29', '2016-03-30', '2016-03-31',
-// ];
 
 'use strict';
 
@@ -202,26 +175,55 @@ console.log(resultWeekends);
 var holidays = [];
 
 var getHolidays = function(year){
-	holidays.push(`${year}-07-04`, `${year}-07-04`);
 
-	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Friday"){
-		holidays.push(`${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
-	}
-	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Saturday"){
-		holidays.push(`${year}-07-03`, `${year}-07-03`, `${year}-07-05`, `${year}-07-05`);
-	}
-	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Sunday"){
-		holidays.push(`${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
-	}
-	if(moment(`${year}-07-04`, "YYYY-MM-DD").format("dddd") == "Monday"){
-		holidays.push(`${year}-07-01`, `${year}-07-02`, `${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
-	}
+	var newYears = `${year}-01-01`;
+		holidays.push(newYears, newYears);
+		if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Friday"){
+			holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+			holidays.push(`${year}-01-02`, `${year}-01-02`, `${year}-01-03`, `${year}-01-03`);
+		} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Saturday"){
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+				holidays.push(`${year}-01-02`, `${year}-01-02`);
+		} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Sunday"){
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+		} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Monday"){
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+				holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(3,'days').format("YYYY-MM-DD"));
+		} else {
+			holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+		}
 
-	// for labor day
+	// Mardi Gras
+
+	// Easter
+
+	var memorialDay = moment(`${year}-05-01`, "YYYY-MM-DD").endOf('month').day("Monday").format("YYYY-MM-DD");
+		holidays.push(moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
+		holidays.push(moment(memorialDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"),moment(memorialDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+		holidays.push(moment(memorialDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(memorialDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+	
+	var fourthOfJuly = `${year}-07-04`;
+		holidays.push(fourthOfJuly, fourthOfJuly);
+		if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Friday"){
+			holidays.push(`${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
+		} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Saturday"){
+			holidays.push(`${year}-07-03`, `${year}-07-03`, `${year}-07-05`, `${year}-07-05`);
+		} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Sunday"){
+			holidays.push(`${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+		} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Monday"){
+			holidays.push(`${year}-07-01`, `${year}-07-02`, `${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+		} else {
+			holidays.push(`${year}-07-03`);
+		}
+
+	// Labor Day
 	var start = moment(`${year}-09`).startOf('month');
 	var counter = 1;
-	// var day = moment(`${year}-09`).startOf('month').add(counter,'days').format('dddd');
-
 		if(start != "Monday"){
 			while(day != "Monday"){
 				var day = moment(`${year}-09`).startOf('month').add(counter,'days').format('dddd');
@@ -233,8 +235,16 @@ var getHolidays = function(year){
 				}
 				counter++
 			}
-
 		}
+
+	var Thanksgiving = moment(`${year}-11-01`,"YYYY-MM-DD").startOf('month').day("Thursday").add(3,'weeks').format("YYYY-MM-DD");
+		holidays.push(moment(Thanksgiving,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+		holidays.push(Thanksgiving, Thanksgiving);
+		holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(1,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(1,'days').format("YYYY-MM-DD"));
+		holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(2,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(2,'days').format("YYYY-MM-DD"));
+		holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"));
+
+	// Christmas
 
 	console.log(holidays);
 };
