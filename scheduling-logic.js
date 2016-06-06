@@ -198,9 +198,12 @@ var getHolidays = function(year){
 			holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
 		}
 
-	// Mardi Gras
-
 	// Easter
+		holidays.push('2017-04-16', '2017-04-16', '2017-04-15', '2017-04-15', '2017-04-14');
+		holidays.push('2018-04-01', '2018-04-01', '2018-03-31', '2018-03-31', '2018-03-30');
+		holidays.push('2018-04-21', '2018-04-21', '2018-04-20', '2018-04-20', '2018-04-19');
+		holidays.push('2018-04-12', '2018-04-12', '2018-04-11', '2018-04-11', '2018-04-10');
+		holidays.push('2017-04-04', '2017-04-04', '2017-04-03', '2017-04-03', '2017-04-02');
 
 	var memorialDay = moment(`${year}-05-01`, "YYYY-MM-DD").endOf('month').day("Monday").format("YYYY-MM-DD");
 		holidays.push(moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
@@ -210,7 +213,7 @@ var getHolidays = function(year){
 	var fourthOfJuly = `${year}-07-04`;
 		holidays.push(fourthOfJuly, fourthOfJuly);
 		if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Friday"){
-			holidays.push(`${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
+			holidays.push(`${year}-07-03`, `${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
 		} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Saturday"){
 			holidays.push(`${year}-07-03`, `${year}-07-03`, `${year}-07-05`, `${year}-07-05`);
 		} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Sunday"){
@@ -245,13 +248,32 @@ var getHolidays = function(year){
 		holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"));
 
 	// Christmas
+	var christmas = `${year}-12-25`;
+		holidays.push(christmas, christmas);
+		if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Friday"){
+			holidays.push(`${year}-12-24`, `${year}-12-26`, `${year}-12-26`, `${year}-12-27`, `${year}-12-27`);
+		} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Saturday"){
+			holidays.push(`${year}-12-24`, `${year}-12-26`, `${year}-12-26`);
+		} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Sunday"){
+			holidays.push(`${year}-12-23`,`${year}-12-24`, `${year}-12-24`, `${year}-12-26`, `${year}-12-26`);
+		} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Monday"){
+			holidays.push(`${year}-12-22`,`${year}-12-23`, `${year}-12-23`, `${year}-12-24`, `${year}-12-24`);
+		} else {
+			holidays.push(`${year}-12-24`);
+		}
 
 	console.log(holidays);
 };
 
 
 
-
+for(var i=0; i<weekdays.length; i++){
+	holidays.forEach(function(date){
+		if(weekdays[i] == date){
+			weekdays.splice(weekdays[i], 1);
+		}
+	});
+}
 
 
 

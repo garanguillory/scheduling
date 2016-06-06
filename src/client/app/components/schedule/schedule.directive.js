@@ -6,34 +6,29 @@ angular
 			restrict: 'AE',
 			templateUrl: "app/components/schedule/schedule.view.html",
 			link: function(scope, element, attrs, controller){
+				
+				scope.$watch('people.completed', function (newValue) {
+					var tds = angular.element('.calendar-section td');
+					angular.forEach(tds, function (td) {
+						if ( scope.people ) {
+							for(var i=0; i<scope.people.length; i++){
+								var weekdaysArray = scope.people[i].onCall.weekdays;
+								var weekendsArray = scope.people[i].onCall.weekends;
+								var holidaysArray = scope.people[i].onCall.holidays;
+								// flatten array of onCall days
+								var onCalls = weekdaysArray.concat(weekendsArray).concat(holidaysArray);
 
-				angular.element('tr').on('click', 'td', function(){
-					
-					angular.element(this).append("<p>"+angular.element(this).data('date')+"</p>");
+								onCalls.forEach(function(date){
+									if(date == angular.element(td).data("date")){
+											angular.element(td).append("<p>"+scope.people[i].name+"</p>");
+									}
+								});
 
-					console.log(angular.element(this).data("date"));
-					console.log(angular.element(this));
-					console.log(angular.element(attrs));
+							}
+						}
+						// console.log("td's data: ", angular.element(td).data("date"));
+					});
 				});
-
-				// angular.element('button').on('click', function(){
-				// 		angular.element('td').append("<p>"+angular.element('td').data('date')+"</p>");
-				// });
-
-				// angular.element('button').on('click', function(){
-				// 		console.log(scope.people[4].onCall.weekdays)
-				// 	for(var i=0; i<scope.people.length; i++){
-				// 		// console.log(scope.people[i].name);
-				// 		console.log(angular.element('td.'+scope.people[i].onCall.weekdays[0]))
-				// 			// angular.element('td.'+scope.people[i].onCall.weekdays[0]).append("<p>"+scope.people[i].name+"</p>");
-				// 	}
-
-				// 	// if(angular.element('td').hasClass('2016-06-10')){
-				// 	// 	console.log('winner!');
-				// 	// 	angular.element('td.2016-06-10').append("<p>Hello</p>");
-				// 	// }
-				// 	// scope.$apply();
-				// });
 
 			},
 			controller: function($scope, $rootScope, $location, $window){
@@ -147,8 +142,101 @@ angular
 					return array;
 				};
 
-				// need to make an array of holidays
-				// var holidays = ["2016-07-04", "2016-09-05", ... ];
+				var holidays = [];
+
+				var getHolidays = function(year){
+
+					var newYears = `${year}-01-01`;
+						holidays.push(newYears, newYears);
+						if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Friday"){
+							holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+							holidays.push(`${year}-01-02`, `${year}-01-02`, `${year}-01-03`, `${year}-01-03`);
+						} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Saturday"){
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+								holidays.push(`${year}-01-02`, `${year}-01-02`);
+						} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Sunday"){
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+						} else if(moment(newYears, "YYYY-MM-DD").format("dddd") == "Monday"){
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+								holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(3,'days').format("YYYY-MM-DD"));
+						} else {
+							holidays.push(moment(`${year}-01-01`, "YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+						}
+
+					// Easter
+						holidays.push('2017-04-16', '2017-04-16', '2017-04-15', '2017-04-15', '2017-04-14');
+						holidays.push('2018-04-01', '2018-04-01', '2018-03-31', '2018-03-31', '2018-03-30');
+						holidays.push('2018-04-21', '2018-04-21', '2018-04-20', '2018-04-20', '2018-04-19');
+						holidays.push('2018-04-12', '2018-04-12', '2018-04-11', '2018-04-11', '2018-04-10');
+						holidays.push('2017-04-04', '2017-04-04', '2017-04-03', '2017-04-03', '2017-04-02');
+
+					var memorialDay = moment(`${year}-05-01`, "YYYY-MM-DD").endOf('month').day("Monday").format("YYYY-MM-DD");
+						holidays.push(moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
+						holidays.push(moment(memorialDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"),moment(memorialDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+						holidays.push(moment(memorialDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(memorialDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+					
+					var fourthOfJuly = `${year}-07-04`;
+						holidays.push(fourthOfJuly, fourthOfJuly);
+						if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Friday"){
+							holidays.push(`${year}-07-03`, `${year}-07-05`, `${year}-07-05`, `${year}-07-06`, `${year}-07-06`);
+						} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Saturday"){
+							holidays.push(`${year}-07-03`, `${year}-07-03`, `${year}-07-05`, `${year}-07-05`);
+						} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Sunday"){
+							holidays.push(`${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+						} else if(moment(fourthOfJuly, "YYYY-MM-DD").format("dddd") == "Monday"){
+							holidays.push(`${year}-07-01`, `${year}-07-02`, `${year}-07-02`, `${year}-07-03`, `${year}-07-03`);
+						} else {
+							holidays.push(`${year}-07-03`);
+						}
+
+					// Labor Day
+					var start = moment(`${year}-09`).startOf('month');
+					var counter = 1;
+						if(start != "Monday"){
+							while(day != "Monday"){
+								var day = moment(`${year}-09`).startOf('month').add(counter,'days').format('dddd');
+								if(day == "Monday"){
+									var laborDay = moment(`${year}-09`).startOf('month').add(counter,'days').format('YYYY-MM-DD');
+									holidays.push(moment(laborDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(laborDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
+									holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+									holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
+								}
+								counter++
+							}
+						}
+
+					var Thanksgiving = moment(`${year}-11-01`,"YYYY-MM-DD").startOf('month').day("Thursday").add(3,'weeks').format("YYYY-MM-DD");
+						holidays.push(moment(Thanksgiving,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
+						holidays.push(Thanksgiving, Thanksgiving);
+						holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(1,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(1,'days').format("YYYY-MM-DD"));
+						holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(2,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(2,'days').format("YYYY-MM-DD"));
+						holidays.push(moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"),moment(Thanksgiving,"YYYY-MM-DD").add(3,'days').format("YYYY-MM-DD"));
+
+					// Christmas
+					var christmas = `${year}-12-25`;
+						holidays.push(christmas, christmas);
+						if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Friday"){
+							holidays.push(`${year}-12-24`, `${year}-12-26`, `${year}-12-26`, `${year}-12-27`, `${year}-12-27`);
+						} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Saturday"){
+							holidays.push(`${year}-12-24`, `${year}-12-26`, `${year}-12-26`);
+						} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Sunday"){
+							holidays.push(`${year}-12-23`,`${year}-12-24`, `${year}-12-24`, `${year}-12-26`, `${year}-12-26`);
+						} else if(moment(christmas, "YYYY-MM-DD").format("dddd") == "Monday"){
+							holidays.push(`${year}-12-22`,`${year}-12-23`, `${year}-12-23`, `${year}-12-24`, `${year}-12-24`);
+						} else {
+							holidays.push(`${year}-12-24`);
+						}
+
+					// console.log(holidays);
+				};
+
+				getHolidays(currentYear);
+				getHolidays(currentYear+1);
 
 				// check to see if holiday falls on a weekend
 				// holiday shifts are split into AM and PM
@@ -174,9 +262,25 @@ angular
 							return start.concat(current);
 						});
 
+						for(var i=0; i<weekdays.length; i++){
+							holidays.map(function(date){
+								if(weekdays[i] == date){
+									weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
+								}
+							});
+						}
+
 						weekends = weekends.reduce(function(start, current){
 							return start.concat(current);
 						});
+
+						for(var i=0; i<weekends.length; i++){
+							holidays.map(function(date){
+								if(weekends[i] == date){
+									weekends.splice(weekends.indexOf(weekends[i]), 1);
+								}
+							});
+						}
 
 						var findEligible = (date) => {
 						  return (person) => person.conflicts.indexOf(date) < 0;
@@ -204,8 +308,21 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						console.log($scope.people);
+						// console.log("holidays: ", holidays);
+						// console.log("weekdays: ", weekdays);
+						// console.log("weekends: ", weekends);
 
+						holidays.reduce((acc, date) => {
+						  var type = 'holidays';
+						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
+
+						  selected.onCall[type].push(date);
+
+						  return acc;
+						}, $scope.people);
+
+
+						$scope.people.completed = !$scope.people.completed;
 				};
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
