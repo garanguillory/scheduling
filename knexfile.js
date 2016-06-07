@@ -5,7 +5,7 @@ module.exports = {
     connection: 'postgres://localhost/schedules'
   },
   production: {
-    client: 'pg',
+    client: 'postgresql',
     connection: process.env.DATABASE_URL
   }
 };
