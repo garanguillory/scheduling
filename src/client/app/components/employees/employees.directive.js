@@ -109,8 +109,8 @@ angular
 					$scope.new_employee.company_id = company_id;
 					employeesService.addEmployee($scope.new_employee)
 						.then(function(data) {
-						console.log('new_employee', data);
-					});
+							console.log('new_employee', data);
+						});
 					$scope.new_employee = {};
 					$scope.new_employee.company_id = company_id;
 					$window.location.reload();

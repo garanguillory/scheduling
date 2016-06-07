@@ -1,224 +1,229 @@
-<navigation></navigation>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-8">
-<!-- 			<p class="centered">- Add instructions here -</p>
-				employee: {{employee}}
-						<br>
-				employee.conflictDates: {{ employee.conflictDates }}
-						<br>
-				employee.newConflicts: {{ employee.newConflicts }}
-						<br> -->
-			
-				<nav class="employee-nav navbar navbar-default">
-				  <div class="container-fluid">
-					  <div class="navbar-header">
-					    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-					      <span class="sr-only">Toggle navigation</span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					      <span class="icon-bar"></span>
-					    </button>
-					  </div>
-
-				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				    	<ul class="nav navbar-nav">
-				    		<li ng-click="editing()" ng-class="{active: edit_employee}"><a>Edit Employee</a></li>
-				    		<li ng-click="adding()" ng-class="{active: add_employee}"><a>Add Employee</a></li>
-				    		<li ng-click="editingBulk()" ng-class="{active: edit_bulk}"><a>Edit Bulk</a></li>
-				    		<li ng-click="addingBulk()" ng-class="{active: add_bulk}"><a>Add Bulk</a></li>
-				    		<li>
-					    		<form class="navbar-form navbar-right" role="search">
-						        <div class="form-group">
-						          <input ng-model="search" type="text" class="form-control" placeholder="Search By Name">
-						        </div>
-					      	</form>
-				      	</li>
-				    	</ul>
-				    </div><!-- /.navbar-collapse -->
-
-				  </div><!-- /.container-fluid -->
-				</nav>
-
-			<p ng-show="add_employee == false && edit_employee == false && edit_bulk == false && add_bulk == false" class="centered">To get started, choose one of the above options.</p>
-
-				<form ng-show="edit_employee" ng-submit="edit()" class="edit-employee form-horizontal">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="row">
-								<div class="col-xs-4">
-									<p ng-show="selection == false">
-										To edit an employee, select one from the list on the right.
-									</p>
-									<img ng-show="selection == true" ng-src="{{employee.picture}}">
-								</div>
-								<div class="col-xs-8">
-									<div class="row form-group">
-										<div class="col-xs-6">
-											<input ng-model="employee.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
-										</div>
-										<div class="col-xs-6">
-											<input ng-model="employee.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-6">
-											<input ng-model="employee.email" type="text" class="form-control" id="email" placeholder="Email">
-										</div>
-										<div class="col-xs-6">
-											<input ng-model="employee.phone" type="text" class="form-control" id="phone" placeholder="Phone">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-12">
-											<input  ng-model="employee.picture" type="text" class="form-control" id="picture" placeholder="Picture (url or file)">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-12">
-											<textarea ng-model="employee.notes" class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
-										</div>
-									</div>
-								</div> <!-- end col-xs-8 -->
-							</div> <!-- end row -->
-						</div> <!-- end col-xs-12 -->
-					</div> <!-- end row -->
-				<br><br>
-					<div class="row">
-						<div class="col-xs-6">
-								<!-- calendar directive -->
-							<calendar></calendar> 
-						</div>
-						<br><br><br>
-						<div class="schedule-conflicts form-horizontal col-xs-6">
-							<ul>
-								<li ng-repeat="conflict in employee.conflicts">
-									<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
-									<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
-									<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
-								</li>
-							</ul>
-						</div>
-					</div> 
-				<br><br>
-					<div class="row form-group">
-						<div class="col-xs-12">
-							<button ng-click="delete()" type="button" class="btn btn-danger pull-left">Delete Employee</button>
-							<button ng-click="edit_employee = false" type="button" class="btn btn-default pull-right">Cancel</button>
-						  <button type="submit" class="btn btn-default pull-right">Edit Employee</button>
-						</div>
-					</div>
-				</form>
-
-				<form ng-show="add_employee" ng-submit="add()" class="edit-employee form-horizontal">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="row">
-								<div class="col-xs-4">
-									<img ng-src="http://ww4.msu.ac.zw/mainsite/wp-content/uploads/2015/05/default.gif">
-								</div>
-								<div class="col-xs-8">
-									<div class="row form-group">
-										<div class="col-xs-6">
-											<input ng-model="new_employee.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
-										</div>
-										<div class="col-xs-6">
-											<input ng-model="new_employee.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-6">
-											<input ng-model="new_employee.email" type="text" class="form-control" id="email" placeholder="Email">
-										</div>
-										<div class="col-xs-6">
-											<input ng-model="new_employee.phone" type="text" class="form-control" id="phone" placeholder="Phone">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-12">
-											<input  ng-model="new_employee.picture" type="text" class="form-control" id="picture" placeholder="Picture (url or file)">
-										</div>
-									</div>
-									<div class="row form-group">
-										<div class="col-xs-12">
-											<textarea class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
-										</div>
-									</div>
-								</div> <!-- end col-xs-8 -->
-							</div> <!-- end row -->
-							<div class="row">
-								<div class="col-xs-6">
-									<!-- calendar directive not working with both edit employee and add employee-->
-									<!-- <calendar></calendar> -->
-								</div>
-								<br><br><br>
-								<div class="schedule-conflicts form-horizontal col-xs-6">
-									<ul>
-										<li ng-repeat="conflict in employee.conflicts">
-											<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
-											<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
-											<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
-										</li>
-									</ul>
-								</div>
-							</div> 
-							<div class="row form-group">
-								<div class="col-xs-12">
-								  <button ng-click="add_employee = false" type="button" class="btn btn-default  pull-right">Cancel</button>
-								  <button type="submit" class="btn btn-default pull-right">Add New Employee</button>
-								</div>
-							</div>
-						</div> <!-- end col-xs-12 -->
-					</div> <!-- end row -->
-				</form>
-		<!-- form for editing bulk -->
-				<form ng-show="edit_bulk" ng-submit="editBulk()" class="edit-employee form-horizontal">
-					<div class="row">
-						<div class="col-xs-12">
-							<p class="centered">- example of spread sheet format goes here -</p>
-							<div class="example-spread-sheet">
-								<img ng-src="assets/images/new_employees_spread_sheet.jpg" alt="">
-								<div class="overlay"></div>
-							</div>
-								<br><br>
-							<div class="">
-						    <label for="edit_employees_spread_sheet">File input</label>
-						    <input ng-model="edit_bulk_file" type="file" id="edit_employees_spread_sheet" style="display: inline-block;">
-						    <button type="submit" class="btn btn-default pull-right">Edit Multiple Employees</button>
+<div id="employees">
+	<navigation></navigation>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-8">
+	<!-- 			<p class="centered">- Add instructions here -</p>
+					employee: {{employee}}
+							<br>
+					employee.conflictDates: {{ employee.conflictDates }}
+							<br>
+					employee.newConflicts: {{ employee.newConflicts }}
+							<br> -->
+				
+					<nav class="employee-nav navbar navbar-default">
+					  <div class="container-fluid">
+						  <div class="navbar-header">
+						    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						      <span class="sr-only">Toggle navigation</span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						      <span class="icon-bar"></span>
+						    </button>
 						  </div>
+
+					    <!-- Collect the nav links, forms, and other content for toggling -->
+					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					    	<ul class="nav navbar-nav">
+					    		<li ng-click="editing()" ng-class="{active: edit_employee}"><a>Edit Employee</a></li>
+					    		<li ng-click="adding()" ng-class="{active: add_employee}"><a>Add Employee</a></li>
+					    		<li ng-click="editingBulk()" ng-class="{active: edit_bulk}"><a>Edit Bulk</a></li>
+					    		<li ng-click="addingBulk()" ng-class="{active: add_bulk}"><a>Add Bulk</a></li>
+					    		<li>
+						    		<form class="navbar-form navbar-right" role="search">
+							        <div class="form-group">
+							          <input ng-model="search" type="text" class="form-control" placeholder="Search By Name">
+							        </div>
+						      	</form>
+					      	</li>
+					    	</ul>
+					    </div><!-- /.navbar-collapse -->
+
+					  </div><!-- /.container-fluid -->
+					</nav>
+
+				<p ng-show="add_employee == false && edit_employee == false && edit_bulk == false && add_bulk == false" class="centered instructions-text">To get started, choose one of the above options.</p>
+
+					<form ng-show="edit_employee" ng-submit="edit()" class="edit-employee form-horizontal">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-4">
+										<p ng-show="selection == false">
+											To edit an employee, select one from the list on the right.
+										</p>
+										<img ng-show="selection == true" ng-src="{{employee.picture}}">
+									</div>
+									<div class="col-xs-8">
+										<div class="row form-group">
+											<div class="col-xs-6">
+												<input ng-model="employee.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
+											</div>
+											<div class="col-xs-6">
+												<input ng-model="employee.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-6">
+												<input ng-model="employee.email" type="text" class="form-control" id="email" placeholder="Email">
+											</div>
+											<div class="col-xs-6">
+												<input ng-model="employee.phone" type="text" class="form-control" id="phone" placeholder="Phone">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-12">
+												<input  ng-model="employee.picture" type="text" class="form-control" id="picture" placeholder="Picture (url or file)">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-12">
+												<textarea ng-model="employee.notes" class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
+											</div>
+										</div>
+									</div> <!-- end col-xs-8 -->
+								</div> <!-- end row -->
+							</div> <!-- end col-xs-12 -->
+						</div> <!-- end row -->
+					<br><br>
+						<div class="row">
+							<div class="col-xs-6">
+									<!-- calendar directive -->
+								<calendar></calendar> 
+							</div>
+							<br><br><br>
+							<div class="schedule-conflicts form-horizontal col-xs-6">
+								<ul>
+									<li ng-repeat="conflict in employee.conflicts">
+										<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+										<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+										<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+									</li>
+								</ul>
+							</div>
+						</div> 
+					<br><br>
+						<div class="row form-group">
+							<div class="col-xs-12">
+								<button ng-click="delete()" type="button" class="btn btn-danger pull-left">Delete Employee</button>
+								<button ng-click="edit_employee = false" type="button" class="btn btn-default pull-right">Cancel</button>
+							  <button type="submit" class="btn btn-default pull-right">Edit Employee</button>
+							</div>
 						</div>
-					</div>
-				</form>
-		<!-- form for adding bulk -->
-				<form ng-show="add_bulk" ng-submit="addBulk()" class="edit-employee form-horizontal">
-					<div class="row">
-						<div class="col-xs-12">
-							<p class="centered">- example of spread sheet format goes here -</p>
+					</form>
+
+					<form ng-show="add_employee" ng-submit="add()" class="edit-employee form-horizontal">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-4">
+										<img ng-src="http://ww4.msu.ac.zw/mainsite/wp-content/uploads/2015/05/default.gif">
+									</div>
+									<div class="col-xs-8">
+										<div class="row form-group">
+											<div class="col-xs-6">
+												<input ng-model="new_employee.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
+											</div>
+											<div class="col-xs-6">
+												<input ng-model="new_employee.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-6">
+												<input ng-model="new_employee.email" type="text" class="form-control" id="email" placeholder="Email">
+											</div>
+											<div class="col-xs-6">
+												<input ng-model="new_employee.phone" type="text" class="form-control" id="phone" placeholder="Phone">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-12">
+												<input  ng-model="new_employee.picture" type="text" class="form-control" id="picture" placeholder="Picture (url or file)">
+											</div>
+										</div>
+										<div class="row form-group">
+											<div class="col-xs-12">
+												<textarea class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
+											</div>
+										</div>
+									</div> <!-- end col-xs-8 -->
+								</div> <!-- end row -->
+								<div class="row">
+									<div class="col-xs-6">
+										<!-- calendar directive not working with both edit employee and add employee-->
+										<!-- <calendar></calendar> -->
+									</div>
+									<br><br><br>
+									<div class="schedule-conflicts form-horizontal col-xs-6">
+										<ul>
+											<li ng-repeat="conflict in employee.conflicts">
+												<button ng-show="!conflict.remove" ng-click="remove()" type="button" class="btn btn-danger btn-xs">Remove Date</button>
+												<button ng-show="conflict.remove" ng-click="keep()" type="button" class="btn btn-success btn-xs">Add Date Again</button>
+												<span ng-class="{strikethrough: conflict.remove == true}" class="form-control-static">{{conflict.date | date:'EEEE, MMMM d, y'}}</span> 
+											</li>
+										</ul>
+									</div>
+								</div> 
+								<div class="row form-group">
+									<div class="col-xs-12">
+									  <button ng-click="add_employee = false" type="button" class="btn btn-default  pull-right">Cancel</button>
+									  <button type="submit" class="btn btn-default pull-right">Add New Employee</button>
+									</div>
+								</div>
+							</div> <!-- end col-xs-12 -->
+						</div> <!-- end row -->
+					</form>
+			<!-- form for editing bulk -->
+					<form ng-show="edit_bulk" ng-submit="editBulk()" class="edit-employee form-horizontal">
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="centered">- example of spread sheet format goes here -</p>
 								<div class="example-spread-sheet">
 									<img ng-src="assets/images/new_employees_spread_sheet.jpg" alt="">
 									<div class="overlay"></div>
 								</div>
-								<br><br>
-							<div class="">
-						    <label for="new_employees_spread_sheet">File input</label>
-						    <input ng-model="add_bulk_file" type="file" id="new_employees_spread_sheet" style="display: inline-block;">
-						    <button type="submit" class="btn btn-default pull-right">Add New Employees</button>
-						  </div>
+									<br><br>
+								<div class="">
+							    <label for="edit_employees_spread_sheet">File input</label>
+							    <input ng-model="edit_bulk_file" type="file" id="edit_employees_spread_sheet" style="display: inline-block;">
+							    <button type="submit" class="btn btn-default pull-right">Edit Multiple Employees</button>
+							  </div>
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+			<!-- form for adding bulk -->
+					<form ng-show="add_bulk" ng-submit="addBulk()" class="edit-employee form-horizontal">
+						<div class="row">
+							<div class="col-xs-12">
+								<p class="centered">- example of spread sheet format goes here -</p>
+									<div class="example-spread-sheet">
+										<img ng-src="assets/images/new_employees_spread_sheet.jpg" alt="">
+										<div class="overlay"></div>
+									</div>
+									<br><br>
+								<div class="">
+							    <label for="new_employees_spread_sheet">File input</label>
+							    <input ng-model="add_bulk_file" type="file" id="new_employees_spread_sheet" style="display: inline-block;">
+							    <button type="submit" class="btn btn-default pull-right">Add New Employees</button>
+							  </div>
+							</div>
+						</div>
+					</form>
 
-		</div>
+			</div>
 
-		<!-- move employee-list to 'col-sm-4' div and add the style="border-left: 1px solid black" -->
-		<div class="col-sm-4" style="border-left: 1px solid black">
-			<div class="employee-list">
-				<ul> <!-- need to hide admin from employee list -->
-					<li ng-click="selected()" class="employee-individual" ng-repeat="employee in employees | filter:search">
-						<img ng-src="{{employee.picture}}">{{employee.first_name}} {{employee.last_name}} <span ng-show="employee.admin"> -- ADMIN</span>
-					</li>
-				</ul>
+			<div class="col-sm-4">
+				<div class="employee-list">
+					<ul> <!-- need to hide admin from employee list -->
+						<li ng-click="selected()" class="employee-individual" ng-hide="employee.admin" ng-repeat="employee in employees | filter:search">
+							<div class="employee-stats">
+								<img ng-src="{{employee.picture}}">
+									<p>{{employee.first_name}} {{employee.last_name}}</p>
+									<!-- <span ng-show="employee.admin"> -- ADMIN</span> -->
+							</div>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

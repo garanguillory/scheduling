@@ -50,6 +50,15 @@ angular
 					number++
 				}
 
+				$scope.nextMonths = [];
+				var final = moment().add(1,'years').subtract(1,'months').format("MMMM");
+				var incrementer = 1;
+				while(next != final){
+					var next = moment().add(incrementer, 'months').format('MMMM');
+					$scope.nextMonths.push(next);
+					incrementer++
+				}
+
 				scheduleService.getEmployeeInfo(company_id)
 						.then(function (data) {
 						// console.log('employees', data);

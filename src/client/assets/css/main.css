@@ -3,13 +3,19 @@
 	1). universal
 	2). navbar
 	3). home || landing page
-	4). employees
-	5). profile
+	4). signup
+	5). login
+	6). employees
+	7). profile
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* ----- color palette ----- */
 /* ------ universal ------- */
 html {
   font-size: 16px; }
+
+body {
+  background: #E7F2F8; }
 
 ul {
   padding-left: 0; }
@@ -18,7 +24,11 @@ li {
   list-style: none; }
 
 a {
-  color: inherit; }
+  color: inherit;
+  font-family: 'Roboto', sans-serif; }
+
+p {
+  font-family: 'Raleway', sans-serif; }
 
 a:hover {
   text-decoration: none; }
@@ -134,27 +144,139 @@ a:hover {
     color: #FFF;
     display: block; }
 
+.hero-text {
+  color: #051E51;
+  font-size: 3rem;
+  font-weight: 900;
+  margin-top: 10rem; }
+
+.explaination-text {
+  color: #051E51;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-top: 2rem; }
+  .explaination-text span {
+    color: #336FA5; }
+
+/* --------- signup --------- */
+#signup {
+  background: #E7F2F8;
+  color: #336FA5;
+  font-family: 'Roboto', sans-serif;
+  height: 100vh; }
+  #signup input {
+    background: #E7F2F8;
+    border-color: #9FC9E1;
+    color: #051E51; }
+  #signup button {
+    background: #E7F2F8;
+    border-color: #87B9D8;
+    color: #336FA5;
+    font-family: 'Roboto', sans-serif; }
+    #signup button:hover {
+      color: #2d6292;
+      background: #d3e7f2;
+      border-color: #74aed2; }
+  #signup form a {
+    font-weight: 900; }
+
+/* --------- login --------- */
+#login {
+  background: #E7F2F8;
+  color: #336FA5;
+  font-family: 'Roboto', sans-serif;
+  height: 100vh; }
+  #login input {
+    background: #E7F2F8;
+    border-color: #87B9D8;
+    color: #051E51; }
+  #login button {
+    background: #E7F2F8;
+    border-color: #87B9D8;
+    color: #336FA5;
+    font-family: 'Roboto', sans-serif; }
+    #login button:hover {
+      color: #2d6292;
+      background: #d3e7f2;
+      border-color: #74aed2; }
+  #login form a {
+    font-weight: 900; }
+
+/* --------- company --------- */
+#company-page {
+  background: #E7F2F8;
+  height: 100vh;
+  color: #051E51; }
+  #company-page li {
+    background: #E7F2F8;
+    border-color: #051E51;
+    color: #051E51;
+    font-family: 'Roboto', sans-serif; }
+    #company-page li:hover {
+      color: #051E51;
+      background: #d3e7f2;
+      border-color: #051E51; }
+
+.admin-options li {
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  display: inline-block;
+  margin: 3rem 4rem;
+  padding: 1rem 4rem; }
+  .admin-options li:hover {
+    background: lightgrey; }
+
 /* ------ employees ------- */
+#employees {
+  background: #E7F2F8;
+  height: 100vh; }
+  #employees input {
+    background: #E7F2F8;
+    border-color: #9FC9E1;
+    color: #051E51; }
+    #employees input:hover {
+      background: #ddedf5; }
+  #employees .instructions-text {
+    color: #051E51;
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+    margin-top: 5rem; }
+
 .edit-employee img {
-  max-width: 100%; }
+  max-width: 100%;
+  border-radius: 4px; }
 
 .employee-list {
-  border: 1px solid black;
   height: 90vh;
   overflow: scroll; }
 
-.employee-individual {
-  border-bottom: 1px solid black; }
-  .employee-individual:hover {
-    background: lightgrey; }
-  .employee-individual img {
+.employee-individual:hover {
+  background: #d3e7f2; }
+
+.employee-individual .employee-stats {
+  border: 1px solid #051E51;
+  border-radius: 4px;
+  color: #051E51;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.5rem;
+  margin: 0.5rem 0rem;
+  position: relative; }
+  .employee-individual .employee-stats img {
+    border-radius: 4px 0px 0px 4px;
+    display: inline-block;
     height: 100px;
+    margin-left: 0;
+    position: relative;
     width: 100px; }
+  .employee-individual .employee-stats p {
+    display: inline-block;
+    position: relative;
+    left: 2rem; }
 
 .example-spread-sheet {
   position: relative; }
   .example-spread-sheet .overlay {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 75%);
+    background: linear-gradient(to top, #E7F2F8 0%, rgba(255, 255, 255, 0) 75%);
     position: absolute;
     top: 0;
     left: 0;
@@ -196,17 +318,18 @@ a:hover {
     display: inline-block;
     margin: 0 1rem; }
 
-.calendar th {
-  max-width: 2rem;
-  min-width: 2rem;
-  text-align: center;
-  width: 2rem; }
-
-.calendar td {
-  height: 2rem;
-  max-height: 2rem;
-  min-height: 2rem;
-  text-align: center; }
+.calendar {
+  background: white; }
+  .calendar th {
+    max-width: 2rem;
+    min-width: 2rem;
+    text-align: center;
+    width: 2rem; }
+  .calendar td {
+    height: 2rem;
+    max-height: 2rem;
+    min-height: 2rem;
+    text-align: center; }
 
 /* -------- schedule ---------*/
 .calendar-section .table th {

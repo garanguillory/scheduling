@@ -3,15 +3,31 @@
 	1). universal
 	2). navbar
 	3). home || landing page
-	4). employees
-	5). profile
+	4). signup
+	5). login
+	6). employees
+	7). profile
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+/* ----- color palette ----- */
+
+	$dark-blue: #051E51;
+	$colbalt: #336FA5;
+	$colbalt-light: #4C8ABA;
+	$pale-blue: #6DA6CC;
+	$pale-blue-1: #87B9D8;
+	$pale-blue-2: #9FC9E1;
+	$off-white: #E7F2F8;
+
 /* ------ universal ------- */
 
-	html{
+	html {
 		font-size:16px;
+	}
+
+	body {
+		background: $off-white;
 	}
 
 	ul {
@@ -24,6 +40,11 @@
 
 	a {
 		color: inherit;
+		font-family: 'Roboto', sans-serif;
+	}
+
+	p {
+		font-family: 'Raleway', sans-serif;	
 	}
 
 	a:hover {
@@ -63,19 +84,19 @@
 	}
 	/* title */
 	.navbar-default .navbar-brand {
-	    color: #336FA5;
+	    color: $colbalt;
 	}
 	.navbar-default .navbar-brand:hover,
 	.navbar-default .navbar-brand:focus {
-	    color: #051E51;
+	    color: $dark-blue;
 	}
 	/* link */
 	.navbar-default .navbar-nav > li > a {
-	    color: #336FA5;
+	    color: $colbalt;
 	}
 	.navbar-default .navbar-nav > li > a:hover,
 	.navbar-default .navbar-nav > li > a:focus {
-	    color: #051E51;
+	    color: $dark-blue;
 	}
 	.navbar-default .navbar-nav > .active > a, 
 	.navbar-default .navbar-nav > .active > a:hover, 
@@ -96,8 +117,8 @@
 	}
 	.navbar-default .navbar-nav > .dropdown > a:hover .caret,
 	.navbar-default .navbar-nav > .dropdown > a:focus .caret {
-	    border-top-color: #051E51;
-	    border-bottom-color: #051E51;
+	    border-top-color: $dark-blue;
+	    border-bottom-color: $dark-blue;
 	}
 	.navbar-default .navbar-nav > .open > a .caret, 
 	.navbar-default .navbar-nav > .open > a:hover .caret, 
@@ -157,39 +178,208 @@
 
 	}
 
+	.hero-text {
+		color: $dark-blue;
+		font-size: 3rem;
+		font-weight: 900;
+		margin-top: 10rem;
+	}
+
+	.explaination-text {
+		span {
+			color: $colbalt;
+		}
+		color: $dark-blue;
+		font-size: 1.5rem;
+		font-weight: 900;
+		margin-top: 2rem;
+	}
+
+/* --------- signup --------- */
+
+	#signup {
+		background: $off-white;
+		color: $colbalt;
+		font-family: 'Roboto', sans-serif;
+		height: 100vh;
+		
+		input {
+			background: $off-white;
+			border-color: $pale-blue-2;
+			color: $dark-blue;
+		}
+
+		button {
+			background: $off-white;
+			border-color: $pale-blue-1;
+			color: $colbalt;
+			font-family: 'Roboto', sans-serif;
+
+			&:hover {
+				color: darken($colbalt, 5%);
+				background: darken($off-white, 5%);
+				border-color: darken($pale-blue-1, 5%);
+			}
+		}
+		
+		form {
+			a {
+				font-weight: 900;
+			}
+		}
+	}
+
+/* --------- login --------- */
+
+	#login {
+		background: $off-white;
+		color: $colbalt;
+		font-family: 'Roboto', sans-serif;
+		// font-family: 'Raleway', sans-serif;
+		height: 100vh;
+		
+		input {
+			background: $off-white;
+			border-color: #87B9D8;
+			color: $dark-blue;
+		}
+
+		button {
+			background: $off-white;
+			border-color: $pale-blue-1;
+			color: $colbalt;
+			font-family: 'Roboto', sans-serif;
+
+			&:hover {
+				color: darken($colbalt, 5%);
+				background: darken($off-white, 5%);
+				border-color: darken($pale-blue-1, 5%);
+			}
+		}
+		
+		form {
+			a {
+				font-weight: 900;
+			}
+		}
+	}
+
+/* --------- company --------- */
+
+	#company-page {
+		background: $off-white;
+		height: 100vh;
+		color: $dark-blue;
+		
+		li {
+			background: $off-white;
+			border-color: $dark-blue;
+			color: $dark-blue;
+			font-family: 'Roboto', sans-serif;
+
+			&:hover {
+				color: $dark-blue;
+				background: darken($off-white, 5%);
+				border-color: $dark-blue;
+			}
+		}
+
+	}
+
+	.admin-options {
+		li {
+			border: 2px solid black;
+			border-radius: 0.5rem;
+			display: inline-block;
+			margin: 3rem 4rem;
+			padding: 1rem 4rem;
+			&:hover {
+				background: lightgrey;
+			}
+		}
+	}
+
 /* ------ employees ------- */
+
+	#employees {
+
+		background: $off-white;
+		height: 100vh;
+
+		input {
+			background: $off-white;
+			border-color: $pale-blue-2;
+			color: $dark-blue;
+
+			&:hover {
+				background: darken($off-white, 2.5%);
+			}
+		}
+
+		.instructions-text {
+			color: $dark-blue;
+			font-size: 1.5rem;
+			font-family: 'Raleway', sans-serif;	
+			margin-top: 5rem;
+		}
+
+	}
 
 	.edit-employee {
 		img {
 			max-width: 100%;
+			border-radius: 4px;
 		}
 	}
 
 	.employee-list {
-		border: 1px solid black;
 		height: 90vh;
 		overflow: scroll;
 	}
 
 	.employee-individual {
+
 		&:hover {
-			background: lightgrey;
+			background: darken($off-white, 5%);
 		}
-		border-bottom: 1px solid black;
-		// need to edit height and width
-		img {
-			height: 100px;
-			width: 100px;
+		
+		.employee-stats {
+
+			border: 1px solid $dark-blue;
+			border-radius: 4px;
+			color: $dark-blue;
+			font-family: 'Raleway', sans-serif;	
+			font-size: 1.5rem;
+			margin: 0.5rem 0rem;
+			position: relative;
+			// text-align: center;
+
+			img {
+				border-radius: 4px 0px 0px 4px;
+				display: inline-block;
+				height: 100px;
+				margin-left: 0;
+				position: relative;
+				width: 100px;
+			}
+
+			p {
+				display: inline-block;
+				position: relative;
+				left: 2rem;
+			}
+
 		}
+	
 	}
 
 	.example-spread-sheet {
 			position: relative;
 			
 			.overlay {
-				background: linear-gradient(to bottom, 
-					rgba(255,255,255,0) 0%,
-					rgba(255,255,255,1) 75%);
+				background: linear-gradient(to top, 
+					$off-white 0%,
+					rgba(255,255,255,0) 75%);
 				position: absolute;
 		    top: 0;
 		    left: 0;
@@ -254,6 +444,9 @@
 	}
 
 	.calendar {
+		
+		background: lighten($off-white, 10%);
+
 		th {
 			max-width: 2rem;
 			min-width: 2rem;
