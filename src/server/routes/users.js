@@ -161,7 +161,7 @@ router.post('/employees', function(req, res, next) {
 		});
 });
 
-	// router.post('/employees', function(req, res, next) {
+// router.post('/employees', function(req, res, next) {
 	// 		var newEmployee = {
 	// 			first_name: req.body.first_name,
 	// 			last_name: req.body.last_name,
@@ -431,6 +431,77 @@ router.put('/conflicts/update/:employee_id', function(req, res, next){
 				 .catch(function(err){
 				 		return next(err);
 				 });
+});
+
+router.post('/on_call_schedule/:company_id', function(req, res, next) {
+
+	var company_id = req.params.company_id;
+	var employees = req.body;
+
+	var weekdays = employees.map(function(employee){
+			return employee.onCall.weekdays.map(function(date){
+				var onCallData = {
+					employee_id: employee.id,
+					company_id: company_id,
+					date: date,
+					type: 1
+				};
+				return queries.addOnCallDate(onCallData);
+			});
+	});
+
+	weekdays = weekdays.reduce(function (prev, curr) {
+		return prev.concat(curr);
+	});
+
+	var weekends = employees.map(function(employee){
+			return employee.onCall.weekends.map(function(date){
+				var onCallData = {
+					employee_id: employee.id,
+					company_id: company_id,
+					date: date,
+					type: 2
+				};
+				return queries.addOnCallDate(onCallData);
+			});
+	});
+
+	weekends = weekends.reduce(function (prev, curr) {
+		return prev.concat(curr);
+	});
+
+	var holidays = employees.map(function(employee){
+			return employee.onCall.holidays.map(function(date){
+				var onCallData = {
+					employee_id: employee.id,
+					company_id: company_id,
+					date: date,
+					type: 3
+				};
+				return queries.addOnCallDate(onCallData);
+			});
+	});
+
+	holidays = holidays.reduce(function (prev, curr) {
+		return prev.concat(curr);
+	});
+	
+	var promises = weekdays.concat(weekends).concat(holidays);
+
+	Promise.all(promises)
+		.then(function(schedule) {
+		    console.log('schedule', schedule);
+		    res.status(200).json({
+		        status: 'success',
+		        data: {
+		            on_call_schedule: schedule
+		        }
+		    });
+		})
+		.catch(function(err) {
+		    console.log(err);
+		    res.send(err);
+		});
 });
 
 module.exports = router;

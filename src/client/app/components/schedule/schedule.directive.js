@@ -262,25 +262,25 @@ angular
 							return start.concat(current);
 						});
 
-						for(var i=0; i<weekdays.length; i++){
-							holidays.map(function(date){
-								if(weekdays[i] == date){
-									weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
-								}
-							});
-						}
+							for(var i=0; i<weekdays.length; i++){
+								holidays.map(function(date){
+									if(weekdays[i] == date){
+										weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
+									}
+								});
+							}
 
 						weekends = weekends.reduce(function(start, current){
 							return start.concat(current);
 						});
 
-						for(var i=0; i<weekends.length; i++){
-							holidays.map(function(date){
-								if(weekends[i] == date){
-									weekends.splice(weekends.indexOf(weekends[i]), 1);
-								}
-							});
-						}
+							for(var i=0; i<weekends.length; i++){
+								holidays.map(function(date){
+									if(weekends[i] == date){
+										weekends.splice(weekends.indexOf(weekends[i]), 1);
+									}
+								});
+							}
 
 						var findEligible = (date) => {
 						  return (person) => person.conflicts.indexOf(date) < 0;
@@ -308,10 +308,6 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						// console.log("holidays: ", holidays);
-						// console.log("weekdays: ", weekdays);
-						// console.log("weekends: ", weekends);
-
 						holidays.reduce((acc, date) => {
 						  var type = 'holidays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
@@ -323,6 +319,14 @@ angular
 
 
 						$scope.people.completed = !$scope.people.completed;
+
+					// $scope.people = payload = employees with all of their scheduled days
+					// if schedule is already made??? overwrite???
+						scheduleService.onCallSchedule(company_id, $scope.people)
+													 .then(function(data) {
+															console.log('current schedule: ', data);
+													 });
+
 				};
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
