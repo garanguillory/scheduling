@@ -357,20 +357,6 @@
 		overflow: scroll;
 		position: relative;
 
-			.fade {
-				background: linear-gradient(to bottom, 
-					$off-white 0%,
-					rgba(255,255,255,1) 75%);
-				position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 100%;
-		    height: 100%;
-		    display: none;
-		    color: #FFF;
-		    display: block;
-		    z-index: 10;
-			}
 	}
 
 	.employee-individual {
