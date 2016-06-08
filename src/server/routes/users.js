@@ -375,9 +375,6 @@ router.put('/employees/edit', function(req, res, next){
 			
 });
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
-
-
 // get conflicts by employee_id
 router.get('/conflicts/:employee_id', function(req, res, next){
 	var employee_id = req.params.employee_id;
@@ -393,9 +390,6 @@ router.get('/conflicts/:employee_id', function(req, res, next){
 			  return next(err);
 			});
 });
-
-
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 // update conflicts by employee_id
 router.put('/conflicts/update/:employee_id', function(req, res, next){
@@ -432,6 +426,24 @@ router.put('/conflicts/update/:employee_id', function(req, res, next){
 				 		return next(err);
 				 });
 });
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + +
+// get on_call_schedule by company_id
+router.get('/on_call_schedule/:company_id', function(req, res, next){
+	var company_id = req.params.company_id;
+		queries.getOnCallDates(company_id)
+			.then(function(on_call_dates) {
+				console.log('on_call_dates: ', on_call_dates);
+			  res.status(200).json({
+			    status: 'success',
+			    data: on_call_dates
+			  });
+			})
+			.catch(function (err) {
+			  return next(err);
+			});
+});
+// + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 router.post('/on_call_schedule/:company_id', function(req, res, next) {
 
@@ -503,5 +515,22 @@ router.post('/on_call_schedule/:company_id', function(req, res, next) {
 		    res.send(err);
 		});
 });
+
+// delete employee (by employee_id)
+router.delete('/on_call_schedule/:company_id', function(req, res, next){
+	var company_id = req.params.company_id;
+
+		queries.deleteSchedule(company_id)
+			 		 .then(function() {
+			 			    res.status(200).json({
+			 			        status: "deleted company's schedule" 
+			 			    });
+			 			})
+					 .catch(function(error){
+					 		console.log(error);
+					 		res.send(error);
+					 });
+});
+
 
 module.exports = router;

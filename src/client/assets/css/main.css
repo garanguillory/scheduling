@@ -76,8 +76,9 @@ a:hover {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-  color: #555;
-  background-color: #E7E7E7; }
+  color: #051E51;
+  background-color: #d3e7f2;
+  border-radius: 4px; }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
@@ -236,6 +237,19 @@ a:hover {
     color: #051E51; }
     #employees input:hover {
       background: #ddedf5; }
+  #employees textarea {
+    background: #E7F2F8;
+    border-color: #9FC9E1;
+    color: #051E51; }
+  #employees button {
+    background: #E7F2F8;
+    border-color: #87B9D8;
+    color: #336FA5;
+    font-family: 'Roboto', sans-serif; }
+    #employees button:hover {
+      color: #2d6292;
+      background: #d3e7f2;
+      border-color: #74aed2; }
   #employees .instructions-text {
     color: #051E51;
     font-size: 1.5rem;
@@ -248,7 +262,19 @@ a:hover {
 
 .employee-list {
   height: 90vh;
-  overflow: scroll; }
+  overflow: scroll;
+  position: relative; }
+  .employee-list .fade {
+    background: linear-gradient(to bottom, #E7F2F8 0%, white 75%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    color: #FFF;
+    display: block;
+    z-index: 10; }
 
 .employee-individual:hover {
   background: #d3e7f2; }
@@ -289,6 +315,9 @@ a:hover {
     border-radius: 4px; }
 
 /*-------- schedule ---------*/
+.scheduled-employee {
+  font-size: 0.5rem; }
+
 /* -------- legend --------- */
 .legend ul li #red {
   background: red;

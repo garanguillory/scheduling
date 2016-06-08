@@ -143,14 +143,13 @@
 										</div>
 										<div class="row form-group">
 											<div class="col-xs-12">
-												<textarea class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
+												<textarea class="form-control" rows="3" placeholder="Notes"></textarea>
 											</div>
 										</div>
 									</div> <!-- end col-xs-8 -->
 								</div> <!-- end row -->
 								<div class="row">
 									<div class="col-xs-6">
-										<!-- calendar directive not working with both edit employee and add employee-->
 										<!-- <calendar></calendar> -->
 									</div>
 									<br><br><br>
@@ -214,6 +213,7 @@
 
 			<div class="col-sm-4">
 				<div class="employee-list">
+				<div class="fade"></div>
 					<ul> <!-- need to hide admin from employee list -->
 						<li ng-click="selected()" class="employee-individual" ng-hide="employee.admin" ng-repeat="employee in employees | filter:search">
 							<div class="employee-stats">
@@ -223,6 +223,7 @@
 							</div>
 						</li>
 					</ul>
+					<!-- <div class="fade"></div> -->
 				</div>
 			</div>
 		</div>

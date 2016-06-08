@@ -100,6 +100,18 @@ module.exports = {
 
     addOnCallDate: function(data){
         return OnCallSchedule().insert(data);//.returning('*');
+    },
+
+    getOnCallDates: function(company_id){
+        return OnCallSchedule().where('company_id', company_id);//.returning('*');
+    },
+
+    getOnCallDatesByEmployee: function(employee_id){
+      return OnCallSchedule().where('employee_id', employee_id);//.returning('*');  
+    },
+
+    deleteSchedule: function(company_id){
+        return OnCallSchedule().where('company_id', company_id).delete();
     }
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +

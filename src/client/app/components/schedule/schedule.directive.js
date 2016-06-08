@@ -10,6 +10,11 @@ angular
 				scope.$watch('people.completed', function (newValue) {
 					var tds = angular.element('.calendar-section td');
 					angular.forEach(tds, function (td) {
+						var scheduled = angular.element(td).find('.scheduled-employee');
+						if ( scheduled.length ) { scheduled.remove(); }
+					});
+
+					angular.forEach(tds, function (td) {
 						if ( scope.people ) {
 							for(var i=0; i<scope.people.length; i++){
 								var weekdaysArray = scope.people[i].onCall.weekdays;
@@ -20,7 +25,7 @@ angular
 
 								onCalls.forEach(function(date){
 									if(date == angular.element(td).data("date")){
-											angular.element(td).append("<p>"+scope.people[i].name+"</p>");
+											angular.element(td).append("<p class='scheduled-employee'>"+scope.people[i].name+"</p>");
 									}
 								});
 
@@ -61,7 +66,6 @@ angular
 
 				scheduleService.getEmployeeInfo(company_id)
 						.then(function (data) {
-						// console.log('employees', data);
 						$scope.employees = data.data.data;
 
 						for(var i=0; i<$scope.employees.length; i++){
@@ -89,9 +93,32 @@ angular
 									}
 							}
 						// console.log('$scope.people: ', $scope.people);
-					});
-				
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +	
+					}).then(function () {
+						scheduleService.getOnCallDates(company_id)
+								.then(function(data){
+									// $scope.onCallDates = data.data.data;
+									// console.log("$scope.onCallDates: ", $scope.onCallDates);
+									var onCallDates = data.data.data;
+										for(var i=0; i<onCallDates.length; i++){
+											for(var j=0; j<$scope.people.length; j++){
+												if(onCallDates[i].employee_id == $scope.people[j].id){
+													if(onCallDates[i].type == 1){
+														$scope.people[j].onCall.weekdays.push(moment(onCallDates[i].date).format("YYYY-MM-DD"));
+													}
+													if(onCallDates[i].type == 2){
+														$scope.people[j].onCall.weekends.push(moment(onCallDates[i].date).format("YYYY-MM-DD"));
+													}
+													if(onCallDates[i].type == 3){
+														$scope.people[j].onCall.holidays.push(moment(onCallDates[i].date).format("YYYY-MM-DD"));
+													}
+												}
+											}
+										}
+									console.log('$scope.people: ', $scope.people);
+									$scope.people.completed = !$scope.people.completed;
+								});
+
+					})
 
 				var getWeekdays = function(currentMonth, year){
 					var monthsArray = moment.months();
@@ -255,7 +282,6 @@ angular
 
 						var weekdays = [];
 						var weekends = [];
-						// var holidays = [];
 						var counter = 0;
 
 						while(month != $scope.end){
@@ -274,7 +300,7 @@ angular
 							for(var i=0; i<weekdays.length; i++){
 								holidays.map(function(date){
 									if(weekdays[i] == date){
-										weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
+										return weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
 									}
 								});
 							}
@@ -286,7 +312,7 @@ angular
 							for(var i=0; i<weekends.length; i++){
 								holidays.map(function(date){
 									if(weekends[i] == date){
-										weekends.splice(weekends.indexOf(weekends[i]), 1);
+										return weekends.splice(weekends.indexOf(weekends[i]), 1);
 									}
 								});
 							}
@@ -303,7 +329,9 @@ angular
 						  var type = 'weekdays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
-						  selected.onCall[type].push(date);
+						  if(selected.onCall[type].indexOf(date) == -1){
+						  	selected.onCall[type].push(date);
+						  }
 
 						  return acc;
 						}, $scope.people);
@@ -312,7 +340,9 @@ angular
 						  var type = 'weekends';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
-						  selected.onCall[type].push(date);
+						  if(selected.onCall[type].indexOf(date) == -1){
+						  	selected.onCall[type].push(date);
+						  }
 
 						  return acc;
 						}, $scope.people);
@@ -321,7 +351,9 @@ angular
 						  var type = 'holidays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
-						  selected.onCall[type].push(date);
+						  if(selected.onCall[type].indexOf(date) == -1){
+						  	selected.onCall[type].push(date);
+						  }
 
 						  return acc;
 						}, $scope.people);
@@ -336,6 +368,16 @@ angular
 															console.log('current schedule: ', data);
 													 });
 
+				};
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+		// reset schedule function
+				$scope.resetSchedule = function(){
+					scheduleService.deleteSchedule(company_id)
+								 .then(function(data) {
+									 	console.log('current schedule: ', data);
+								  });
 				};
 
 // + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
