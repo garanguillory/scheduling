@@ -1,4 +1,5 @@
 node_modules/
 .DS_Store
 npm-debug.log
-bower_components/
+scheduling-logic.js
+twilio-test.js

@@ -19,9 +19,6 @@ var userRoutes = require('./routes/users.js');
 var app = express();
 
 
-// *** view engine *** //
-
-
 // *** static directory *** //
 app.set('views', path.join(__dirname, 'views'));
 
@@ -34,11 +31,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.use('/scripts', express.static(__dirname + '/../../node_modules/'));
-app.use('/bc_scripts', express.static(__dirname + '/../../bower_components/'));
-app.use('/styles', express.static(__dirname + '/../../node_modules/'));
-
-// app.use('/node_modules', express.static(__dirname + '../client'));
-
 
 // *** main routes *** //
 app.use('/', routes);

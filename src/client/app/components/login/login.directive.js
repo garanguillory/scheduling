@@ -12,9 +12,8 @@ angular
 				  authService.login($scope.user)
 				    .then(function(user) {
 				      authService.setUserInfo(user);
-				      // if/else to determine if user is an admin backend???
 				      console.log("user: ", user);
-				      if(user.data.data.admin == true){
+				      if(user.data.data.admin === true){
 				      	$location.path('/company');
 				      } else {
 				      	$location.path('/profile');

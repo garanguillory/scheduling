@@ -2,14 +2,6 @@
 
   'use strict';
 
-  /**
-  1. login
-  2. logout
-  3. register
-  4. set user info into localstorage
-  5. get user info from localstorage
-  **/
-
   angular.module('Scheduling')
     .service('authService', authService);
 

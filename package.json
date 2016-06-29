@@ -24,7 +24,8 @@
     "morgan": "~1.6.1",
     "pg": "^4.5.5",
     "pg-native": "^1.10.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "twilio": "^2.9.1"
   },
   "devDependencies": {
     "browser-sync": "2.9.6",

@@ -18,9 +18,7 @@ function OnCallSchedule() {
 }
 
 module.exports = {
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
-// log in to specific clinic/company 
-// and check email address/password at the same time
+
     Users: function() {
         return Users();
     },
@@ -57,7 +55,6 @@ module.exports = {
                    .where('employees.company_id', company_id)
                    .returning('*');
     },
-        // single 'Employee'
     getEmployeeAndConflicts: function(employee_id){
         return knex.select('employees.id', 'employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.admin', 'employees.company_id', 'employees.picture', 'conflicts.id as conflict_id', 'conflicts.employee_id', 'conflicts.date')
                    .from('employees')
@@ -91,7 +88,7 @@ module.exports = {
     },
 
     addConflict: function(employee_id, data){
-        return Conflicts().insert(data).where('id', employee_id);//.returning('*');
+        return Conflicts().insert(data).where('id', employee_id);
     },
 
     updateConflict: function(employee_id, conflict){
@@ -99,21 +96,20 @@ module.exports = {
     },
 
     addOnCallDate: function(data){
-        return OnCallSchedule().insert(data);//.returning('*');
+        return OnCallSchedule().insert(data);
     },
 
     getOnCallDates: function(company_id){
-        return OnCallSchedule().where('company_id', company_id);//.returning('*');
+        return OnCallSchedule().where('company_id', company_id);
     },
 
     getOnCallDatesByEmployee: function(employee_id){
-      return OnCallSchedule().where('employee_id', employee_id);//.returning('*');  
+      return OnCallSchedule().where('employee_id', employee_id);
     },
 
     deleteSchedule: function(company_id){
         return OnCallSchedule().where('company_id', company_id).delete();
     }
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 };
 

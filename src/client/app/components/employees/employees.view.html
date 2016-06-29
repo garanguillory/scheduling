@@ -3,13 +3,6 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-8">
-	<!-- 			<p class="centered">- Add instructions here -</p>
-					employee: {{employee}}
-							<br>
-					employee.conflictDates: {{ employee.conflictDates }}
-							<br>
-					employee.newConflicts: {{ employee.newConflicts }}
-							<br> -->
 				
 					<nav class="employee-nav navbar navbar-default">
 					  <div class="container-fluid">
@@ -22,7 +15,6 @@
 						    </button>
 						  </div>
 
-					    <!-- Collect the nav links, forms, and other content for toggling -->
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					    	<ul class="nav navbar-nav">
 					    		<li ng-click="editing()" ng-class="{active: edit_employee}"><a>Edit Employee</a></li>
@@ -37,9 +29,9 @@
 						      	</form>
 					      	</li>
 					    	</ul>
-					    </div><!-- /.navbar-collapse -->
+					    </div>
 
-					  </div><!-- /.container-fluid -->
+					  </div>
 					</nav>
 
 				<p ng-show="add_employee == false && edit_employee == false && edit_bulk == false && add_bulk == false" class="centered instructions-text">To get started, choose one of the above options.</p>
@@ -81,14 +73,13 @@
 												<textarea ng-model="employee.notes" class="form-control" rows="3" id="notes" placeholder="Notes"></textarea>
 											</div>
 										</div>
-									</div> <!-- end col-xs-8 -->
-								</div> <!-- end row -->
-							</div> <!-- end col-xs-12 -->
-						</div> <!-- end row -->
+									</div> 
+								</div>
+							</div>
+						</div> 
 					<br><br>
 						<div class="row">
 							<div class="col-xs-6">
-									<!-- calendar directive -->
 								<calendar></calendar> 
 							</div>
 							<br><br><br>
@@ -146,13 +137,10 @@
 												<textarea class="form-control" rows="3" placeholder="Notes"></textarea>
 											</div>
 										</div>
-									</div> <!-- end col-xs-8 -->
-								</div> <!-- end row -->
+									</div> 
+								</div> 
 								<div class="row">
-									<div class="col-xs-6">
-										<!-- <calendar></calendar> -->
-									</div>
-									<br><br><br>
+									
 									<div class="schedule-conflicts form-horizontal col-xs-6">
 										<ul>
 											<li ng-repeat="conflict in employee.conflicts">
@@ -169,10 +157,10 @@
 									  <button type="submit" class="btn btn-default pull-right">Add New Employee</button>
 									</div>
 								</div>
-							</div> <!-- end col-xs-12 -->
-						</div> <!-- end row -->
+							</div>
+						</div> 
 					</form>
-			<!-- form for editing bulk -->
+
 					<form ng-show="edit_bulk" ng-submit="editBulk()" class="edit-employee form-horizontal">
 						<div class="row">
 							<div class="col-xs-12">
@@ -190,7 +178,7 @@
 							</div>
 						</div>
 					</form>
-			<!-- form for adding bulk -->
+
 					<form ng-show="add_bulk" ng-submit="addBulk()" class="edit-employee form-horizontal">
 						<div class="row">
 							<div class="col-xs-12">
@@ -213,12 +201,11 @@
 
 			<div class="col-sm-4">
 				<div class="employee-list">
-					<ul> <!-- need to hide admin from employee list -->
+					<ul> 
 						<li ng-click="selected()" class="employee-individual" ng-hide="employee.admin" ng-repeat="employee in employees | filter:search">
 							<div class="employee-stats">
 								<img ng-src="{{employee.picture}}">
 									<p>{{employee.first_name}} {{employee.last_name}}</p>
-									<!-- <span ng-show="employee.admin"> -- ADMIN</span> -->
 							</div>
 						</li>
 					</ul>

@@ -31,10 +31,8 @@ angular
 
 							}
 						}
-						// console.log("td's data: ", angular.element(td).data("date"));
 					});
 				});
-
 			},
 			controller: function($scope, $rootScope, $location, $window){
 
@@ -46,23 +44,22 @@ angular
 				var nextYear = +moment().add(1,'year').format('YYYY');
 
 				$scope.monthsRemaining = [];
-				var number = 0;
-				var ending = moment(currentYear + "-12-01", "YYYY-MM-DD").format("MMMM");
-
-				while(months != ending){
-					var months = moment().month(currentMonth).add(number, 'months').format('MMMM');
-					$scope.monthsRemaining.push(months);
-					number++
-				}
+					var number = 0;
+					var ending = moment(currentYear + "-12-01", "YYYY-MM-DD").format("MMMM");
+					while(months != ending){
+						var months = moment().month(currentMonth).add(number, 'months').format('MMMM');
+						$scope.monthsRemaining.push(months);
+						number++
+					}
 
 				$scope.nextMonths = [];
-				var final = moment().add(1,'years').subtract(1,'months').format("MMMM");
-				var incrementer = 1;
-				while(next != final){
-					var next = moment().add(incrementer, 'months').format('MMMM');
-					$scope.nextMonths.push(next);
-					incrementer++
-				}
+					var final = moment().add(1,'years').subtract(1,'months').format("MMMM");
+					var incrementer = 1;
+					while(next != final){
+						var next = moment().add(incrementer, 'months').format('MMMM');
+						$scope.nextMonths.push(next);
+						incrementer++
+					}
 
 				scheduleService.getEmployeeInfo(company_id)
 						.then(function (data) {
@@ -92,12 +89,9 @@ angular
 											});
 									}
 							}
-						// console.log('$scope.people: ', $scope.people);
 					}).then(function () {
 						scheduleService.getOnCallDates(company_id)
 								.then(function(data){
-									// $scope.onCallDates = data.data.data;
-									// console.log("$scope.onCallDates: ", $scope.onCallDates);
 									var onCallDates = data.data.data;
 										for(var i=0; i<onCallDates.length; i++){
 											for(var j=0; j<$scope.people.length; j++){
@@ -317,15 +311,19 @@ angular
 								});
 							}
 
-						var findEligible = (date) => {
-						  return (person) => person.conflicts.indexOf(date) < 0;
+						var findEligible = function(date) {
+												return function(person) {
+																		return person.conflicts.indexOf(date) < 0;
+												};
 						};
 
-						var findShortestOnCallList = (type) => {
-						  return (prev, curr) => ( prev.onCall[type].length <= curr.onCall[type].length ) ? prev : curr;
+						var findShortestOnCallList = function(type) {
+												return function(prev, curr) {
+																		return prev.onCall[type].length <= curr.onCall[type].length ? prev : curr;
+												};
 						};
 
-						weekdays.reduce((acc, date) => {
+						weekdays.reduce(function(acc, date) {
 						  var type = 'weekdays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
@@ -336,7 +334,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						weekends.reduce((acc, date) => {
+						weekends.reduce(function(acc, date) {
 						  var type = 'weekends';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
@@ -347,7 +345,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						holidays.reduce((acc, date) => {
+						holidays.reduce(function (acc, date) {
 						  var type = 'holidays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
@@ -361,8 +359,6 @@ angular
 
 						$scope.people.completed = !$scope.people.completed;
 
-					// $scope.people = payload = employees with all of their scheduled days
-					// if schedule is already made??? overwrite???
 						scheduleService.onCallSchedule(company_id, $scope.people)
 													 .then(function(data) {
 															console.log('current schedule: ', data);
@@ -370,17 +366,15 @@ angular
 
 				};
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
-
-		// reset schedule function
 				$scope.resetSchedule = function(){
 					scheduleService.deleteSchedule(company_id)
 								 .then(function(data) {
 									 	console.log('current schedule: ', data);
+									 	$window.location.reload();
 								  });
+
 				};
 
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 				$scope.moment = moment();
 				$scope.year = moment().format('YYYY');
 				$scope.current = moment().format('MMMM');
