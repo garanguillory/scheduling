@@ -161,43 +161,6 @@ router.post('/employees', function(req, res, next) {
 		});
 });
 
-// router.post('/employees', function(req, res, next) {
-	// 		var newEmployee = {
-	// 			first_name: req.body.first_name,
-	// 			last_name: req.body.last_name,
-	// 			email: req.body.email,
-	// 			phone: req.body.phone,
-	// 			picture: req.body.picture
-	// 		};
-	// 		queries.NewUser(newEmployee)
-	// 			.then(function(newGuy) {
-	// 				console.log("newGuy[0].id: ", newGuy[0].id);
-	// 				console.log("req.body.conflicts: ", req.body.conflicts);
-	// 					var promises = req.body.conflicts.map(function(date){
-	// 						var dateData = {
-	// 							employee_id: newGuy[0].id,
-	// 							date: date
-	// 						};
-	// 						return queries.addConflict(newGuy[0].id, dateData);
-	// 					});
-	// 					Promise.all(promises)
-	// 								 .then(function(data){
-	// 								 	res.status(200).json({
-	// 								 	    status: 'success',
-	// 								 	    data: data
-	// 								 	});
-	// 								 })
-	// 								 .catch(function(err) {
-	// 								     console.log(err);
-	// 								     res.send(err);
-	// 								 });
-	// 			})
-	// 			.catch(function(err) {
-	// 			    console.log(err);
-	// 			    res.send(err);
-	// 			});
-	// });
-
 
 // delete employee (by employee_id)
 router.delete('/employees/delete/:employee_id', function(req, res, next){
