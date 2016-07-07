@@ -9,12 +9,13 @@
 
 			<br>
 				
-				<form ng-submit="signUp()" class="form-horizontal">
+				<form name="signUpForm" ng-submit="signUp()" class="form-horizontal">
 
 				  <div class="form-group">
 				    <label for="company" class="col-sm-2 control-label" style="text-align: left">Company</label>
 				    <div class="col-sm-10">
-				      <input ng-model="user.company" type="text" class="form-control" id="company" placeholder="Company Name">
+				      <input ng-model="user.company" type="text" class="form-control" name="company" id="company" placeholder="Company Name" required>
+				      <p class="red" ng-hide="signUpForm.company.$pristine || signUpForm.company.$valid">This field is required!</p>
 				    </div>
 				  </div>
 

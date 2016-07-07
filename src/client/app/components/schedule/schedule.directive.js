@@ -19,9 +19,9 @@ angular
 							for(var i=0; i<scope.people.length; i++){
 								var weekdaysArray = scope.people[i].onCall.weekdays;
 								var weekendsArray = scope.people[i].onCall.weekends;
-								var holidaysArray = scope.people[i].onCall.holidays;
+								// var holidaysArray = scope.people[i].onCall.holidays;
 								// flatten array of onCall days
-								var onCalls = weekdaysArray.concat(weekendsArray).concat(holidaysArray);
+								var onCalls = weekdaysArray.concat(weekendsArray)//.concat(holidaysArray);
 
 								onCalls.forEach(function(date){
 									if(date == angular.element(td).data("date")){
@@ -108,7 +108,7 @@ angular
 												}
 											}
 										}
-									console.log('$scope.people: ', $scope.people);
+									// console.log('$scope.people: ', $scope.people);
 									$scope.people.completed = !$scope.people.completed;
 								});
 
@@ -172,9 +172,13 @@ angular
 					return array;
 				};
 
-				var holidays = [];
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
+				// var holidays = [];
 
 				var getHolidays = function(year){
+
+					var holidays = [];
 
 					var newYears = `${year}-01-01`;
 						holidays.push(newYears, newYears);
@@ -261,15 +265,15 @@ angular
 						} else {
 							holidays.push(`${year}-12-24`);
 						}
-
-					// console.log(holidays);
 				};
 
-				getHolidays(currentYear);
-				getHolidays(currentYear+1);
+				// getHolidays(currentYear);
+				// getHolidays(currentYear+1);
 
 				// check to see if holiday falls on a weekend
 				// holiday shifts are split into AM and PM
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 
 				$scope.makeSchedule = function(){
 						console.log("making schedule");
@@ -277,6 +281,10 @@ angular
 						var weekdays = [];
 						var weekends = [];
 						var counter = 0;
+						// holidays = [];
+
+						// getHolidays(currentYear);
+						// getHolidays(currentYear+1);
 
 						while(month != $scope.end){
 							var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
@@ -291,25 +299,26 @@ angular
 							return start.concat(current);
 						});
 
-							for(var i=0; i<weekdays.length; i++){
-								holidays.map(function(date){
-									if(weekdays[i] == date){
-										return weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
-									}
-								});
-							}
+							// for(var i=0; i<weekdays.length; i++){
+							// 	holidays.map(function(date){
+							// 		if(weekdays[i] == date){
+							// 			return weekdays.splice(weekdays.indexOf(weekdays[i]), 1);
+							// 		}
+							// 	});
+							// }
 
 						weekends = weekends.reduce(function(start, current){
 							return start.concat(current);
 						});
 
-							for(var i=0; i<weekends.length; i++){
-								holidays.map(function(date){
-									if(weekends[i] == date){
-										return weekends.splice(weekends.indexOf(weekends[i]), 1);
-									}
-								});
-							}
+							// for(var i=0; i<weekends.length; i++){
+							// 	holidays.map(function(date){
+							// 		if(weekends[i] == date){
+							// 			console.log(weekends[i]);
+							// 			return weekends.splice(weekends.indexOf(weekends[i]), 1);
+							// 		}
+							// 	});
+							// }
 
 						var findEligible = function(date) {
 												return function(person) {
@@ -345,16 +354,16 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						holidays.reduce(function (acc, date) {
-						  var type = 'holidays';
-						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
+						// holidays.reduce(function (acc, date) {
+						//   var type = 'holidays';
+						//   var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
 
-						  if(selected.onCall[type].indexOf(date) == -1){
-						  	selected.onCall[type].push(date);
-						  }
+						//   if(selected.onCall[type].indexOf(date) == -1){
+						//   	selected.onCall[type].push(date);
+						//   }
 
-						  return acc;
-						}, $scope.people);
+						//   return acc;
+						// }, $scope.people);
 
 
 						$scope.people.completed = !$scope.people.completed;
@@ -364,7 +373,10 @@ angular
 															console.log('current schedule: ', data);
 													 });
 
-				};
+				}; // end makeSchedule
+
+
+// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
 				$scope.resetSchedule = function(){
 					scheduleService.deleteSchedule(company_id)
