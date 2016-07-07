@@ -22,24 +22,28 @@
 				  <div class="form-group">
 				    <label for="email" class="col-sm-2 control-label" style="text-align: left">Email</label>
 				    <div class="col-sm-10">
-				      <input ng-model="user.email" type="email" class="form-control" id="email" placeholder="Email Address">
+				      <input ng-model="user.email" type="email" class="form-control" name="email" id="email" placeholder="Email Address" required>
+				      <p class="red" ng-hide="signUpForm.email.$pristine || signUpForm.email.$valid">This field is required!</p>
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <label for="first_name" class="col-sm-2 control-label" style="text-align: left">Name</label>
 				    <div class="col-sm-5">
-				      <input  ng-model="user.first_name" type="text" class="form-control" id="first_name" placeholder="First Name">
+				      <input  ng-model="user.first_name" type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required>
+				      <p class="red" ng-hide="signUpForm.first_name.$pristine || signUpForm.first_name.$valid">This field is required!</p>
 				    </div>
 				    <div class="col-sm-5">
-				      <input ng-model="user.last_name" type="text" class="form-control" id="last_name" placeholder="Last Name">
+				      <input ng-model="user.last_name" type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required>
+				      <p class="red" ng-hide="signUpForm.last_name.$pristine || signUpForm.last_name.$valid">This field is required!</p>
 				    </div>
 				  </div>
 
 				  <div class="form-group">
 				    <label for="password" class="col-sm-2 control-label" style="text-align: left">Password</label>
 				    <div class="col-sm-10">
-				      <input ng-model="user.password" type="password" class="form-control" id="password" placeholder="Password">
+				      <input ng-model="user.password" type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+				      <p class="red" ng-hide="signUpForm.password.$pristine || signUpForm.password.$valid">This field is required!</p>
 				    </div>
 				  </div>
 
