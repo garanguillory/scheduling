@@ -121,25 +121,28 @@ angular
 					var month = monthsArray.indexOf(currentMonth)+1;
 					year = year || moment().year();
 					var day = moment().day() + 1;
-					
 					var lengthOfMonth = moment(month).daysInMonth();
 
-					for(var d=1; d<lengthOfMonth+1; d++){
-						var date = moment(year+"-"+month+"-"+d);
-							if(date.format("dddd") == "Monday"){
-									array.push(date.format("YYYY-MM-DD"));
-							}
-							if(date.format("dddd") == "Tuesday"){
-									array.push(date.format("YYYY-MM-DD"));
-							}
-							if(date.format("dddd") == "Wednesday"){
-									array.push(date.format("YYYY-MM-DD"));
-							}
-							if(date.format("dddd") == "Thursday"){
-									array.push(date.format("YYYY-MM-DD"));
-							}
-					}
-
+						for(var d=1; d<lengthOfMonth+1; d++){
+								if(d<10){
+									var date = moment(year+"-"+month+"-0"+d);
+								} else {
+									var date = moment(year+"-"+month+"-"+d);
+								}
+							
+								if(date.format("dddd") == "Monday"){
+										array.push(date.format("YYYY-MM-DD"));
+								}
+								if(date.format("dddd") == "Tuesday"){
+										array.push(date.format("YYYY-MM-DD"));
+								}
+								if(date.format("dddd") == "Wednesday"){
+										array.push(date.format("YYYY-MM-DD"));
+								}
+								if(date.format("dddd") == "Thursday"){
+										array.push(date.format("YYYY-MM-DD"));
+								}
+						}
 					return array;
 				};
 
@@ -155,7 +158,11 @@ angular
 					var lengthOfMonth = moment(month).daysInMonth();
 
 					for(var d=1; d<lengthOfMonth+1; d++){
-						var date = moment(year+"-"+month+"-"+d);
+							if(d<10){
+								var date = moment(year+"-"+month+"-0"+d);
+							} else {
+								var date = moment(year+"-"+month+"-"+d);
+							}
 							if(date.format("dddd") == "Friday"){
 									array.push(date.format("YYYY-MM-DD"));
 							}
@@ -295,9 +302,13 @@ angular
 							counter++;
 						}
 
+						console.log('weekdays: ', weekdays);
+
 						weekdays = weekdays.reduce(function(start, current){
 							return start.concat(current);
 						});
+
+						// console.log('weekdays: ', weekdays);
 
 							// for(var i=0; i<weekdays.length; i++){
 							// 	holidays.map(function(date){
@@ -310,6 +321,8 @@ angular
 						weekends = weekends.reduce(function(start, current){
 							return start.concat(current);
 						});
+
+						console.log('weekends: ', weekends);
 
 							// for(var i=0; i<weekends.length; i++){
 							// 	holidays.map(function(date){
@@ -406,4 +419,3 @@ angular
 			}
 		};
 }]);
-
