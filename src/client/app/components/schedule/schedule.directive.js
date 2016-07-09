@@ -118,16 +118,18 @@ angular
 					var monthsArray = moment.months();
 					var array = [];
 
-					var month = monthsArray.indexOf(currentMonth)+1;
+					var month = monthsArray.indexOf(currentMonth);
+          var mes = month + 1;
 					year = year || moment().year();
 					var day = moment().day() + 1;
-					var lengthOfMonth = moment(month).daysInMonth();
 
-						for(var d=1; d<lengthOfMonth+1; d++){
+					var lengthOfMonth = moment().year(year).month(month).daysInMonth();
+
+						for(var d=1; d<=lengthOfMonth; d++){
 								if(d<10){
-									var date = moment(year+"-"+month+"-0"+d);
+									var date = moment(year+"-"+mes+"-0"+d);
 								} else {
-									var date = moment(year+"-"+month+"-"+d);
+									var date = moment(year+"-"+mes+"-"+d);
 								}
 							
 								if(date.format("dddd") == "Monday"){
@@ -151,17 +153,18 @@ angular
 					var monthsArray = moment.months();
 					var array = [];
 
-					var month = monthsArray.indexOf(currentMonth)+1;
+					var month = monthsArray.indexOf(currentMonth);
+          var mes = month + 1;
 					year = year || moment().year();
 					var day = moment().day() + 1;
 
-					var lengthOfMonth = moment(month).daysInMonth();
+					var lengthOfMonth = moment().year(year).month(month).daysInMonth();
 
-					for(var d=1; d<lengthOfMonth+1; d++){
+					for(var d=1; d<=lengthOfMonth; d++){
 							if(d<10){
-								var date = moment(year+"-"+month+"-0"+d);
+								var date = moment(year+"-"+mes+"-0"+d);
 							} else {
-								var date = moment(year+"-"+month+"-"+d);
+								var date = moment(year+"-"+mes+"-"+d);
 							}
 							if(date.format("dddd") == "Friday"){
 									array.push(date.format("YYYY-MM-DD"));
@@ -302,7 +305,6 @@ angular
 							counter++;
 						}
 
-						console.log('weekdays: ', weekdays);
 
 						weekdays = weekdays.reduce(function(start, current){
 							return start.concat(current);
@@ -322,7 +324,7 @@ angular
 							return start.concat(current);
 						});
 
-						console.log('weekends: ', weekends);
+						// console.log('weekends: ', weekends);
 
 							// for(var i=0; i<weekends.length; i++){
 							// 	holidays.map(function(date){
