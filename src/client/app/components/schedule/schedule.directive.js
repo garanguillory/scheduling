@@ -19,9 +19,9 @@ angular
 							for(var i=0; i<scope.people.length; i++){
 								var weekdaysArray = scope.people[i].onCall.weekdays;
 								var weekendsArray = scope.people[i].onCall.weekends;
-								// var holidaysArray = scope.people[i].onCall.holidays;
+								var holidaysArray = scope.people[i].onCall.holidays;
 								// flatten array of onCall days
-								var onCalls = weekdaysArray.concat(weekendsArray)//.concat(holidaysArray);
+								var onCalls = weekdaysArray.concat(weekendsArray).concat(holidaysArray);
 
 								onCalls.forEach(function(date){
 									if(date == angular.element(td).data("date")){
@@ -182,8 +182,6 @@ angular
 					return array;
 				};
 
-
-// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + 
 				var holidays = [];
 
 				var getHolidays = function(year){
@@ -260,7 +258,7 @@ angular
 						holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
 						holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
 						// holidays.push(moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"),moment(laborDay,"YYYY-MM-DD").subtract(2,'days').format("YYYY-MM-DD"));
-						
+
 
 					var Thanksgiving = moment(`${year}-11-01`,"YYYY-MM-DD").startOf('month').day("Thursday").add(3,'weeks').format("YYYY-MM-DD");
 						holidays.push(moment(Thanksgiving,"YYYY-MM-DD").subtract(1,'days').format("YYYY-MM-DD"));
@@ -286,10 +284,6 @@ angular
 					holidays.push(christmas, christmas);
 				};
 
-				getHolidays(currentYear);
-				getHolidays(currentYear+1);
-
-				// console.log("holidays: ", holidays);
 
 				// check to see if holiday falls on a weekend
 				// holiday shifts are split into AM and PM
@@ -303,8 +297,8 @@ angular
 						var counter = 0;
 						// holidays = [];
 
-						// getHolidays(currentYear);
-						// getHolidays(currentYear+1);
+						getHolidays(currentYear);
+						getHolidays(currentYear+1);
 
 						while(month != $scope.end){
 							var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
@@ -314,7 +308,6 @@ angular
 							weekends.push(getWeekends(month, year));
 							counter++;
 						}
-
 
 						weekdays = weekdays.reduce(function(start, current){
 							return start.concat(current);
@@ -332,17 +325,15 @@ angular
 							return start.concat(current);
 						});
 
-						console.log("weekends: ", weekends);
 
 							for(var i=0; i<weekends.length; i++){
 								holidays.map(function(date){
 									if(weekends[i] == date){
-										return weekends.splice(weekends.indexOf(weekends[i]), 1);
+										return weekends.splice(weekends.indexOf(date), 1);
 									}
 								});
 							}
 
-						console.log("weekends minus holidays: ", weekends);
 
 						var findEligible = function(date) {
 												return function(person) {
@@ -356,6 +347,7 @@ angular
 												};
 						};
 
+			// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 						weekdays.reduce(function(acc, date) {
 						  var type = 'weekdays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
@@ -378,18 +370,19 @@ angular
 						  return acc;
 						}, $scope.people);
 
+
+						holidays.reduce(function (acc, date) {
+						  var type = 'holidays';
+						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
+
+						  if(selected.onCall[type].indexOf(date) == -1){
+						  	selected.onCall[type].push(date);
+						  }
+
+						  return acc;
+						}, $scope.people);
+
 						console.log("$scope.people: ", $scope.people);
-
-						// holidays.reduce(function (acc, date) {
-						//   var type = 'holidays';
-						//   var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
-
-						//   if(selected.onCall[type].indexOf(date) == -1){
-						//   	selected.onCall[type].push(date);
-						//   }
-
-						//   return acc;
-						// }, $scope.people);
 
 
 						$scope.people.completed = !$scope.people.completed;
