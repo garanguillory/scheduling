@@ -184,9 +184,15 @@ angular
 
 				var holidays = [];
 
+				// Easter
+					holidays.push('2017-04-16', '2017-04-16', '2017-04-15', '2017-04-15', '2017-04-14');
+					holidays.push('2018-04-01', '2018-04-01', '2018-03-31', '2018-03-31', '2018-03-30');
+					holidays.push('2019-04-21', '2019-04-21', '2019-04-20', '2019-04-20', '2019-04-19');
+					holidays.push('2020-04-12', '2020-04-12', '2020-04-11', '2020-04-11', '2020-04-10');
+					holidays.push('2021-04-04', '2021-04-04', '2021-04-03', '2021-04-03', '2021-04-02');
+
 				var getHolidays = function(year){
 
-					// var holidays = [];
 
 					var newYears = `${year}-01-01`;
 						// holidays.push(newYears, newYears);
@@ -215,12 +221,12 @@ angular
 						}
 					holidays.push(newYears, newYears);
 
-					// Easter
-						holidays.push('2017-04-16', '2017-04-16', '2017-04-15', '2017-04-15', '2017-04-14');
-						holidays.push('2018-04-01', '2018-04-01', '2018-03-31', '2018-03-31', '2018-03-30');
-						holidays.push('2018-04-21', '2018-04-21', '2018-04-20', '2018-04-20', '2018-04-19');
-						holidays.push('2018-04-12', '2018-04-12', '2018-04-11', '2018-04-11', '2018-04-10');
-						holidays.push('2017-04-04', '2017-04-04', '2017-04-03', '2017-04-03', '2017-04-02');
+					// // Easter
+					// 	holidays.push('2017-04-16', '2017-04-16', '2017-04-15', '2017-04-15', '2017-04-14');
+					// 	holidays.push('2018-04-01', '2018-04-01', '2018-03-31', '2018-03-31', '2018-03-30');
+					// 	holidays.push('2019-04-21', '2019-04-21', '2019-04-20', '2019-04-20', '2019-04-19');
+					// 	holidays.push('2020-04-12', '2020-04-12', '2020-04-11', '2020-04-11', '2020-04-10');
+					// 	holidays.push('2021-04-04', '2021-04-04', '2021-04-03', '2021-04-03', '2021-04-02');
 
 					var memorialDay = moment(`${year}-05-01`, "YYYY-MM-DD").endOf('month').day("Monday").format("YYYY-MM-DD");
 						holidays.push(moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"), moment(memorialDay,"YYYY-MM-DD").format("YYYY-MM-DD"));
@@ -359,6 +365,8 @@ angular
 						  return acc;
 						}, $scope.people);
 
+						console.log("weekdays: ", weekdays); 
+
 						weekends.reduce(function(acc, date) {
 						  var type = 'weekends';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
@@ -370,6 +378,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
+						console.log("weekends: ", weekends);
 
 						holidays.reduce(function (acc, date) {
 						  var type = 'holidays';
@@ -381,6 +390,8 @@ angular
 
 						  return acc;
 						}, $scope.people);
+
+						console.log("holidays: ", holidays);
 
 						console.log("$scope.people: ", $scope.people);
 
