@@ -3,9 +3,9 @@
 Angular employee scheduling app that schedules a given company's employees according to their availability.
 
 The scheduling algorithm takes into account:
-	- all of the employees' scheduling conflicts
-	- number of times each employee was scheduled in the prior time frame
-	- number of times each employee has been scheduled for the defined time frame
+- all of the employees' scheduling conflicts
+- number of times each employee was scheduled in the prior time frame
+- number of times each employee has been scheduled for the defined time frame
 
 Next, the algorithm makes 3 separate schedules (weekdays, weekends, and holidays), and displays them merged on the frontend's calendar view.
 
