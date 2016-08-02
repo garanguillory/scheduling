@@ -1048,14 +1048,42 @@
 				<form class="form-inline">
 				  <div class="form-group" style="margin-right: 2rem;">
 				    <label for="start">Start Month</label>
-				    <select ng-model="start" class="form-control" id="start">
+<!-- 				    <select ng-model="start" class="form-control" id="start">
 				        <option ng-repeat="month in monthsRemaining" value="{{month}}">{{month}}</option>
+				    </select> -->
+				    <select ng-model="start" class="form-control" id="start">
+				        <option value="January">January</option>
+				        <option value="February">February</option>
+				        <option value="March">March</option>
+				        <option value="April">April</option>
+				        <option value="May">May</option>
+				        <option value="June">June</option>
+				        <option value="July">July</option>
+				        <option value="August">August</option>
+				        <option value="September">September</option>
+				        <option value="October">October</option>
+				        <option value="November">November</option>
+				        <option value="December">December</option>
 				    </select>
 				  </div>
 				  <div class="form-group">
 				    <label for="end">End Month</label>
-				    <select ng-model="end" class="form-control" id="end">
+<!-- 				    <select ng-model="end" class="form-control" id="end">
 				        <option ng-repeat="month in nextMonths" value="{{month}}">{{month}}</option>
+				    </select> -->
+				    <select ng-model="end" class="form-control" id="end">
+				        <option value="January">January</option>
+				        <option value="February">February</option>
+				        <option value="March">March</option>
+				        <option value="April">April</option>
+				        <option value="May">May</option>
+				        <option value="June">June</option>
+				        <option value="July">July</option>
+				        <option value="August">August</option>
+				        <option value="September">September</option>
+				        <option value="October">October</option>
+				        <option value="November">November</option>
+				        <option value="December">December</option>
 				    </select>
 				  </div>
 				  <button ng-click="makeSchedule()" type="button" class="btn btn-success pull-right">Make Schedule</button>

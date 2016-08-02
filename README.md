@@ -26,7 +26,7 @@ Gulp
 
 
 ## To-Do:
-1. Fix month drop down
+1. ~~Fix month drop down~~
 1. Shuffle the order of the employees when scheduling (front-end)
 1. Eliminate possibility of back-to-back shifts and days scheduled (front-end)
 1. Eliminate possibility of double booking (server side)

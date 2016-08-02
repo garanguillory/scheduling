@@ -301,18 +301,28 @@ angular
 						var weekdays = [];
 						var weekends = [];
 						var counter = 0;
-						// holidays = [];
 
 						getHolidays(currentYear);
 						getHolidays(currentYear+1);
 
-						while(month != $scope.end){
-							var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
-							var month = moment().month($scope.start).add(counter, 'months').format('MMMM');
+						if($scope.start === $scope.end){
+							while(counter <= 11){
+								var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
+								var month = moment().month($scope.start).add(counter, 'months').format('MMMM');
 
-							weekdays.push(getWeekdays(month, year));
-							weekends.push(getWeekends(month, year));
-							counter++;
+								weekdays.push(getWeekdays(month, year));
+								weekends.push(getWeekends(month, year));
+								counter++;
+							}
+						} else {
+							while(month !== $scope.end){
+								var year = moment().month($scope.start).add(counter, 'months').format('YYYY');
+								var month = moment().month($scope.start).add(counter, 'months').format('MMMM');
+
+								weekdays.push(getWeekdays(month, year));
+								weekends.push(getWeekends(month, year));
+								counter++;
+							}
 						}
 
 						weekdays = weekdays.reduce(function(start, current){
