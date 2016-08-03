@@ -350,7 +350,7 @@ router.get('/on_call_schedule/:company_id', function(req, res, next){
 			});
 });
 // + + + + + + + + + + + + + + + + + + + + + + + + + +
-
+// need to eliminate the possiblity of double booking
 router.post('/on_call_schedule/:company_id', function(req, res, next) {
 
 	var company_id = req.params.company_id;
@@ -371,6 +371,10 @@ router.post('/on_call_schedule/:company_id', function(req, res, next) {
 	weekdays = weekdays.reduce(function (prev, curr) {
 		return prev.concat(curr);
 	});
+	// console.log("weekdays: ", weekdays); 
+	// returns unresloved promises pertaining to weekdays 
+
+	// if queries.findOnCallDate == true, skip date
 
 	var weekends = employees.map(function(employee){
 			return employee.onCall.weekends.map(function(date){

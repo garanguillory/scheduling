@@ -363,7 +363,6 @@ angular
 												};
 						};
 
-			// + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
 						weekdays.reduce(function(acc, date) {
 						  var type = 'weekdays';
 						  var selected = acc.filter(findEligible(date)).reduce(findShortestOnCallList(type));
@@ -375,7 +374,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						console.log("weekdays: ", weekdays); 
+						// console.log("weekdays: ", weekdays); 
 
 						weekends.reduce(function(acc, date) {
 						  var type = 'weekends';
@@ -388,7 +387,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						console.log("weekends: ", weekends);
+						// console.log("weekends: ", weekends);
 
 						holidays.reduce(function (acc, date) {
 						  var type = 'holidays';
@@ -401,7 +400,7 @@ angular
 						  return acc;
 						}, $scope.people);
 
-						console.log("holidays: ", holidays);
+						// console.log("holidays: ", holidays);
 
 						console.log("$scope.people: ", $scope.people);
 

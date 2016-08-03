@@ -24,7 +24,7 @@ angular
 										  return err;
 										});
 			},
-
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
 			onCallSchedule: function(company_id, payload){
 				return $http.post('/api/users/on_call_schedule/'+ company_id, payload)
 										.then(function(res){
@@ -34,7 +34,7 @@ angular
 										  return err;
 										});
 			},
-
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
 			deleteSchedule: function(company_id){
 					return $http.delete('/api/users/on_call_schedule/'+ company_id)
 											.then(function(res){

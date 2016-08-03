@@ -94,10 +94,11 @@ module.exports = {
     updateConflict: function(employee_id, conflict){
         return Conflicts().update(conflict).where('employee_id', employee_id);
     },
-
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
     addOnCallDate: function(data){
         return OnCallSchedule().insert(data);
     },
+// + + + + + + + + + + + + + + + + + + + + + + + + + + +
 
     getOnCallDates: function(company_id){
         return OnCallSchedule().where('company_id', company_id);
